@@ -1,0 +1,128 @@
+// Format errors
+export function formatError(error: unknown): string {
+  // Handle Zod errors
+  if (
+    error &&
+    typeof error === "object" &&
+    "name" in error &&
+    error.name === "ZodError" &&
+    "errors" in error
+  ) {
+    const zodError = error as { errors: Record<string, { message: string }> };
+    const fieldErrors = Object.keys(zodError.errors).map(
+      (field) => zodError.errors[field].message
+    );
+    return fieldErrors.join(". ");
+  }
+
+  // Handle Prisma validation errors (missing/invalid required fields)
+  if (
+    error &&
+    typeof error === "object" &&
+    "name" in error &&
+    error.name === "PrismaClientValidationError"
+  ) {
+    return "Oops! Something's missing. Please try again.";
+  }
+
+  // Handle Prisma P2002 (unique constraint) errors
+  if (
+    error &&
+    typeof error === "object" &&
+    "code" in error &&
+    error.code === "P2002"
+  ) {
+    const prismaError = error as { meta?: { target?: string[] } };
+    const field = prismaError.meta?.target?.[0] || "field";
+    return `${field.charAt(0).toUpperCase() + field.slice(1)} already exists`;
+  }
+
+  // Handle Prisma P2025 (record not found)
+  if (
+    error &&
+    typeof error === "object" &&
+    "code" in error &&
+    error.code === "P2025"
+  ) {
+    return "Record not found.";
+  }
+
+  // Pass through standard error messages
+  if (error instanceof Error) {
+    return error.message;
+  }
+
+  if (typeof error === "string") {
+    return error;
+  }
+
+  return "Something went wrong. Please try again.";
+}
+
+// Format currency
+const CURRENCY_FORMATTER = new Intl.NumberFormat("en-US", {
+  currency: "USD",
+  style: "currency",
+  minimumFractionDigits: 2,
+});
+
+export function formatCurrency(amount: number | string | null) {
+  if (typeof amount === "number") {
+    return CURRENCY_FORMATTER.format(amount);
+  } else if (typeof amount === "string") {
+    return CURRENCY_FORMATTER.format(Number(amount));
+  } else {
+    return "Nan";
+  }
+}
+
+// Format number
+const NUMBER_FORMATTER = new Intl.NumberFormat("en-US");
+export function formatNumber(number: number) {
+  return NUMBER_FORMATTER.format(number);
+}
+
+// Shorten the UUID
+export function formatId(id: string) {
+  return `..${id.substring(id.length - 6)}`;
+}
+
+// Format the date and time
+export const formatDateTime = (dateString: Date) => {
+  const dateTimeOptions: Intl.DateTimeFormatOptions = {
+    month: "short", // abbreviated month name (e.g., 'Oct')
+    year: "numeric", // abbreviated month name (e.g., 'Oct')
+    day: "numeric", // numeric day of the month (e.g., '25')
+    hour: "numeric", // numeric hour (e.g., '8')
+    minute: "numeric", // numeric minute (e.g., '30')
+    hour12: true, // use 12-hour clock (true) or 24-hour clock (false)
+  };
+  const dateOptions: Intl.DateTimeFormatOptions = {
+    weekday: "short", // abbreviated weekday name (e.g., 'Mon')
+    month: "short", // abbreviated month name (e.g., 'Oct')
+    year: "numeric", // numeric year (e.g., '2023')
+    day: "numeric", // numeric day of the month (e.g., '25')
+  };
+  const timeOptions: Intl.DateTimeFormatOptions = {
+    hour: "numeric", // numeric hour (e.g., '8')
+    minute: "numeric", // numeric minute (e.g., '30')
+    hour12: true, // use 12-hour clock (true) or 24-hour clock (false)
+  };
+  const formattedDateTime: string = new Date(dateString).toLocaleString(
+    "en-US",
+    dateTimeOptions
+  );
+  const formattedDate: string = new Date(dateString).toLocaleString(
+    "en-US",
+    dateOptions
+  );
+  const formattedTime: string = new Date(dateString).toLocaleString(
+    "en-US",
+    timeOptions
+  );
+  return {
+    dateTime: formattedDateTime,
+    dateOnly: formattedDate,
+    timeOnly: formattedTime,
+  };
+};
