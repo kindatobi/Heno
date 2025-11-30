@@ -3,23 +3,42 @@ import { hashSync } from "bcrypt-ts-edge";
 const sampleData = {
   users: [
     {
-      name: "John",
+      name: "John Admin",
       email: "admin@example.com",
       password: hashSync("123456", 10),
       role: "ADMIN",
     },
     {
-      name: "Jane",
+      name: "Jane Doe",
       email: "user@example.com",
       password: hashSync("123456", 10),
       role: "USER",
+    },
+    {
+      name: "Michael Smith",
+      email: "michael@example.com",
+      password: hashSync("123456", 10),
+      role: "USER",
+    },
+    {
+      name: "Sarah Johnson",
+      email: "sarah@example.com",
+      password: hashSync("123456", 10),
+      role: "USER",
+    },
+    {
+      name: "David Lee",
+      email: "david@example.com",
+      password: hashSync("123456", 10),
+      role: "ADMIN",
     },
   ],
   products: [
     {
       name: "Polo Sporting Stretch Shirt",
       slug: "polo-sporting-stretch-shirt",
-      category: "Men's Dress Shirts",
+      category: "TOPS",
+      color: "White",
       description: "Classic Polo style with modern comfort",
       detail:
         "Made from premium stretch cotton blend for maximum comfort and flexibility. Features moisture-wicking technology and a tailored fit that moves with you throughout the day.",
@@ -58,7 +77,7 @@ const sampleData = {
           sleeves: '36"',
         },
       },
-      productVariants: [
+      sizeStock: [
         { size: "S", stock: 5 },
         { size: "M", stock: 8 },
         { size: "L", stock: 3 },
@@ -68,7 +87,8 @@ const sampleData = {
     {
       name: "Brooks Brothers Long Sleeved Shirt",
       slug: "brooks-brothers-long-sleeved-shirt",
-      category: "Men's Dress Shirts",
+      category: "TOPS",
+      color: "Light Blue",
       description: "Timeless style and premium comfort",
       detail:
         "Crafted from superior Egyptian cotton with a non-iron finish. This shirt maintains its crisp appearance all day, making it perfect for professional settings.",
@@ -107,7 +127,7 @@ const sampleData = {
           sleeves: '37"',
         },
       },
-      productVariants: [
+      sizeStock: [
         { size: "S", stock: 10 },
         { size: "M", stock: 15 },
         { size: "L", stock: 8 },
@@ -117,7 +137,8 @@ const sampleData = {
     {
       name: "Tommy Hilfiger Classic Fit Dress Shirt",
       slug: "tommy-hilfiger-classic-fit-dress-shirt",
-      category: "Men's Dress Shirts",
+      category: "TOPS",
+      color: "Navy",
       description: "A perfect blend of sophistication and comfort",
       detail:
         "Features the iconic Tommy Hilfiger styling with a relaxed classic fit. Made from breathable cotton fabric that keeps you cool and comfortable throughout the day.",
@@ -150,7 +171,7 @@ const sampleData = {
           sleeves: '36.5"',
         },
       },
-      productVariants: [
+      sizeStock: [
         { size: "M", stock: 0 },
         { size: "L", stock: 0 },
         { size: "XL", stock: 0 },
@@ -159,7 +180,8 @@ const sampleData = {
     {
       name: "Calvin Klein Slim Fit Stretch Shirt",
       slug: "calvin-klein-slim-fit-stretch-shirt",
-      category: "Men's Dress Shirts",
+      category: "TOPS",
+      color: "Black",
       description: "Streamlined design with flexible stretch fabric",
       detail:
         "Modern slim fit design with 4-way stretch technology. Perfect for the contemporary professional who values both style and comfort. Machine washable for easy care.",
@@ -198,7 +220,7 @@ const sampleData = {
           sleeves: '36"',
         },
       },
-      productVariants: [
+      sizeStock: [
         { size: "S", stock: 10 },
         { size: "M", stock: 12 },
         { size: "L", stock: 8 },
@@ -208,7 +230,8 @@ const sampleData = {
     {
       name: "Polo Ralph Lauren Oxford Shirt",
       slug: "polo-ralph-lauren-oxford-shirt",
-      category: "Men's Dress Shirts",
+      category: "TOPS",
+      color: "Pink",
       description: "Iconic Polo design with refined oxford fabric",
       detail:
         "The classic button-down oxford shirt featuring the signature embroidered pony. Made from 100% cotton oxford cloth for durability and breathability.",
@@ -247,7 +270,7 @@ const sampleData = {
           sleeves: '36.5"',
         },
       },
-      productVariants: [
+      sizeStock: [
         { size: "S", stock: 6 },
         { size: "M", stock: 10 },
         { size: "L", stock: 4 },
@@ -257,7 +280,8 @@ const sampleData = {
     {
       name: "Polo Classic Pink Hoodie",
       slug: "polo-classic-pink-hoodie",
-      category: "Men's Sweatshirts",
+      category: "TOPS",
+      color: "Pink",
       description: "Soft, stylish, and perfect for laid-back days",
       detail:
         "Ultra-soft fleece hoodie with the iconic Polo logo. Features a drawstring hood, kangaroo pocket, and ribbed cuffs for a comfortable fit. Perfect for casual wear or layering.",
@@ -302,13 +326,411 @@ const sampleData = {
           sleeves: '28"',
         },
       },
-      productVariants: [
+      sizeStock: [
         { size: "S", stock: 8 },
         { size: "M", stock: 12 },
         { size: "L", stock: 6 },
         { size: "XL", stock: 4 },
         { size: "XXL", stock: 2 },
       ],
+    },
+    {
+      name: "Levi's 511 Slim Fit Jeans",
+      slug: "levis-511-slim-fit-jeans",
+      category: "DENIMS",
+      color: "Dark Blue",
+      description: "The perfect slim fit denim for everyday wear",
+      detail:
+        "Iconic Levi's 511 slim fit jeans crafted from premium stretch denim. Sits below the waist with a slim fit from hip to ankle. Features the classic 5-pocket styling and signature red tab.",
+      images: [
+        "/images/sample-products/p1-1.jpg",
+        "/images/sample-products/p1-2.jpg",
+      ],
+      price: 65000,
+      onSale: true,
+      discountPercent: 25,
+      isFeatured: true,
+      banner: "banner-3.jpg",
+      sizingInfo: {
+        S: { waist: '30"', inseam: '32"', rise: '9.5"' },
+        M: { waist: '32"', inseam: '32"', rise: '10"' },
+        L: { waist: '34"', inseam: '32"', rise: '10.5"' },
+        XL: { waist: '36"', inseam: '32"', rise: '11"' },
+      },
+      sizeStock: [
+        { size: "S", stock: 12 },
+        { size: "M", stock: 18 },
+        { size: "L", stock: 10 },
+        { size: "XL", stock: 6 },
+      ],
+    },
+    {
+      name: "Wrangler Retro Straight Leg Jeans",
+      slug: "wrangler-retro-straight-leg-jeans",
+      category: "DENIMS",
+      color: "Light Wash",
+      description: "Classic straight fit with vintage appeal",
+      detail:
+        "Retro-inspired straight leg jeans with a comfortable regular fit. Made from durable cotton denim with a hint of stretch. Perfect for casual everyday wear.",
+      images: [
+        "/images/sample-products/p2-1.jpg",
+        "/images/sample-products/p2-2.jpg",
+      ],
+      price: 45000,
+      onSale: false,
+      discountPercent: null,
+      isFeatured: false,
+      banner: null,
+      sizingInfo: {
+        M: { waist: '32"', inseam: '32"', rise: '10.5"' },
+        L: { waist: '34"', inseam: '32"', rise: '11"' },
+        XL: { waist: '36"', inseam: '32"', rise: '11.5"' },
+      },
+      sizeStock: [
+        { size: "M", stock: 8 },
+        { size: "L", stock: 12 },
+        { size: "XL", stock: 5 },
+      ],
+    },
+    {
+      name: "Diesel Sleenker Skinny Jeans",
+      slug: "diesel-sleenker-skinny-jeans",
+      category: "DENIMS",
+      color: "Black",
+      description: "Ultra-modern skinny fit with premium quality",
+      detail:
+        "Premium Italian denim with superior stretch recovery. The Sleenker features an ultra-skinny fit that's comfortable and stylish. Finished with signature Diesel hardware and detailing.",
+      images: [
+        "/images/sample-products/p3-1.jpg",
+        "/images/sample-products/p3-2.jpg",
+      ],
+      price: 98000,
+      onSale: true,
+      discountPercent: 15,
+      isFeatured: true,
+      banner: null,
+      sizingInfo: {
+        S: { waist: '29"', inseam: '32"', rise: '9"' },
+        M: { waist: '31"', inseam: '32"', rise: '9.5"' },
+        L: { waist: '33"', inseam: '32"', rise: '10"' },
+        XL: { waist: '35"', inseam: '32"', rise: '10.5"' },
+      },
+      sizeStock: [
+        { size: "S", stock: 4 },
+        { size: "M", stock: 8 },
+        { size: "L", stock: 6 },
+        { size: "XL", stock: 3 },
+      ],
+    },
+    {
+      name: "Lee Regular Fit Bootcut Jeans",
+      slug: "lee-regular-fit-bootcut-jeans",
+      category: "DENIMS",
+      color: "Medium Wash",
+      description: "Comfortable bootcut with timeless style",
+      detail:
+        "Classic bootcut jeans with a regular fit through the seat and thigh. Made from 100% cotton denim for authentic feel and durability. Features contrast stitching and the iconic Lee leather patch.",
+      images: [
+        "/images/sample-products/p4-1.jpg",
+        "/images/sample-products/p4-2.jpg",
+      ],
+      price: 38000,
+      onSale: false,
+      discountPercent: null,
+      isFeatured: false,
+      banner: null,
+      sizingInfo: {
+        M: { waist: '32"', inseam: '34"', rise: '11"' },
+        L: { waist: '34"', inseam: '34"', rise: '11.5"' },
+        XL: { waist: '36"', inseam: '34"', rise: '12"' },
+        XXL: { waist: '38"', inseam: '34"', rise: '12.5"' },
+      },
+      sizeStock: [
+        { size: "M", stock: 10 },
+        { size: "L", stock: 15 },
+        { size: "XL", stock: 8 },
+        { size: "XXL", stock: 4 },
+      ],
+    },
+    {
+      name: "Classic Chino Pants",
+      slug: "classic-chino-pants",
+      category: "BOTTOMS",
+      color: "Khaki",
+      description: "Versatile chinos for any occasion",
+      detail:
+        "Premium cotton chino pants with a modern slim fit. Perfect for business casual or smart casual occasions. Features flat front styling and slant pockets.",
+      images: [
+        "/images/sample-products/p5-1.jpg",
+        "/images/sample-products/p5-2.jpg",
+      ],
+      price: 42000,
+      onSale: true,
+      discountPercent: 20,
+      isFeatured: false,
+      banner: null,
+      sizingInfo: {
+        S: { waist: '30"', inseam: '32"' },
+        M: { waist: '32"', inseam: '32"' },
+        L: { waist: '34"', inseam: '32"' },
+        XL: { waist: '36"', inseam: '32"' },
+      },
+      sizeStock: [
+        { size: "S", stock: 7 },
+        { size: "M", stock: 14 },
+        { size: "L", stock: 9 },
+        { size: "XL", stock: 5 },
+      ],
+    },
+    {
+      name: "Athletic Jogger Pants",
+      slug: "athletic-jogger-pants",
+      category: "BOTTOMS",
+      color: "Grey",
+      description: "Comfortable joggers for active lifestyle",
+      detail:
+        "Lightweight jogger pants made from breathable performance fabric. Features elastic waistband with drawstring, side pockets, and tapered leg with ankle cuffs. Perfect for workouts or casual wear.",
+      images: [
+        "/images/sample-products/p6-1.jpg",
+        "/images/sample-products/p6-2.jpg",
+      ],
+      price: 32000,
+      onSale: false,
+      discountPercent: null,
+      isFeatured: false,
+      banner: null,
+      sizingInfo: {
+        S: { waist: '28-30"', length: '40"' },
+        M: { waist: '31-33"', length: '41"' },
+        L: { waist: '34-36"', length: '42"' },
+        XL: { waist: '37-39"', length: '43"' },
+      },
+      sizeStock: [
+        { size: "S", stock: 15 },
+        { size: "M", stock: 20 },
+        { size: "L", stock: 12 },
+        { size: "XL", stock: 8 },
+      ],
+    },
+    {
+      name: "Premium Leather Biker Jacket",
+      slug: "premium-leather-biker-jacket",
+      category: "LEATHER",
+      color: "Black",
+      description: "Classic biker style in genuine leather",
+      detail:
+        "Crafted from premium genuine leather with asymmetric zip closure. Features multiple pockets, belted waist, and quilted shoulder panels. Fully lined for comfort. A timeless piece that gets better with age.",
+      images: [
+        "/images/sample-products/p1-1.jpg",
+        "/images/sample-products/p1-2.jpg",
+      ],
+      price: 285000,
+      onSale: false,
+      discountPercent: null,
+      isFeatured: true,
+      banner: "banner-4.jpg",
+      sizingInfo: {
+        S: { chest: '38"', shoulders: '17"', length: '24"' },
+        M: { chest: '40"', shoulders: '18"', length: '25"' },
+        L: { chest: '42"', shoulders: '19"', length: '26"' },
+        XL: { chest: '44"', shoulders: '20"', length: '27"' },
+      },
+      sizeStock: [
+        { size: "S", stock: 3 },
+        { size: "M", stock: 5 },
+        { size: "L", stock: 4 },
+        { size: "XL", stock: 2 },
+      ],
+    },
+    {
+      name: "Leather Bomber Jacket",
+      slug: "leather-bomber-jacket",
+      category: "LEATHER",
+      color: "Brown",
+      description: "Vintage-inspired bomber in soft leather",
+      detail:
+        "Luxurious lambskin leather bomber jacket with ribbed collar, cuffs, and hem. Features side pockets and inner pockets. The buttery soft leather develops a beautiful patina over time.",
+      images: [
+        "/images/sample-products/p2-1.jpg",
+        "/images/sample-products/p2-2.jpg",
+      ],
+      price: 320000,
+      onSale: true,
+      discountPercent: 10,
+      isFeatured: true,
+      banner: null,
+      sizingInfo: {
+        M: { chest: '40"', shoulders: '18"', length: '26"' },
+        L: { chest: '42"', shoulders: '19"', length: '27"' },
+        XL: { chest: '44"', shoulders: '20"', length: '28"' },
+      },
+      sizeStock: [
+        { size: "M", stock: 4 },
+        { size: "L", stock: 3 },
+        { size: "XL", stock: 2 },
+      ],
+    },
+    {
+      name: "Minimalist Leather Jacket",
+      slug: "minimalist-leather-jacket",
+      category: "LEATHER",
+      color: "Black",
+      description: "Clean lines and premium craftsmanship",
+      detail:
+        "Modern minimalist design in premium Italian leather. Features clean zip closure, subtle pockets, and a streamlined silhouette. Perfect for contemporary style enthusiasts.",
+      images: [
+        "/images/sample-products/p3-1.jpg",
+        "/images/sample-products/p3-2.jpg",
+      ],
+      price: 395000,
+      onSale: false,
+      discountPercent: null,
+      isFeatured: false,
+      banner: null,
+      sizingInfo: {
+        S: { chest: '37"', shoulders: '16.5"', length: '25"' },
+        M: { chest: '39"', shoulders: '17.5"', length: '26"' },
+        L: { chest: '41"', shoulders: '18.5"', length: '27"' },
+        XL: { chest: '43"', shoulders: '19.5"', length: '28"' },
+      },
+      sizeStock: [
+        { size: "S", stock: 2 },
+        { size: "M", stock: 3 },
+        { size: "L", stock: 2 },
+        { size: "XL", stock: 1 },
+      ],
+    },
+    {
+      name: "North Face Puffer Jacket",
+      slug: "north-face-puffer-jacket",
+      category: "OUTERWEAR",
+      color: "Navy",
+      description: "Warm and lightweight winter essential",
+      detail:
+        "Down-filled puffer jacket with water-resistant outer shell. Features adjustable hood, zippered pockets, and elastic cuffs. Provides excellent warmth without the bulk.",
+      images: [
+        "/images/sample-products/p4-1.jpg",
+        "/images/sample-products/p4-2.jpg",
+      ],
+      price: 125000,
+      onSale: true,
+      discountPercent: 30,
+      isFeatured: true,
+      banner: null,
+      sizingInfo: {
+        S: { chest: '40"', length: '27"' },
+        M: { chest: '42"', length: '28"' },
+        L: { chest: '44"', length: '29"' },
+        XL: { chest: '46"', length: '30"' },
+        XXL: { chest: '48"', length: '31"' },
+      },
+      sizeStock: [
+        { size: "S", stock: 8 },
+        { size: "M", stock: 15 },
+        { size: "L", stock: 10 },
+        { size: "XL", stock: 6 },
+        { size: "XXL", stock: 3 },
+      ],
+    },
+    {
+      name: "Patagonia Fleece Jacket",
+      slug: "patagonia-fleece-jacket",
+      category: "OUTERWEAR",
+      color: "Forest Green",
+      description: "Cozy fleece for outdoor adventures",
+      detail:
+        "Classic Patagonia fleece made from recycled polyester. Features full-zip closure, stand-up collar, and zippered hand pockets. Breathable and warm for layering or standalone wear.",
+      images: [
+        "/images/sample-products/p5-1.jpg",
+        "/images/sample-products/p5-2.jpg",
+      ],
+      price: 78000,
+      onSale: false,
+      discountPercent: null,
+      isFeatured: false,
+      banner: null,
+      sizingInfo: {
+        S: { chest: '38"', length: '26"' },
+        M: { chest: '40"', length: '27"' },
+        L: { chest: '42"', length: '28"' },
+        XL: { chest: '44"', length: '29"' },
+      },
+      sizeStock: [
+        { size: "S", stock: 12 },
+        { size: "M", stock: 18 },
+        { size: "L", stock: 14 },
+        { size: "XL", stock: 8 },
+      ],
+    },
+    {
+      name: "Carhartt Work Jacket",
+      slug: "carhartt-work-jacket",
+      category: "OUTERWEAR",
+      color: "Brown",
+      description: "Durable workwear that lasts",
+      detail:
+        "Heavy-duty canvas work jacket with quilted lining. Features corduroy collar, multiple utility pockets, and reinforced stitching. Built to withstand tough conditions while maintaining style.",
+      images: [
+        "/images/sample-products/p6-1.jpg",
+        "/images/sample-products/p6-2.jpg",
+      ],
+      price: 95000,
+      onSale: false,
+      discountPercent: null,
+      isFeatured: false,
+      banner: null,
+      sizingInfo: {
+        M: { chest: '42"', length: '28"' },
+        L: { chest: '44"', length: '29"' },
+        XL: { chest: '46"', length: '30"' },
+        XXL: { chest: '48"', length: '31"' },
+      },
+      sizeStock: [
+        { size: "M", stock: 10 },
+        { size: "L", stock: 15 },
+        { size: "XL", stock: 12 },
+        { size: "XXL", stock: 7 },
+      ],
+    },
+    {
+      name: "Leather Crossbody Bag",
+      slug: "leather-crossbody-bag",
+      category: "ACCESSORIES",
+      color: "Tan",
+      description: "Compact and stylish everyday bag",
+      detail:
+        "Premium full-grain leather crossbody bag with adjustable strap. Features main compartment with zip closure, interior slip pocket, and card slots. Perfect size for essentials.",
+      images: [
+        "/images/sample-products/p1-1.jpg",
+        "/images/sample-products/p1-2.jpg",
+      ],
+      price: 68000,
+      onSale: true,
+      discountPercent: 15,
+      isFeatured: false,
+      banner: null,
+      sizingInfo: null,
+      sizeStock: [{ size: "ONE_SIZE", stock: 25 }],
+    },
+    {
+      name: "Aviator Sunglasses",
+      slug: "aviator-sunglasses",
+      category: "ACCESSORIES",
+      color: "Gold/Brown",
+      description: "Classic aviators with UV protection",
+      detail:
+        "Timeless aviator sunglasses with metal frame and gradient lenses. Provides 100% UV protection. Comes with protective case and cleaning cloth. A wardrobe staple that never goes out of style.",
+      images: [
+        "/images/sample-products/p2-1.jpg",
+        "/images/sample-products/p2-2.jpg",
+      ],
+      price: 22000,
+      onSale: false,
+      discountPercent: null,
+      isFeatured: false,
+      banner: null,
+      sizingInfo: null,
+      sizeStock: [{ size: "ONE_SIZE", stock: 40 }],
     },
   ],
 };

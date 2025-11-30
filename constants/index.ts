@@ -27,14 +27,17 @@ export const productDefaultValues = {
   name: "",
   slug: "",
   category: "",
+  color: "",
   images: [],
   description: "",
+  detail: "",
+  sizingInfo: null,
   price: 0,
-  stock: 0,
-  rating: null,
-
+  onSale: false,
+  discountPercent: null,
   isFeatured: false,
   banner: null,
+  sizeStock: [],
 };
 
 export const USER_ROLES = process.env.USER_ROLES
