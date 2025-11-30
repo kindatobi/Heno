@@ -1,44 +1,48 @@
-import { Product } from "@/types";
+import {
+  ProductCategory,
+  ProductSize,
+  UserRole,
+} from "@/app/generated/prisma/client";
 import { hashSync } from "bcrypt-ts-edge";
 
-const sampleData: { products: Omit<Product, "id" | "createdAt">[] } = {
+const sampleData = {
   users: [
     {
       name: "John Admin",
       email: "admin@example.com",
       password: hashSync("123456", 10),
-      role: "ADMIN",
+      role: "ADMIN" as UserRole,
     },
     {
       name: "Jane Doe",
       email: "user@example.com",
       password: hashSync("123456", 10),
-      role: "USER",
+      role: "USER" as UserRole,
     },
     {
       name: "Michael Smith",
       email: "michael@example.com",
       password: hashSync("123456", 10),
-      role: "USER",
+      role: "USER" as UserRole,
     },
     {
       name: "Sarah Johnson",
       email: "sarah@example.com",
       password: hashSync("123456", 10),
-      role: "USER",
+      role: "USER" as UserRole,
     },
     {
       name: "David Lee",
       email: "david@example.com",
       password: hashSync("123456", 10),
-      role: "ADMIN",
+      role: "ADMIN" as UserRole,
     },
   ],
   products: [
     {
       name: "Polo Sporting Stretch Shirt",
       slug: "polo-sporting-stretch-shirt",
-      category: "TOPS",
+      category: ProductCategory.TOPS,
       color: "White",
       description: "Classic Polo style with modern comfort",
       detail:
@@ -54,37 +58,37 @@ const sampleData: { products: Omit<Product, "id" | "createdAt">[] } = {
       banner: "banner-1.jpg",
       sizingInfo: [
         {
-          size: "S",
+          size: ProductSize.S,
           bodyLength: '28"',
           chest: '38"',
         },
         {
-          size: "M",
+          size: ProductSize.M,
           bodyLength: '29"',
           chest: '40"',
         },
         {
-          size: "L",
+          size: ProductSize.L,
           bodyLength: '30"',
           chest: '42"',
         },
         {
-          size: "XL",
+          size: ProductSize.XL,
           bodyLength: '31"',
           chest: '44"',
         },
       ],
       sizeStock: [
-        { size: "S", stock: 5 },
-        { size: "M", stock: 8 },
-        { size: "L", stock: 3 },
-        { size: "XL", stock: 2 },
+        { size: ProductSize.S, stock: 5 },
+        { size: ProductSize.M, stock: 8 },
+        { size: ProductSize.L, stock: 3 },
+        { size: ProductSize.XL, stock: 2 },
       ],
     },
     {
       name: "Brooks Brothers Long Sleeved Shirt",
       slug: "brooks-brothers-long-sleeved-shirt",
-      category: "TOPS",
+      category: ProductCategory.TOPS,
       color: "Light Blue",
       description: "Timeless style and premium comfort",
       detail:
@@ -100,37 +104,37 @@ const sampleData: { products: Omit<Product, "id" | "createdAt">[] } = {
       banner: "banner-2.jpg",
       sizingInfo: [
         {
-          size: "S",
+          size: ProductSize.S,
           bodyLength: '29"',
           chest: '39"',
         },
         {
-          size: "M",
+          size: ProductSize.M,
           bodyLength: '30"',
           chest: '41"',
         },
         {
-          size: "L",
+          size: ProductSize.L,
           bodyLength: '31"',
           chest: '43"',
         },
         {
-          size: "XL",
+          size: ProductSize.XL,
           bodyLength: '32"',
           chest: '45"',
         },
       ],
       sizeStock: [
-        { size: "S", stock: 10 },
-        { size: "M", stock: 15 },
-        { size: "L", stock: 8 },
-        { size: "XL", stock: 4 },
+        { size: ProductSize.S, stock: 10 },
+        { size: ProductSize.M, stock: 15 },
+        { size: ProductSize.L, stock: 8 },
+        { size: ProductSize.XL, stock: 4 },
       ],
     },
     {
       name: "Calvin Klein Slim Fit Stretch Shirt",
       slug: "calvin-klein-slim-fit-stretch-shirt",
-      category: "TOPS",
+      category: ProductCategory.TOPS,
       color: "Black",
       description: "Streamlined design with stretch fabric",
       detail:
@@ -146,37 +150,37 @@ const sampleData: { products: Omit<Product, "id" | "createdAt">[] } = {
       banner: null,
       sizingInfo: [
         {
-          size: "S",
+          size: ProductSize.S,
           bodyLength: '27.5"',
           chest: '36"',
         },
         {
-          size: "M",
+          size: ProductSize.M,
           bodyLength: '28.5"',
           chest: '38"',
         },
         {
-          size: "L",
+          size: ProductSize.L,
           bodyLength: '29.5"',
           chest: '40"',
         },
         {
-          size: "XL",
+          size: ProductSize.XL,
           bodyLength: '30.5"',
           chest: '42"',
         },
       ],
       sizeStock: [
-        { size: "S", stock: 10 },
-        { size: "M", stock: 12 },
-        { size: "L", stock: 8 },
-        { size: "XL", stock: 5 },
+        { size: ProductSize.S, stock: 10 },
+        { size: ProductSize.M, stock: 12 },
+        { size: ProductSize.L, stock: 8 },
+        { size: ProductSize.XL, stock: 5 },
       ],
     },
     {
       name: "Polo Classic Pink Hoodie",
       slug: "polo-classic-pink-hoodie",
-      category: "TOPS",
+      category: ProductCategory.TOPS,
       color: "Pink",
       description: "Soft and stylish for laid-back days",
       detail:
@@ -192,43 +196,43 @@ const sampleData: { products: Omit<Product, "id" | "createdAt">[] } = {
       banner: null,
       sizingInfo: [
         {
-          size: "S",
+          size: ProductSize.S,
           bodyLength: '26"',
           chest: '20"',
         },
         {
-          size: "M",
+          size: ProductSize.M,
           bodyLength: '27"',
           chest: '21"',
         },
         {
-          size: "L",
+          size: ProductSize.L,
           bodyLength: '28"',
           chest: '22"',
         },
         {
-          size: "XL",
+          size: ProductSize.XL,
           bodyLength: '29"',
           chest: '23"',
         },
         {
-          size: "XXL",
+          size: ProductSize.XXL,
           bodyLength: '30"',
           chest: '24"',
         },
       ],
       sizeStock: [
-        { size: "S", stock: 8 },
-        { size: "M", stock: 12 },
-        { size: "L", stock: 6 },
-        { size: "XL", stock: 4 },
-        { size: "XXL", stock: 2 },
+        { size: ProductSize.S, stock: 8 },
+        { size: ProductSize.M, stock: 12 },
+        { size: ProductSize.L, stock: 6 },
+        { size: ProductSize.XL, stock: 4 },
+        { size: ProductSize.XXL, stock: 2 },
       ],
     },
     {
       name: "Levi's 511 Slim Fit Jeans",
       slug: "levis-511-slim-fit-jeans",
-      category: "DENIMS",
+      category: ProductCategory.DENIMS,
       color: "Dark Blue",
       description: "Perfect slim fit denim for everyday",
       detail:
@@ -244,37 +248,37 @@ const sampleData: { products: Omit<Product, "id" | "createdAt">[] } = {
       banner: "banner-3.jpg",
       sizingInfo: [
         {
-          size: "S",
+          size: ProductSize.S,
           bodyLength: '40"',
           chest: '30"',
         },
         {
-          size: "M",
+          size: ProductSize.M,
           bodyLength: '40"',
           chest: '32"',
         },
         {
-          size: "L",
+          size: ProductSize.L,
           bodyLength: '40"',
           chest: '34"',
         },
         {
-          size: "XL",
+          size: ProductSize.XL,
           bodyLength: '40"',
           chest: '36"',
         },
       ],
       sizeStock: [
-        { size: "S", stock: 12 },
-        { size: "M", stock: 18 },
-        { size: "L", stock: 10 },
-        { size: "XL", stock: 6 },
+        { size: ProductSize.S, stock: 12 },
+        { size: ProductSize.M, stock: 18 },
+        { size: ProductSize.L, stock: 10 },
+        { size: ProductSize.XL, stock: 6 },
       ],
     },
     {
       name: "Diesel Sleenker Skinny Jeans",
       slug: "diesel-sleenker-skinny-jeans",
-      category: "DENIMS",
+      category: ProductCategory.DENIMS,
       color: "Black",
       description: "Ultra-modern skinny fit premium denim",
       detail:
@@ -290,37 +294,37 @@ const sampleData: { products: Omit<Product, "id" | "createdAt">[] } = {
       banner: null,
       sizingInfo: [
         {
-          size: "S",
+          size: ProductSize.S,
           bodyLength: '40"',
           chest: '29"',
         },
         {
-          size: "M",
+          size: ProductSize.M,
           bodyLength: '40"',
           chest: '31"',
         },
         {
-          size: "L",
+          size: ProductSize.L,
           bodyLength: '40"',
           chest: '33"',
         },
         {
-          size: "XL",
+          size: ProductSize.XL,
           bodyLength: '40"',
           chest: '35"',
         },
       ],
       sizeStock: [
-        { size: "S", stock: 4 },
-        { size: "M", stock: 8 },
-        { size: "L", stock: 6 },
-        { size: "XL", stock: 3 },
+        { size: ProductSize.S, stock: 4 },
+        { size: ProductSize.M, stock: 8 },
+        { size: ProductSize.L, stock: 6 },
+        { size: ProductSize.XL, stock: 3 },
       ],
     },
     {
       name: "Classic Chino Pants",
       slug: "classic-chino-pants",
-      category: "BOTTOMS",
+      category: ProductCategory.BOTTOMS,
       color: "Khaki",
       description: "Versatile chinos for any occasion",
       detail:
@@ -336,37 +340,37 @@ const sampleData: { products: Omit<Product, "id" | "createdAt">[] } = {
       banner: null,
       sizingInfo: [
         {
-          size: "S",
+          size: ProductSize.S,
           bodyLength: '40"',
           chest: '30"',
         },
         {
-          size: "M",
+          size: ProductSize.M,
           bodyLength: '40"',
           chest: '32"',
         },
         {
-          size: "L",
+          size: ProductSize.L,
           bodyLength: '40"',
           chest: '34"',
         },
         {
-          size: "XL",
+          size: ProductSize.XL,
           bodyLength: '40"',
           chest: '36"',
         },
       ],
       sizeStock: [
-        { size: "S", stock: 7 },
-        { size: "M", stock: 14 },
-        { size: "L", stock: 9 },
-        { size: "XL", stock: 5 },
+        { size: ProductSize.S, stock: 7 },
+        { size: ProductSize.M, stock: 14 },
+        { size: ProductSize.L, stock: 9 },
+        { size: ProductSize.XL, stock: 5 },
       ],
     },
     {
       name: "Premium Leather Biker Jacket",
       slug: "premium-leather-biker-jacket",
-      category: "LEATHER",
+      category: ProductCategory.LEATHER,
       color: "Black",
       description: "Classic biker style in genuine leather",
       detail:
@@ -382,37 +386,37 @@ const sampleData: { products: Omit<Product, "id" | "createdAt">[] } = {
       banner: "banner-4.jpg",
       sizingInfo: [
         {
-          size: "S",
+          size: ProductSize.S,
           bodyLength: '24"',
           chest: '38"',
         },
         {
-          size: "M",
+          size: ProductSize.M,
           bodyLength: '25"',
           chest: '40"',
         },
         {
-          size: "L",
+          size: ProductSize.L,
           bodyLength: '26"',
           chest: '42"',
         },
         {
-          size: "XL",
+          size: ProductSize.XL,
           bodyLength: '27"',
           chest: '44"',
         },
       ],
       sizeStock: [
-        { size: "S", stock: 3 },
-        { size: "M", stock: 5 },
-        { size: "L", stock: 4 },
-        { size: "XL", stock: 2 },
+        { size: ProductSize.S, stock: 3 },
+        { size: ProductSize.M, stock: 5 },
+        { size: ProductSize.L, stock: 4 },
+        { size: ProductSize.XL, stock: 2 },
       ],
     },
     {
       name: "North Face Puffer Jacket",
       slug: "north-face-puffer-jacket",
-      category: "OUTERWEAR",
+      category: ProductCategory.OUTERWEAR,
       color: "Navy",
       description: "Warm and lightweight winter essential",
       detail:
@@ -428,43 +432,43 @@ const sampleData: { products: Omit<Product, "id" | "createdAt">[] } = {
       banner: null,
       sizingInfo: [
         {
-          size: "S",
+          size: ProductSize.S,
           bodyLength: '27"',
           chest: '40"',
         },
         {
-          size: "M",
+          size: ProductSize.M,
           bodyLength: '28"',
           chest: '42"',
         },
         {
-          size: "L",
+          size: ProductSize.L,
           bodyLength: '29"',
           chest: '44"',
         },
         {
-          size: "XL",
+          size: ProductSize.XL,
           bodyLength: '30"',
           chest: '46"',
         },
         {
-          size: "XXL",
+          size: ProductSize.XXL,
           bodyLength: '31"',
           chest: '48"',
         },
       ],
       sizeStock: [
-        { size: "S", stock: 8 },
-        { size: "M", stock: 15 },
-        { size: "L", stock: 10 },
-        { size: "XL", stock: 6 },
-        { size: "XXL", stock: 3 },
+        { size: ProductSize.S, stock: 8 },
+        { size: ProductSize.M, stock: 15 },
+        { size: ProductSize.L, stock: 10 },
+        { size: ProductSize.XL, stock: 6 },
+        { size: ProductSize.XXL, stock: 3 },
       ],
     },
     {
       name: "Aviator Sunglasses",
       slug: "aviator-sunglasses",
-      category: "ACCESSORIES",
+      category: ProductCategory.ACCESSORIES,
       color: "Gold/Brown",
       description: "Classic aviators with UV protection",
       detail:
@@ -479,7 +483,7 @@ const sampleData: { products: Omit<Product, "id" | "createdAt">[] } = {
       isFeatured: false,
       banner: null,
       sizingInfo: null,
-      sizeStock: [{ size: "ONE_SIZE", stock: 40 }],
+      sizeStock: [{ size: ProductSize.ONE_SIZE, stock: 40 }],
     },
   ],
 };
