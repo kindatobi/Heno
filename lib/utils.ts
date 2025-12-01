@@ -78,8 +78,8 @@ export function formatError(error: unknown): string {
 }
 
 // Format currency
-const CURRENCY_FORMATTER = new Intl.NumberFormat("en-US", {
-  currency: "USD",
+const CURRENCY_FORMATTER = new Intl.NumberFormat("en-NG", {
+  currency: "NGN",
   style: "currency",
   minimumFractionDigits: 2,
 });
@@ -90,7 +90,7 @@ export function formatCurrency(amount: number | string | null) {
   } else if (typeof amount === "string") {
     return CURRENCY_FORMATTER.format(Number(amount));
   } else {
-    return "Nan";
+    return "NaN";
   }
 }
 

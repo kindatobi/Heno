@@ -1,8 +1,9 @@
 import sampleData from "@/db/sample-data";
+import prisma from "@/lib/prisma";
 import Image from "next/image";
 
-export default function Home() {
-  const products = sampleData.products;
+export default async function Home() {
+  const products = await prisma.product.findMany();
   return (
     <div>
       <main>
@@ -16,7 +17,7 @@ export default function Home() {
             />
             <div>
               <p>{product.name}</p>
-              <p>{product.brand}</p>
+              <p>{product.description}</p>
               <p>{product.price}</p>
             </div>
           </div>

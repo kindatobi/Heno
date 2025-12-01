@@ -1,8 +1,11 @@
 import ShopProductCard from "@/components/shop-product-card";
-import sampleData from "@/db/sample-data";
 
-export default function ShopPage() {
-  const shopProducts = sampleData.products;
+import prisma from "@/lib/prisma";
+
+export default async function ShopPage() {
+  const shopProducts = await prisma.product.findMany({
+    include: { sizeStock: true },
+  });
   return (
     <div>
       <p> Hey there, what do you wanna get</p>
