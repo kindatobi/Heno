@@ -1,4 +1,4 @@
-import sampleData from "@/db/sample-data";
+import { Button } from "@/components/ui/button";
 import prisma from "@/lib/prisma";
 import Image from "next/image";
 
@@ -23,6 +23,9 @@ export default async function Home() {
           </div>
         ))}
       </main>
+      <form action="">
+        <Button>Log out</Button>
+      </form>
     </div>
   );
 }
