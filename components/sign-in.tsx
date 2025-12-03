@@ -1,9 +1,9 @@
 "use client";
-
+import { useRouter } from "next/navigation";
 import { signInUserSchema } from "@/lib/validators";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
-import z from "zod";
+import { z } from "zod";
 import { Field, FieldError, FieldGroup, FieldLabel } from "./ui/field";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
@@ -16,15 +16,24 @@ import {
   CardTitle,
 } from "./ui/card";
 import { signInDefaultValues } from "@/constants";
+import { signInUser } from "@/app/actions/user.action";
+import { toast } from "sonner";
 
 export default function SignIn() {
+  const router = useRouter();
   const form = useForm<z.infer<typeof signInUserSchema>>({
     resolver: zodResolver(signInUserSchema),
     defaultValues: signInDefaultValues,
   });
 
-  function onSubmit(data) {
-    console.log(data);
+  async function onSubmit(data: z.infer<typeof signInUserSchema>) {
+    const res = await signInUser(data);
+    if (!res.success) {
+      toast.error(res.message);
+    } else {
+      toast.success("User signed in successfully");
+      router.push("/");
+    }
   }
 
   return (
@@ -41,12 +50,10 @@ export default function SignIn() {
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor="form-rhf-input-username">
-                    Email
-                  </FieldLabel>
+                  <FieldLabel htmlFor="form-rhf-input-email">Email</FieldLabel>
                   <Input
                     {...field}
-                    id="form-rhf-input-username"
+                    id="form-rhf-input-email"
                     aria-invalid={fieldState.invalid}
                     placeholder="Enter your email"
                   />
@@ -61,15 +68,16 @@ export default function SignIn() {
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor="form-rhf-input-username">
+                  <FieldLabel htmlFor="form-rhf-input-password">
                     Password
                   </FieldLabel>
                   <Input
                     {...field}
-                    id="form-rhf-input-username"
+                    id="form-rhf-input-password"
                     aria-invalid={fieldState.invalid}
+                    type="password"
                     placeholder="Enter your password"
-                    autoComplete="password"
+                    autoComplete="current-password"
                   />
                   {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]} />

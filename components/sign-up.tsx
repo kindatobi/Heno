@@ -1,9 +1,9 @@
 "use client";
-
+import { useRouter } from "next/navigation";
 import { signUpUserSchema } from "@/lib/validators";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
-import z from "zod";
+import { z } from "zod";
 import { Field, FieldError, FieldGroup, FieldLabel } from "./ui/field";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
@@ -16,15 +16,24 @@ import {
   CardTitle,
 } from "./ui/card";
 import { signUpDefaultValues } from "@/constants";
+import { signUpUser } from "@/app/actions/user.action";
+import { toast } from "sonner";
 
 export default function SignUp() {
+  const router = useRouter();
   const form = useForm<z.infer<typeof signUpUserSchema>>({
     resolver: zodResolver(signUpUserSchema),
     defaultValues: signUpDefaultValues,
   });
 
-  function onSubmit(data) {
-    console.log(data);
+  async function onSubmit(data: z.infer<typeof signUpUserSchema>) {
+    const res = await signUpUser(data);
+    if (!res.success) {
+      toast.error(res.message);
+    } else {
+      toast.success(res.message);
+      router.push("/");
+    }
   }
 
   return (
@@ -43,14 +52,13 @@ export default function SignUp() {
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor="form-rhf-input-username">
-                    Name
-                  </FieldLabel>
+                  <FieldLabel htmlFor="form-rhf-input-name">Name</FieldLabel>
                   <Input
                     {...field}
-                    id="form-rhf-input-username"
+                    id="form-rhf-input-name"
                     aria-invalid={fieldState.invalid}
                     placeholder="Enter your name"
+                    autoComplete="name"
                   />
                   {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]} />
@@ -63,14 +71,14 @@ export default function SignUp() {
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor="form-rhf-input-username">
-                    Email
-                  </FieldLabel>
+                  <FieldLabel htmlFor="form-rhf-input-email">Email</FieldLabel>
                   <Input
                     {...field}
-                    id="form-rhf-input-username"
+                    id="form-rhf-input-email"
+                    type="email"
                     aria-invalid={fieldState.invalid}
                     placeholder="Enter your email"
+                    autoComplete="email"
                   />
                   {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]} />
@@ -83,15 +91,16 @@ export default function SignUp() {
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor="form-rhf-input-username">
+                  <FieldLabel htmlFor="form-rhf-input-password">
                     Password
                   </FieldLabel>
                   <Input
                     {...field}
-                    id="form-rhf-input-username"
+                    id="form-rhf-input-password"
                     aria-invalid={fieldState.invalid}
+                    type="password"
                     placeholder="Enter your password"
-                    autoComplete="password"
+                    autoComplete="new-password"
                   />
                   {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]} />
@@ -104,15 +113,16 @@ export default function SignUp() {
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor="form-rhf-input-username">
+                  <FieldLabel htmlFor="form-rhf-input-confirmPassword">
                     Confirm password
                   </FieldLabel>
                   <Input
                     {...field}
-                    id="form-rhf-input-username"
+                    id="form-rhf-input-confirmPassword"
                     aria-invalid={fieldState.invalid}
-                    placeholder="Enter your name"
-                    autoComplete="Name"
+                    type="password"
+                    placeholder="Confirm your password"
+                    autoComplete="new-password"
                   />
                   {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]} />
@@ -126,7 +136,7 @@ export default function SignUp() {
       <CardFooter>
         <Field orientation="horizontal">
           <Button type="submit" form="form-rhf-input">
-            Create Account
+            {form.formState.isSubmitting ? "Submitting..." : "Submit"}
           </Button>
         </Field>
       </CardFooter>

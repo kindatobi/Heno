@@ -14,11 +14,11 @@ datasource db {
 }
 
 model User {
-  id    String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id    String  @id @default(cuid())
   email String @unique(map: "user_email_idx")
   name  String @default("USER")
 
-  emailVerified DateTime? @db.Timestamp(6)
+  emailVerified Boolean   @default(false) 
   image         String?
   password      String?
   role          UserRole  @default(USER)
@@ -95,7 +95,7 @@ enum ProductSize {
 
 model Order {
   id              String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  userId          String?     @db.Uuid
+  userId          String?    
   customerName    String
   customerEmail   String
   shippingAddress Json        @db.Json
@@ -135,7 +135,7 @@ model Session {
   updatedAt DateTime @updatedAt
   ipAddress String?
   userAgent String?
-  userId    String   @db.Uuid
+  userId    String   
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([token])
@@ -147,7 +147,7 @@ model Account {
   id                    String    @id
   accountId             String
   providerId            String
-  userId                String    @db.Uuid
+  userId                String    
   user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   accessToken           String?
   refreshToken          String?
