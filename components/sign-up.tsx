@@ -16,8 +16,9 @@ import {
   CardTitle,
 } from "./ui/card";
 import { signUpDefaultValues } from "@/constants";
-import { signUpUser } from "@/app/actions/user.action";
+
 import { toast } from "sonner";
+import { signUpUser } from "@/actions/user.action";
 
 export default function SignUp() {
   const router = useRouter();

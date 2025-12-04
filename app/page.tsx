@@ -1,3 +1,4 @@
+import { signOutUser } from "@/actions/user.action";
 import { Button } from "@/components/ui/button";
 import prisma from "@/lib/prisma";
 import Image from "next/image";
@@ -23,7 +24,7 @@ export default async function Home() {
           </div>
         ))}
       </main>
-      <form action="">
+      <form action={signOutUser}>
         <Button>Log out</Button>
       </form>
     </div>
