@@ -28,7 +28,14 @@ export const productDefaultValues = {
   slug: "",
   category: "",
   color: "",
-  images: [],
+  shopImage: "",
+  showcaseImages: {
+    spin360: {
+      left: [],
+      right: [],
+    },
+    regular: [],
+  },
   description: "",
   detail: "",
   sizingInfo: null,

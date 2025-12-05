@@ -11,7 +11,7 @@ export default async function Home() {
         {products.map((product) => (
           <div key={product.slug}>
             <Image
-              src={product?.images?.[0]}
+              src={product?.shopImage}
               alt={product.name}
               width={100}
               height={100}

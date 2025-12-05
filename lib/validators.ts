@@ -19,6 +19,16 @@ export const signInUserSchema = z.object({
   password: z.string().min(6, "Password must be at least 6 characters"),
 });
 
+export const showcaseImagesSchema = z.object({
+  spin360: z
+    .object({
+      left: z.array(z.string()).length(8, "Must be exactly 8 images"),
+      right: z.array(z.string()).length(8, "Must be exactly 8 images"),
+    })
+    .nullable(),
+  regular: z.array(z.string()).min(1, "At least one regular image required"),
+});
+
 export const createProductSchema = z.object({
   name: z.string().min(1, "Name is required"),
   slug: z.string().min(1, "Slug is required"),
@@ -30,7 +40,8 @@ export const createProductSchema = z.object({
     "OUTERWEAR",
     "ACCESSORIES",
   ]),
-  images: z.array(z.string()).min(1, "Product must have at least one image"),
+  shopImage: z.string().min(1, "Shop Image is required"),
+  showcaseImages: showcaseImagesSchema,
   description: z
     .string()
     .min(1, "Description is required")

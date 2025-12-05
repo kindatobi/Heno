@@ -9,7 +9,7 @@ export default function ShopProductCard({ product }: { product: Product }) {
       <Link href={`/product/${product.slug}`}>
         <Image
           key={product.slug}
-          src={product.images[0]}
+          src={product.shopImage}
           alt={product.description}
           width={100}
           height={100}

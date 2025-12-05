@@ -22,7 +22,7 @@ model User {
   image         String?
   password      String?
   role          UserRole  @default(USER)
-  address       Json?     @db.Json
+ 
   paymentMethod String?
   createdAt     DateTime  @default(now()) @db.Timestamp(6)
   updatedAt     DateTime  @updatedAt
@@ -43,7 +43,8 @@ model Product {
   name     String
   slug     String          @unique(map: "product-slug-idx")
   category ProductCategory
-  images   String[]
+  shopImage String
+  showcaseImages   Json
 
   description String
   color       String

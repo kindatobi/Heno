@@ -16,15 +16,44 @@ export default async function ProductDetailPage(props: {
   return (
     <div>
       <div>
-        {product.images.map((img, i) => (
-          <Image
-            key={i}
-            src={product?.images[i]}
-            alt={product?.name}
-            width={200}
-            height={200}
-          />
-        ))}
+        <div>
+          <div>
+            <div>
+              {product.showcaseImages.spin360?.left.map((img, i) => (
+                <Image
+                  key={i}
+                  src={img}
+                  alt={product.name}
+                  width={450}
+                  height={450}
+                />
+              ))}
+            </div>
+            <div>
+              {product.showcaseImages.spin360?.right.map((img, i) => (
+                <Image
+                  key={i}
+                  src={img}
+                  alt={product.name}
+                  width={450}
+                  height={450}
+                />
+              ))}
+            </div>
+          </div>
+
+          <div>
+            {product.showcaseImages.regular.map((img, i) => (
+              <Image
+                key={i}
+                src={img}
+                alt={product.name}
+                width={200}
+                height={200}
+              />
+            ))}
+          </div>
+        </div>
 
         <div>
           <h2>{product.name}</h2>
