@@ -1,8 +1,9 @@
 import { getProductBySlug } from "@/actions/product.actions";
+import AddToCartButton from "@/components/add-to-cart-button";
 import { formatCurrency } from "@/lib/utils";
 
 import Image from "next/image";
-import Link from "next/link";
+
 import { notFound } from "next/navigation";
 
 export default async function ProductDetailPage(props: {
@@ -15,28 +16,31 @@ export default async function ProductDetailPage(props: {
 
   return (
     <div>
-      <div>
-        <div>
-          <div>
-            <div>
+      <div className="flex">
+        {/* LEFT SIDE - Images */}
+        <div className="w-1/2">
+          <div className="flex">
+            <div className="relative h-[500px] w-full">
               {product.showcaseImages.spin360?.left.map((img, i) => (
                 <Image
                   key={i}
                   src={img}
                   alt={product.name}
-                  width={450}
-                  height={450}
+                  width={250}
+                  height={250}
+                  className="absolute top-0 left-0"
                 />
               ))}
             </div>
-            <div>
+            <div className="relative h-[500px] w-full">
               {product.showcaseImages.spin360?.right.map((img, i) => (
                 <Image
                   key={i}
                   src={img}
                   alt={product.name}
-                  width={450}
-                  height={450}
+                  width={250}
+                  height={250}
+                  className="absolute top-0 left-0"
                 />
               ))}
             </div>
@@ -55,27 +59,28 @@ export default async function ProductDetailPage(props: {
           </div>
         </div>
 
-        <div>
-          <h2>{product.name}</h2>
-          <p>{product.description}</p>
-        </div>
-        <div>
-          <h3>{formatCurrency(product.price)}</h3>
-          <p>
-            <span className="uppercase">VAT</span> included
-          </p>
-        </div>
-        <div>
-          <p>size</p>
-          <div className="flex gap-1">
-            {ALL_SIZES.map((x, i) => (
-              <p key={i}>{x}</p>
-            ))}
+        {/* RIGHT SIDE - Details */}
+        <div className="w-1/2">
+          <div>
+            <h2>{product.name}</h2>
+            <p>{product.description}</p>
           </div>
+          <div>
+            <h3>{formatCurrency(product.price)}</h3>
+            <p>
+              <span className="uppercase">VAT</span> included
+            </p>
+          </div>
+          <div>
+            <p>size</p>
+            <div className="flex gap-1">
+              {ALL_SIZES.map((x, i) => (
+                <p key={i}>{x}</p>
+              ))}
+            </div>
+          </div>
+          <AddToCartButton productId={product.id} />
         </div>
-        <button className="bg-black text-white cursor-pointer">
-          add to cart
-        </button>
       </div>
     </div>
   );
