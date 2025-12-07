@@ -7,7 +7,7 @@ export default function Header() {
   const [cartOpen, setCartOpen] = useState(false);
 
   return (
-    <>
+    <header className="p-2">
       <CartModal cartOpen={cartOpen} setCartOpen={setCartOpen} />
       <div className="flex justify-between">
         {/* LOGO */}
@@ -26,6 +26,6 @@ export default function Header() {
         {/* FUGA */}
         <div>OPEN</div>
       </div>
-    </>
+    </header>
   );
 }

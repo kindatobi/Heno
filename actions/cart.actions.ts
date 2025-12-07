@@ -1,9 +1,3 @@
 "use server";
 
-export async function addItemToCart({
-  productId,
-  quantity,
-}: {
-  productId: string;
-  quantity: number;
-}) {}
+export async function addItemToCart(productId: string, quantity: number) {}
