@@ -77,3 +77,22 @@ export type Product = Omit<PrismaProduct, "showcaseImages" | "sizingInfo"> & {
   showcaseImages: ShowcaseImages;
   sizingInfo: SizingInfo | null;
 };
+
+export type Cart = {
+  userId: string;
+  sessionCartId: string;
+  items: CartItem[];
+  itemsPrice: number;
+  shippingPrice: number;
+  taxPrice: number;
+  totalPrice: number;
+};
+
+export type CartItem = {
+  productId: string;
+  name: string;
+  slug: string;
+  price: number;
+  qty: number;
+  image: string;
+};
