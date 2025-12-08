@@ -13,7 +13,11 @@ export default function AddToCartButton({
   const [selectedSize, setSelectedSize] = useState("");
 
   const handleAddToCart = async () => {
-    const res = await addItemToCart(productId, quantity, selectedSize);
+    if (!selectedSize) {
+      alert("Please select a size");
+      return;
+    }
+    const res = await addItemToCart(productId, selectedSize, quantity);
   };
 
   return (
@@ -22,7 +26,15 @@ export default function AddToCartButton({
         <p>size</p>
         <div className="flex gap-1">
           {sizes.map((x, i) => (
-            <p key={i}>{x}</p>
+            <p
+              key={i}
+              onClick={() => setSelectedSize(x)}
+              className={`cursor-pointer p-2 border ${
+                selectedSize === x ? "bg-black text-white" : ""
+              }`}
+            >
+              {x}
+            </p>
           ))}
         </div>
       </div>

@@ -75,3 +75,9 @@ export const userUpdateProfileSchema = z.object({
   email: z.string().min(3, "Email must be at least 3 characters"),
   image: z.string().nullable(),
 });
+
+export const addItemToCartSchema = z.object({
+  productId: z.string(),
+  size: z.enum(["XS", "S", "M", "L", "XL", "XXL", "XXXL", "ONE_SIZE"]),
+  quantity: z.number(),
+});

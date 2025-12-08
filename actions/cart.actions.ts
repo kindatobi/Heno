@@ -6,7 +6,6 @@ import { redis } from "@/lib/redis";
 import { formatError } from "@/lib/utils";
 import { Cart, CartItem } from "@/types";
 import { cookies, headers } from "next/headers";
-import { success } from "zod";
 
 function calcPrice(items: CartItem[]) {
   const itemsPrice = items.reduce(
@@ -27,8 +26,8 @@ function calcPrice(items: CartItem[]) {
 
 export async function addItemToCart(
   productId: string,
-  quantity: number,
-  selectedSize: string
+  size: string,
+  quantity: number
 ) {
   try {
     const selectedProduct = await prisma.product.findFirst({
@@ -42,7 +41,7 @@ export async function addItemToCart(
       name: selectedProduct.name,
       slug: selectedProduct.slug,
       price: selectedProduct.price,
-      size: selectedProduct.sizeStock,
+      size: size,
       qty: quantity,
       image: selectedProduct.shopImage,
     };
