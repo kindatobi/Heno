@@ -71,15 +71,8 @@ export default async function ProductDetailPage(props: {
               <span className="uppercase">VAT</span> included
             </p>
           </div>
-          <div>
-            <p>size</p>
-            <div className="flex gap-1">
-              {ALL_SIZES.map((x, i) => (
-                <p key={i}>{x}</p>
-              ))}
-            </div>
-          </div>
-          <AddToCartButton productId={product.id} />
+
+          <AddToCartButton productId={product.id} sizes={ALL_SIZES} />
         </div>
       </div>
     </div>

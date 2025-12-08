@@ -25,10 +25,15 @@ function calcPrice(items: CartItem[]) {
   };
 }
 
-export async function addItemToCart(productId: string, quantity: number) {
+export async function addItemToCart(
+  productId: string,
+  quantity: number,
+  selectedSize: string
+) {
   try {
     const selectedProduct = await prisma.product.findFirst({
       where: { id: productId },
+      include: { sizeStock: true },
     });
     if (!selectedProduct) throw new Error("Product not found");
 
@@ -37,6 +42,7 @@ export async function addItemToCart(productId: string, quantity: number) {
       name: selectedProduct.name,
       slug: selectedProduct.slug,
       price: selectedProduct.price,
+      size: selectedProduct.sizeStock,
       qty: quantity,
       image: selectedProduct.shopImage,
     };

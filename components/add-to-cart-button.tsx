@@ -2,15 +2,30 @@
 import { addItemToCart } from "@/actions/cart.actions";
 import { useState } from "react";
 
-export default function AddToCartButton({ productId }: { productId: string }) {
+export default function AddToCartButton({
+  productId,
+  sizes,
+}: {
+  productId: string;
+  sizes: string[];
+}) {
   const [quantity, setQuantity] = useState(1);
+  const [selectedSize, setSelectedSize] = useState("");
 
   const handleAddToCart = async () => {
-    const res = await addItemToCart(productId, quantity);
+    const res = await addItemToCart(productId, quantity, selectedSize);
   };
 
   return (
     <div>
+      <div>
+        <p>size</p>
+        <div className="flex gap-1">
+          {sizes.map((x, i) => (
+            <p key={i}>{x}</p>
+          ))}
+        </div>
+      </div>
       {/* Counter */}
       <div className="flex gap-2 items-center select-none">
         <div
