@@ -79,3 +79,9 @@ export async function addItemToCart(
     return { success: false, message: formatError(error) };
   }
 }
+
+export async function getMyCart() {
+  const sessionCartId = (await cookies()).get("sessionCartId")?.value;
+  const cart: Cart | null = await redis.get(`cart-${sessionCartId}`);
+  return cart;
+}
