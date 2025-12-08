@@ -4,11 +4,11 @@ import { useUIStore } from "@/lib/store/ui.store";
 import CartModal from "./cart-modal";
 
 export default function Header() {
-  const { cartOpen, toggleCart } = useUIStore();
+  const { toggleCart } = useUIStore();
 
   return (
     <header className="p-2">
-      {cartOpen && <CartModal />}
+      <CartModal />
       <div className="flex justify-between">
         {/* LOGO */}
         <div>HENO</div>
