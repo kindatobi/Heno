@@ -17,7 +17,11 @@ export default function AddToCartButton({
       alert("Please select a size");
       return;
     }
-    const res = await addItemToCart(productId, selectedSize, quantity);
+    const res = await addItemToCart({
+      productId,
+      size: selectedSize,
+      quantity,
+    });
   };
 
   return (

@@ -4,7 +4,9 @@ import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { redis } from "@/lib/redis";
 import { formatError } from "@/lib/utils";
+import { addItemToCartSchema } from "@/lib/validators";
 import { Cart, CartItem } from "@/types";
+import { revalidatePath } from "next/cache";
 import { cookies, headers } from "next/headers";
 
 function calcPrice(items: CartItem[]) {
@@ -24,25 +26,47 @@ function calcPrice(items: CartItem[]) {
   };
 }
 
-export async function addItemToCart(
-  productId: string,
-  size: string,
-  quantity: number
-) {
+export async function addItemToCart({
+  productId,
+  size,
+  quantity,
+}: {
+  productId: string;
+  size: string;
+  quantity: number;
+}) {
   try {
+    const validatedProduct = addItemToCartSchema.parse({
+      productId,
+      size,
+      quantity,
+    });
+
     const selectedProduct = await prisma.product.findFirst({
-      where: { id: productId },
+      where: { id: validatedProduct.productId },
       include: { sizeStock: true },
     });
     if (!selectedProduct) throw new Error("Product not found");
+
+    const productSizeStock = selectedProduct.sizeStock.find(
+      (s) => s.size === validatedProduct.size
+    );
+
+    if (!productSizeStock) {
+      throw new Error("Size not found");
+    }
+
+    if (validatedProduct.quantity > productSizeStock.stock) {
+      validatedProduct.quantity = productSizeStock.stock;
+    }
 
     const item = {
       productId: selectedProduct.id,
       name: selectedProduct.name,
       slug: selectedProduct.slug,
       price: selectedProduct.price,
-      size: size,
-      qty: quantity,
+      size: validatedProduct.size,
+      qty: validatedProduct.quantity,
       image: selectedProduct.shopImage,
     };
 
@@ -74,6 +98,7 @@ export async function addItemToCart(
       }
       await redis.set(`cart-${sessionCartId}`, cart);
     }
+
     return { success: true, message: "Item added to cart" };
   } catch (error) {
     return { success: false, message: formatError(error) };

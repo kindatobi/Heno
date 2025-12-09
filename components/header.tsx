@@ -1,26 +1,20 @@
-"use client";
-
-import { useUIStore } from "@/lib/store/ui.store";
+import { getMyCart } from "@/actions/cart.actions";
 import CartModal from "./cart-modal";
 
-export default function Header() {
-  const { toggleCart } = useUIStore();
+import Bag from "./bag";
+
+export default async function Header() {
+  const cart = await getMyCart();
+  const totalItems =
+    cart?.items.reduce((total, item) => total + item.qty, 0) ?? 0;
 
   return (
     <header className="p-2">
-      <CartModal />
+      <CartModal cart={cart} />
       <div className="flex justify-between">
-        {/* LOGO */}
         <div>HENO</div>
-        {/* OTHER THINGS */}
         <div>THINGS</div>
-        {/* BAG */}
-        <div>
-          <span className="cursor-pointer" onClick={toggleCart}>
-            BAG(0)
-          </span>
-        </div>
-        {/* FUGA */}
+        <Bag totalItems={totalItems} />
         <div>OPEN</div>
       </div>
     </header>
