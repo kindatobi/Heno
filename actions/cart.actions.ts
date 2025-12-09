@@ -28,17 +28,14 @@ function calcPrice(items: CartItem[]) {
 export async function addItemToCart({
   productId,
   size,
-  quantity,
 }: {
   productId: string;
   size: string;
-  quantity: number;
 }) {
   try {
     const validatedProduct = addItemToCartSchema.parse({
       productId,
       size,
-      quantity,
     });
 
     const selectedProduct = await prisma.product.findFirst({

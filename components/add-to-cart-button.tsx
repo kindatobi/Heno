@@ -9,7 +9,6 @@ export default function AddToCartButton({
   productId: string;
   sizes: string[];
 }) {
-  const [quantity, setQuantity] = useState(1);
   const [selectedSize, setSelectedSize] = useState("");
 
   const handleAddToCart = async () => {
@@ -20,7 +19,6 @@ export default function AddToCartButton({
     const res = await addItemToCart({
       productId,
       size: selectedSize,
-      quantity,
     });
   };
 
@@ -40,24 +38,6 @@ export default function AddToCartButton({
               {x}
             </p>
           ))}
-        </div>
-      </div>
-      {/* Counter */}
-      <div className="flex gap-2 items-center select-none">
-        <div
-          onClick={() => {
-            if (quantity > 1) setQuantity((q) => q - 1);
-          }}
-          className="cursor-pointer"
-        >
-          -
-        </div>
-        <div>{quantity}</div>
-        <div
-          onClick={() => setQuantity((q) => q + 1)}
-          className="cursor-pointer"
-        >
-          +
         </div>
       </div>
 
