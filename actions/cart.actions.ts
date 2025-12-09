@@ -6,7 +6,6 @@ import { redis } from "@/lib/redis";
 import { formatError } from "@/lib/utils";
 import { addItemToCartSchema } from "@/lib/validators";
 import { Cart, CartItem } from "@/types";
-import { revalidatePath } from "next/cache";
 import { cookies, headers } from "next/headers";
 
 function calcPrice(items: CartItem[]) {
