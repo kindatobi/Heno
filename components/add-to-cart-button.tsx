@@ -1,25 +1,43 @@
 "use client";
-import { addItemToCart } from "@/actions/cart.actions";
+
+import { useCartStore } from "@/lib/store/cart.store";
 import { useState } from "react";
 
+interface Product {
+  id: string;
+  name: string;
+  slug: string;
+  price: number;
+  shopImage: string;
+}
+
 export default function AddToCartButton({
-  productId,
+  product,
   sizes,
 }: {
-  productId: string;
+  product: Product;
   sizes: string[];
 }) {
   const [selectedSize, setSelectedSize] = useState("");
+  const addItemToBag = useCartStore((state) => state.addItemToBag);
 
-  const handleAddToCart = async () => {
+  const handleAddToCart = () => {
     if (!selectedSize) {
       alert("Please select a size");
       return;
     }
-    const res = await addItemToCart({
-      productId,
+
+    addItemToBag({
+      productId: product.id,
+      name: product.name,
+      slug: product.slug,
+      price: product.price,
       size: selectedSize,
+      image: product.shopImage,
     });
+
+    // Optional: Show success message or reset size
+    alert("Added to cart!");
   };
 
   return (

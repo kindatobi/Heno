@@ -72,7 +72,16 @@ export default async function ProductDetailPage(props: {
             </p>
           </div>
 
-          <AddToCartButton productId={product.id} sizes={ALL_SIZES} />
+          <AddToCartButton
+            product={{
+              id: product.id,
+              name: product.name,
+              slug: product.slug,
+              price: product.price,
+              shopImage: product.shopImage,
+            }}
+            sizes={ALL_SIZES}
+          />
         </div>
       </div>
     </div>

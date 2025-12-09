@@ -34,8 +34,6 @@ export type ProductSizeStock = {
 };
 
 export type Cart = {
-  userId: string;
-  sessionCartId: string;
   items: CartItem[];
   itemsPrice: number;
   shippingPrice: number;
@@ -47,6 +45,7 @@ export type CartItem = {
   productId: string;
   name: string;
   slug: string;
+  size: string;
   price: number;
   qty: number;
   image: string;
