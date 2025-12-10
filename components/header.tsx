@@ -1,10 +1,12 @@
-import { getMyCart } from "@/actions/cart.actions";
+"use client";
+
 import CartModal from "./cart-modal";
 
 import Bag from "./bag";
+import { useCartStore } from "@/lib/store/cart.store";
 
-export default async function Header() {
-  const cart = await getMyCart();
+export default function Header() {
+  const { cart } = useCartStore();
   const totalItems =
     cart?.items.reduce((total, item) => total + item.qty, 0) ?? 0;
 

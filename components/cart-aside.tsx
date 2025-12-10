@@ -1,11 +1,14 @@
 "use client";
 
+import { useCartStore } from "@/lib/store/cart.store";
 import { useUIStore } from "@/lib/store/ui.store";
+import { formatCurrency } from "@/lib/utils";
 import { Cart } from "@/types";
 import Image from "next/image";
 
 export default function CartAside({ cart }: { cart: Cart | null }) {
   const { toggleCart } = useUIStore();
+  const { clearCart, removeFromBag } = useCartStore();
 
   return (
     <aside
@@ -16,6 +19,9 @@ export default function CartAside({ cart }: { cart: Cart | null }) {
 
       <div className="flex justify-between">
         <h2>YOUR BAG</h2>
+        <p className="cursor-pointer" onClick={clearCart}>
+          CLEAR
+        </p>
         <p className="cursor-pointer" onClick={toggleCart}>
           CLOSE
         </p>
@@ -27,7 +33,7 @@ export default function CartAside({ cart }: { cart: Cart | null }) {
       ) : (
         <div className="overflow-y-scroll">
           {cart.items.map((item) => (
-            <li key={item.productId}>
+            <li key={item.size}>
               <div>
                 <Image
                   src={item.image}
@@ -38,14 +44,29 @@ export default function CartAside({ cart }: { cart: Cart | null }) {
               </div>
               <div className="text-amber-50">
                 <p>{item.name}</p>
-                <p>{item.price}</p>
-                <p>{item.qty}</p>
+                <div className="flex justify-between">
+                  <div className="flex gap-2">
+                    <p>{item.size}</p>
+                    <p>{item.qty}X</p>
+                  </div>
+                  <p>{formatCurrency(item.price)}</p>
+                  <p
+                    className="cursor-pointer"
+                    onClick={() => removeFromBag(item.productId, item.size)}
+                  >
+                    remove
+                  </p>
+                </div>
               </div>
             </li>
           ))}
         </div>
       )}
       <div className="mt-auto">
+        <div className="flex justify-between">
+          <p>Subtotal: </p>
+          <p>{formatCurrency(Number(cart?.itemsPrice))}</p>
+        </div>
         <button className="bg-white text-black p-2 rounded-sm cursor-pointer w-full">
           continue to checkout
         </button>

@@ -35,9 +35,6 @@ export default function AddToCartButton({
       size: selectedSize,
       image: product.shopImage,
     });
-
-    // Optional: Show success message or reset size
-    alert("Added to cart!");
   };
 
   return (
