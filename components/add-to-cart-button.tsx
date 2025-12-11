@@ -56,7 +56,6 @@ export default function AddToCartButton({
         </div>
       </div>
 
-      {/* Button */}
       <button
         onClick={handleAddToCart}
         className="bg-black p-2 rounded-sm text-white cursor-pointer"
