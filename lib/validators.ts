@@ -80,3 +80,21 @@ export const addItemToCartSchema = z.object({
   productId: z.string(),
   size: z.enum(["XS", "S", "M", "L", "XL", "XXL", "XXXL", "ONE_SIZE"]),
 });
+
+const insertCartItemSchema = z.object({
+  productId: z.string(),
+  name: z.string(),
+  slug: z.string(),
+  size: z.string(),
+  price: z.number().positive(),
+  qty: z.number().int().positive(),
+  image: z.string(),
+});
+
+export const insertCartSchema = z.object({
+  items: z.array(insertCartItemSchema),
+  itemsPrice: z.number().positive(),
+  shippingPrice: z.number().positive(),
+  taxPrice: z.number().positive(),
+  totalPrice: z.number().positive(),
+});
