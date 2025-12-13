@@ -1,5 +1,6 @@
 "use client";
 
+import { checkoutProduct } from "@/actions/product.actions";
 import { useCartStore } from "@/lib/store/cart.store";
 import { useUIStore } from "@/lib/store/ui.store";
 import { formatCurrency } from "@/lib/utils";
@@ -67,7 +68,10 @@ export default function CartAside() {
           <p>Subtotal: </p>
           <p>{formatCurrency(Number(cart?.itemsPrice))}</p>
         </div>
-        <button className="bg-white text-black p-2 rounded-sm cursor-pointer w-full">
+        <button
+          onClick={() => checkoutProduct(cart)}
+          className="bg-white text-black p-2 rounded-sm cursor-pointer w-full"
+        >
           continue to checkout
         </button>
       </div>

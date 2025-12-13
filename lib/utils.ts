@@ -1,3 +1,4 @@
+import { CartItem } from "@/types";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -142,5 +143,22 @@ export const formatDateTime = (dateString: Date) => {
     dateTime: formattedDateTime,
     dateOnly: formattedDate,
     timeOnly: formattedTime,
+  };
+};
+
+export const calcPrice = (items: CartItem[]) => {
+  const itemsPrice = items.reduce(
+    (acc, item) => acc + item.price * item.qty,
+    0
+  );
+  const shippingPrice = itemsPrice > 100 ? 0 : 10;
+  const taxPrice = itemsPrice * 0.15;
+  const totalPrice = itemsPrice + shippingPrice + taxPrice;
+
+  return {
+    itemsPrice: Number(itemsPrice.toFixed(2)),
+    shippingPrice: Number(shippingPrice.toFixed(2)),
+    taxPrice: Number(taxPrice.toFixed(2)),
+    totalPrice: Number(totalPrice.toFixed(2)),
   };
 };

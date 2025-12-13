@@ -1,30 +1,15 @@
 import { Cart, CartItem } from "@/types";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { calcPrice } from "../utils";
 
 interface CartStore {
   cart: Cart | null;
   addItemToBag: (item: Omit<CartItem, "qty">) => void;
   removeFromBag: (productId: string, size: string) => void;
+  syncCart: (newCart: Cart) => void;
   clearCart: () => void;
 }
-
-const calcPrice = (items: CartItem[]) => {
-  const itemsPrice = items.reduce(
-    (acc, item) => acc + item.price * item.qty,
-    0
-  );
-  const shippingPrice = itemsPrice > 100 ? 0 : 10;
-  const taxPrice = itemsPrice * 0.15;
-  const totalPrice = itemsPrice + shippingPrice + taxPrice;
-
-  return {
-    itemsPrice: Number(itemsPrice.toFixed(2)),
-    shippingPrice: Number(shippingPrice.toFixed(2)),
-    taxPrice: Number(taxPrice.toFixed(2)),
-    totalPrice: Number(totalPrice.toFixed(2)),
-  };
-};
 
 export const useCartStore = create<CartStore>()(
   persist(
@@ -88,6 +73,9 @@ export const useCartStore = create<CartStore>()(
 
           return { cart: updatedCart };
         });
+      },
+      syncCart: (newCart) => {
+        set({ cart: newCart });
       },
 
       clearCart: () => {
