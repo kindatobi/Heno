@@ -3,12 +3,12 @@
 import { useCartStore } from "@/lib/store/cart.store";
 import { useUIStore } from "@/lib/store/ui.store";
 import { formatCurrency } from "@/lib/utils";
-import { Cart } from "@/types";
+
 import Image from "next/image";
 
-export default function CartAside({ cart }: { cart: Cart | null }) {
+export default function CartAside() {
   const { toggleCart } = useUIStore();
-  const { clearCart, removeFromBag } = useCartStore();
+  const { clearCart, removeFromBag, cart } = useCartStore();
 
   return (
     <aside
@@ -32,8 +32,8 @@ export default function CartAside({ cart }: { cart: Cart | null }) {
         <div>Your cart is empty</div>
       ) : (
         <div className="overflow-y-scroll">
-          {cart.items.map((item) => (
-            <li key={item.size}>
+          {cart.items.map((item, i) => (
+            <li key={i}>
               <div>
                 <Image
                   src={item.image}

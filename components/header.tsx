@@ -12,7 +12,7 @@ export default function Header() {
 
   return (
     <header className="p-2">
-      <CartModal cart={cart} />
+      <CartModal />
       <div className="flex justify-between">
         <div>HENO</div>
         <div>THINGS</div>
