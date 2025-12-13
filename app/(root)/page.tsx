@@ -1,32 +1,12 @@
 import { signOutUser } from "@/actions/user.action";
 import { Button } from "@/components/ui/button";
-import prisma from "@/lib/prisma";
-import Image from "next/image";
 
-export default async function Home() {
-  const products = await prisma.product.findMany();
+export default function Home() {
   return (
-    <div>
-      <main>
-        {products.map((product) => (
-          <div key={product.slug}>
-            <Image
-              src={product?.shopImage}
-              alt={product.name}
-              width={100}
-              height={100}
-            />
-            <div>
-              <p>{product.name}</p>
-              <p>{product.description}</p>
-              <p>{product.price}</p>
-            </div>
-          </div>
-        ))}
-      </main>
+    <main className="h-screen w-screen">
       <form action={signOutUser}>
         <Button>Log out</Button>
       </form>
-    </div>
+    </main>
   );
 }
