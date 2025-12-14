@@ -6,9 +6,11 @@ import { useUIStore } from "@/lib/store/ui.store";
 import { formatCurrency } from "@/lib/utils";
 
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function CartAside() {
   const { toggleCart } = useUIStore();
+  const router = useRouter();
   const { clearCart, removeFromBag, cart } = useCartStore();
 
   return (
@@ -68,8 +70,29 @@ export default function CartAside() {
           <p>Subtotal: </p>
           <p>{formatCurrency(Number(cart?.itemsPrice))}</p>
         </div>
+        {/* <button
+          onClick={async () => {
+            const result = await checkoutProduct(cart);
+            if (result?.url) {
+              window.location.href = result.url;
+            }
+          }}
+          className="bg-white text-black p-2 rounded-sm cursor-pointer w-full"
+        >
+          continue to checkout
+        </button> */}
         <button
-          onClick={() => checkoutProduct(cart)}
+          onClick={async () => {
+            console.log("Button clicked, cart:", cart);
+            const result = await checkoutProduct(cart);
+            console.log("Result from server:", result);
+            if (result?.url) {
+              console.log("Redirecting to:", result.url);
+              window.location.href = result.url;
+            } else {
+              console.log("No URL in result");
+            }
+          }}
           className="bg-white text-black p-2 rounded-sm cursor-pointer w-full"
         >
           continue to checkout

@@ -1,12 +1,12 @@
 "use server";
 
+import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { redis } from "@/lib/redis";
 import { calcPrice } from "@/lib/utils";
 import { insertCartSchema } from "@/lib/validators";
 import { Cart, Product } from "@/types";
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+import { cookies, headers } from "next/headers";
 import Stripe from "stripe";
 
 export async function getProductBySlug(productSlug: string) {
@@ -17,6 +17,10 @@ export async function getProductBySlug(productSlug: string) {
 }
 
 export async function checkoutProduct(data: Cart | null) {
+  const userSession = await auth.api.getSession({
+    headers: await headers(),
+  });
+  const user = userSession ? userSession.user : undefined;
   const vCart = insertCartSchema.parse(data);
   const cartProductIds = vCart.items.map((x) => x.productId);
   const selectedProducts = await prisma.product.findMany({
@@ -96,15 +100,11 @@ export async function checkoutProduct(data: Cart | null) {
     payment_method_types: ["card"],
     line_items,
     mode: "payment",
-    success_url: `${
-      process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
-    }/success?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${
-      process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
-    }`,
+    success_url: "http://localhost:3000/payment/success",
+    cancel_url: "http://localhost:3000",
+    metadata: {
+      ...(user?.id && { userId: user.id }),
+    },
   });
-
-  if (session.url) {
-    redirect(session.url);
-  }
+  return { success: true, url: session.url };
 }
