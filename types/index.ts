@@ -50,3 +50,16 @@ export type CartItem = {
   qty: number;
   image: string;
 };
+
+export type LowStockItem = {
+  id: string;
+  productId: string;
+  size: string;
+  stock: number;
+  product: {
+    id: string;
+    name: string;
+    category: string;
+    shopImage: string;
+  };
+};

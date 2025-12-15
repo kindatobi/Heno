@@ -11,7 +11,11 @@ export default function CartModal() {
   return (
     <div
       onClick={toggleCart}
-      className="fixed inset-0 bg-black/50 z-50 flex justify-end"
+      className="
+    fixed inset-0 z-50 flex justify-end
+    bg-neutral-500/40
+    backdrop-blur-[50px]
+  "
     >
       <CartAside />
     </div>
