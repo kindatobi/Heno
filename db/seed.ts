@@ -1,6 +1,6 @@
 import prisma from "@/lib/prisma";
 import sampleData from "./sample-data";
-import { Prisma } from "@/app/generated/prisma/client";
+import { Prisma } from "@/generated/prisma/client";
 
 async function main() {
   await prisma.sizeStock.deleteMany();
