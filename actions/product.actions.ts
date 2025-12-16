@@ -5,14 +5,14 @@ import prisma from "@/lib/prisma";
 import { redis } from "@/lib/redis";
 import { calcPrice } from "@/lib/utils";
 import { insertCartSchema } from "@/lib/validators";
-import { Cart, Product } from "@/types";
+import { Cart, ProductItem } from "@/types";
 import { cookies, headers } from "next/headers";
 import Stripe from "stripe";
 
 export async function getProductBySlug(productSlug: string) {
   const data = (await prisma.product.findFirst({
     where: { slug: productSlug },
-  })) as Product;
+  })) as ProductItem;
   return data;
 }
 
