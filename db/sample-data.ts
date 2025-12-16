@@ -2,7 +2,7 @@ import {
   ProductCategory,
   ProductSize,
   UserRole,
-} from "@/app/generated/prisma/client";
+} from "@/generated/prisma/client";
 import { hashSync } from "bcrypt-ts-edge";
 
 const sampleData = {
