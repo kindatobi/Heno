@@ -1,7 +1,4 @@
-import {
-  Product as PrismaProduct,
-  SizeStock,
-} from "@/app/generated/prisma/client";
+import { Product, SizeStock } from "@/generated/prisma/client";
 import { createProductSchema, signUpUserSchema } from "@/lib/validators";
 import z from "zod";
 
@@ -26,7 +23,7 @@ type SizingInfo = Array<{
   chest: string;
 }>;
 
-export type Product = Omit<PrismaProduct, "showcaseImages" | "sizingInfo"> & {
+export type ProductItem = Omit<Product, "showcaseImages" | "sizingInfo"> & {
   showcaseImages: ShowcaseImages;
   sizingInfo: SizingInfo | null;
   sizeStock?: SizeStock[];

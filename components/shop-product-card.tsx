@@ -1,9 +1,10 @@
 import { formatCurrency } from "@/lib/utils";
-import { Product } from "@/types";
+import { ProductItem } from "@/types";
+
 import Image from "next/image";
 import Link from "next/link";
 
-export default function ShopProductCard({ product }: { product: Product }) {
+export default function ShopProductCard({ product }: { product: ProductItem }) {
   return (
     <div>
       <Link href={`/product/${product.slug}`}>
