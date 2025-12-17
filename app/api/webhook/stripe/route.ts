@@ -27,21 +27,18 @@ export async function POST(req: Request) {
     case "checkout.session.completed": {
       const session = event.data.object as Stripe.Checkout.Session;
 
-      console.log("Full session object:", JSON.stringify(session, null, 2));
       const cart: Cart | null = await redis.get(
         `cart-${session.metadata?.sessionCartId}`
       );
-
-      if (!cart) {
-        return new Response("Cart not found", { status: 400 });
-      }
 
       await prisma.order.create({
         data: {
           userId: session.metadata?.userId as string,
           customerName: session.customer_details?.name as string,
           customerEmail: session.customer_details?.email as string,
-          shippingAddress: session.customer_details?.address,
+          shippingAddress: session.customer_details?.address
+            ? JSON.parse(JSON.stringify(session.customer_details.address))
+            : null,
           paymentMethod: "Stripe",
           paymentResult: {
             id: session.id,
@@ -49,12 +46,12 @@ export async function POST(req: Request) {
             email_address: session.customer_details?.email as string,
             pricePaid: (session.amount_total || 0) / 100,
           },
-          itemsPrice: cart.itemsPrice,
-          shippingPrice: cart.shippingPrice,
-          taxPrice: cart.taxPrice,
-          totalPrice: cart.totalPrice,
+          itemsPrice: cart?.itemsPrice,
+          shippingPrice: cart?.shippingPrice,
+          taxPrice: cart?.taxPrice,
+          totalPrice: cart?.totalPrice,
           orderItems: {
-            create: cart.items.map((item) => ({
+            create: cart?.items.map((item) => ({
               productId: item.productId,
               qty: item.qty,
               price: item.price,
