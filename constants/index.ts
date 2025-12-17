@@ -47,6 +47,41 @@ export const productDefaultValues = {
   sizeStock: [],
 };
 
+export const ALLOWED_SHIPPING_COUNTRIES = [
+  "US",
+  "CA",
+  "NG",
+  "ZA",
+  "KE",
+  "EG",
+  "MA",
+  "GH",
+  "TN",
+  "CI",
+  "ET",
+  "UG",
+  "GB",
+  "DE",
+  "FR",
+  "ES",
+  "IT",
+  "NL",
+  "SE",
+  "PL",
+  "DK",
+  "BE",
+  "JP",
+  "KR",
+  "AU",
+  "SG",
+  "MY",
+  "TH",
+  "ID",
+  "VN",
+  "PH",
+  "NZ",
+] as const;
+
 export const USER_ROLES = process.env.USER_ROLES
   ? process.env.USER_ROLES.split(", ")
   : ["admin", "user"];

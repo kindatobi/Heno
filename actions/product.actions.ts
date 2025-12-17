@@ -1,5 +1,6 @@
 "use server";
 
+import { ALLOWED_SHIPPING_COUNTRIES } from "@/constants";
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { redis } from "@/lib/redis";
@@ -9,6 +10,17 @@ import { Cart, ProductItem } from "@/types";
 import { cookies, headers } from "next/headers";
 import Stripe from "stripe";
 
+type AdjustedItems = {
+  name: string;
+  size: string;
+  oldQty: number;
+  newQty: number;
+};
+
+type CheckoutResult =
+  | { success: false; adjustedCart: Cart; adjustedItems: AdjustedItems[] }
+  | { success: true; url: string };
+
 export async function getProductBySlug(productSlug: string) {
   const data = (await prisma.product.findFirst({
     where: { slug: productSlug },
@@ -16,7 +28,9 @@ export async function getProductBySlug(productSlug: string) {
   return data;
 }
 
-export async function checkoutProduct(data: Cart | null) {
+export async function checkoutProduct(
+  data: Cart | null
+): Promise<CheckoutResult> {
   const userSession = await auth.api.getSession({
     headers: await headers(),
   });
@@ -28,7 +42,7 @@ export async function checkoutProduct(data: Cart | null) {
     include: { sizeStock: true },
   });
 
-  const adjustedItems = [];
+  const adjustedItems: AdjustedItems[] = [];
   let hasAdjustments = false;
 
   for (const item of vCart.items) {
@@ -65,14 +79,20 @@ export async function checkoutProduct(data: Cart | null) {
     ...calcPrice(vCart.items),
   };
 
-  if (hasAdjustments)
+  if (hasAdjustments) {
     return {
       success: false,
       adjustedCart: recalculatedCart,
       adjustedItems,
     };
+  }
 
   const sessionCartId = (await cookies()).get("sessionCartId")?.value;
+
+  if (!sessionCartId) {
+    throw new Error("Session cart ID not found");
+  }
+
   await redis.set(`cart-${sessionCartId}`, vCart);
 
   if (!process.env.STRIPE_SECRET_KEY) {
@@ -87,10 +107,12 @@ export async function checkoutProduct(data: Cart | null) {
     vCart.items.map((item) => ({
       price_data: {
         currency: "usd",
-        unit_amount: item.price * 100,
+        unit_amount: item.price,
         product_data: {
           name: item.name,
-          images: [item.image],
+          images: [
+            "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400",
+          ],
         },
       },
       quantity: item.qty,
@@ -102,9 +124,21 @@ export async function checkoutProduct(data: Cart | null) {
     mode: "payment",
     success_url: "http://localhost:3000/payment/success",
     cancel_url: "http://localhost:3000",
+    phone_number_collection: {
+      enabled: true,
+    },
+    shipping_address_collection: {
+      allowed_countries: [...ALLOWED_SHIPPING_COUNTRIES],
+    },
     metadata: {
+      sessionCartId,
       ...(user?.id && { userId: user.id }),
     },
   });
+
+  if (!session.url) {
+    throw new Error("Failed to create checkout session URL");
+  }
+
   return { success: true, url: session.url };
 }

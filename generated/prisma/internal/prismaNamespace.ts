@@ -1117,6 +1117,7 @@ export const OrderItemScalarFieldEnum = {
   price: 'price',
   name: 'name',
   slug: 'slug',
+  size: 'size',
   image: 'image'
 } as const
 
@@ -1324,20 +1325,6 @@ export type EnumProductSizeFieldRefInput<$PrismaModel> = FieldRefInputType<$Pris
  * Reference to a field of type 'ProductSize[]'
  */
 export type ListEnumProductSizeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProductSize[]'>
-    
-
-
-/**
- * Reference to a field of type 'Decimal'
- */
-export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
-    
-
-
-/**
- * Reference to a field of type 'Decimal[]'
- */
-export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
     
 
 

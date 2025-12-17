@@ -27,17 +27,17 @@ export type AggregateOrder = {
 }
 
 export type OrderAvgAggregateOutputType = {
-  itemsPrice: runtime.Decimal | null
-  shippingPrice: runtime.Decimal | null
-  taxPrice: runtime.Decimal | null
-  totalPrice: runtime.Decimal | null
+  itemsPrice: number | null
+  shippingPrice: number | null
+  taxPrice: number | null
+  totalPrice: number | null
 }
 
 export type OrderSumAggregateOutputType = {
-  itemsPrice: runtime.Decimal | null
-  shippingPrice: runtime.Decimal | null
-  taxPrice: runtime.Decimal | null
-  totalPrice: runtime.Decimal | null
+  itemsPrice: number | null
+  shippingPrice: number | null
+  taxPrice: number | null
+  totalPrice: number | null
 }
 
 export type OrderMinAggregateOutputType = {
@@ -46,10 +46,10 @@ export type OrderMinAggregateOutputType = {
   customerName: string | null
   customerEmail: string | null
   paymentMethod: string | null
-  itemsPrice: runtime.Decimal | null
-  shippingPrice: runtime.Decimal | null
-  taxPrice: runtime.Decimal | null
-  totalPrice: runtime.Decimal | null
+  itemsPrice: number | null
+  shippingPrice: number | null
+  taxPrice: number | null
+  totalPrice: number | null
   isDelivered: boolean | null
   deliveredAt: Date | null
   createdAt: Date | null
@@ -61,10 +61,10 @@ export type OrderMaxAggregateOutputType = {
   customerName: string | null
   customerEmail: string | null
   paymentMethod: string | null
-  itemsPrice: runtime.Decimal | null
-  shippingPrice: runtime.Decimal | null
-  taxPrice: runtime.Decimal | null
-  totalPrice: runtime.Decimal | null
+  itemsPrice: number | null
+  shippingPrice: number | null
+  taxPrice: number | null
+  totalPrice: number | null
   isDelivered: boolean | null
   deliveredAt: Date | null
   createdAt: Date | null
@@ -245,10 +245,10 @@ export type OrderGroupByOutputType = {
   shippingAddress: runtime.JsonValue
   paymentMethod: string
   paymentResult: runtime.JsonValue | null
-  itemsPrice: runtime.Decimal
-  shippingPrice: runtime.Decimal
-  taxPrice: runtime.Decimal
-  totalPrice: runtime.Decimal
+  itemsPrice: number
+  shippingPrice: number
+  taxPrice: number
+  totalPrice: number
   isDelivered: boolean
   deliveredAt: Date | null
   createdAt: Date
@@ -285,10 +285,10 @@ export type OrderWhereInput = {
   shippingAddress?: Prisma.JsonFilter<"Order">
   paymentMethod?: Prisma.StringFilter<"Order"> | string
   paymentResult?: Prisma.JsonNullableFilter<"Order">
-  itemsPrice?: Prisma.DecimalFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  shippingPrice?: Prisma.DecimalFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  taxPrice?: Prisma.DecimalFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPrice?: Prisma.DecimalFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  itemsPrice?: Prisma.IntFilter<"Order"> | number
+  shippingPrice?: Prisma.IntFilter<"Order"> | number
+  taxPrice?: Prisma.IntFilter<"Order"> | number
+  totalPrice?: Prisma.IntFilter<"Order"> | number
   isDelivered?: Prisma.BoolFilter<"Order"> | boolean
   deliveredAt?: Prisma.DateTimeNullableFilter<"Order"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Order"> | Date | string
@@ -326,10 +326,10 @@ export type OrderWhereUniqueInput = Prisma.AtLeast<{
   shippingAddress?: Prisma.JsonFilter<"Order">
   paymentMethod?: Prisma.StringFilter<"Order"> | string
   paymentResult?: Prisma.JsonNullableFilter<"Order">
-  itemsPrice?: Prisma.DecimalFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  shippingPrice?: Prisma.DecimalFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  taxPrice?: Prisma.DecimalFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPrice?: Prisma.DecimalFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  itemsPrice?: Prisma.IntFilter<"Order"> | number
+  shippingPrice?: Prisma.IntFilter<"Order"> | number
+  taxPrice?: Prisma.IntFilter<"Order"> | number
+  totalPrice?: Prisma.IntFilter<"Order"> | number
   isDelivered?: Prisma.BoolFilter<"Order"> | boolean
   deliveredAt?: Prisma.DateTimeNullableFilter<"Order"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Order"> | Date | string
@@ -370,10 +370,10 @@ export type OrderScalarWhereWithAggregatesInput = {
   shippingAddress?: Prisma.JsonWithAggregatesFilter<"Order">
   paymentMethod?: Prisma.StringWithAggregatesFilter<"Order"> | string
   paymentResult?: Prisma.JsonNullableWithAggregatesFilter<"Order">
-  itemsPrice?: Prisma.DecimalWithAggregatesFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  shippingPrice?: Prisma.DecimalWithAggregatesFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  taxPrice?: Prisma.DecimalWithAggregatesFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPrice?: Prisma.DecimalWithAggregatesFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  itemsPrice?: Prisma.IntWithAggregatesFilter<"Order"> | number
+  shippingPrice?: Prisma.IntWithAggregatesFilter<"Order"> | number
+  taxPrice?: Prisma.IntWithAggregatesFilter<"Order"> | number
+  totalPrice?: Prisma.IntWithAggregatesFilter<"Order"> | number
   isDelivered?: Prisma.BoolWithAggregatesFilter<"Order"> | boolean
   deliveredAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Order"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Order"> | Date | string
@@ -386,10 +386,10 @@ export type OrderCreateInput = {
   shippingAddress: Prisma.JsonNullValueInput | runtime.InputJsonValue
   paymentMethod: string
   paymentResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  itemsPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
-  shippingPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
-  taxPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  itemsPrice?: number
+  shippingPrice?: number
+  taxPrice?: number
+  totalPrice?: number
   isDelivered?: boolean
   deliveredAt?: Date | string | null
   createdAt?: Date | string
@@ -405,10 +405,10 @@ export type OrderUncheckedCreateInput = {
   shippingAddress: Prisma.JsonNullValueInput | runtime.InputJsonValue
   paymentMethod: string
   paymentResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  itemsPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
-  shippingPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
-  taxPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  itemsPrice?: number
+  shippingPrice?: number
+  taxPrice?: number
+  totalPrice?: number
   isDelivered?: boolean
   deliveredAt?: Date | string | null
   createdAt?: Date | string
@@ -422,10 +422,10 @@ export type OrderUpdateInput = {
   shippingAddress?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
   paymentResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  itemsPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  shippingPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  taxPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  itemsPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  shippingPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  taxPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  totalPrice?: Prisma.IntFieldUpdateOperationsInput | number
   isDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deliveredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -441,10 +441,10 @@ export type OrderUncheckedUpdateInput = {
   shippingAddress?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
   paymentResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  itemsPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  shippingPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  taxPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  itemsPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  shippingPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  taxPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  totalPrice?: Prisma.IntFieldUpdateOperationsInput | number
   isDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deliveredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -459,10 +459,10 @@ export type OrderCreateManyInput = {
   shippingAddress: Prisma.JsonNullValueInput | runtime.InputJsonValue
   paymentMethod: string
   paymentResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  itemsPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
-  shippingPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
-  taxPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  itemsPrice?: number
+  shippingPrice?: number
+  taxPrice?: number
+  totalPrice?: number
   isDelivered?: boolean
   deliveredAt?: Date | string | null
   createdAt?: Date | string
@@ -475,10 +475,10 @@ export type OrderUpdateManyMutationInput = {
   shippingAddress?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
   paymentResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  itemsPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  shippingPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  taxPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  itemsPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  shippingPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  taxPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  totalPrice?: Prisma.IntFieldUpdateOperationsInput | number
   isDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deliveredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -492,10 +492,10 @@ export type OrderUncheckedUpdateManyInput = {
   shippingAddress?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
   paymentResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  itemsPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  shippingPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  taxPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  itemsPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  shippingPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  taxPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  totalPrice?: Prisma.IntFieldUpdateOperationsInput | number
   isDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deliveredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -619,14 +619,6 @@ export type OrderUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.OrderScalarWhereInput | Prisma.OrderScalarWhereInput[]
 }
 
-export type DecimalFieldUpdateOperationsInput = {
-  set?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
-}
-
 export type NullableDateTimeFieldUpdateOperationsInput = {
   set?: Date | string | null
 }
@@ -652,10 +644,10 @@ export type OrderCreateWithoutUserInput = {
   shippingAddress: Prisma.JsonNullValueInput | runtime.InputJsonValue
   paymentMethod: string
   paymentResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  itemsPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
-  shippingPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
-  taxPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  itemsPrice?: number
+  shippingPrice?: number
+  taxPrice?: number
+  totalPrice?: number
   isDelivered?: boolean
   deliveredAt?: Date | string | null
   createdAt?: Date | string
@@ -669,10 +661,10 @@ export type OrderUncheckedCreateWithoutUserInput = {
   shippingAddress: Prisma.JsonNullValueInput | runtime.InputJsonValue
   paymentMethod: string
   paymentResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  itemsPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
-  shippingPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
-  taxPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  itemsPrice?: number
+  shippingPrice?: number
+  taxPrice?: number
+  totalPrice?: number
   isDelivered?: boolean
   deliveredAt?: Date | string | null
   createdAt?: Date | string
@@ -716,10 +708,10 @@ export type OrderScalarWhereInput = {
   shippingAddress?: Prisma.JsonFilter<"Order">
   paymentMethod?: Prisma.StringFilter<"Order"> | string
   paymentResult?: Prisma.JsonNullableFilter<"Order">
-  itemsPrice?: Prisma.DecimalFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  shippingPrice?: Prisma.DecimalFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  taxPrice?: Prisma.DecimalFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPrice?: Prisma.DecimalFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  itemsPrice?: Prisma.IntFilter<"Order"> | number
+  shippingPrice?: Prisma.IntFilter<"Order"> | number
+  taxPrice?: Prisma.IntFilter<"Order"> | number
+  totalPrice?: Prisma.IntFilter<"Order"> | number
   isDelivered?: Prisma.BoolFilter<"Order"> | boolean
   deliveredAt?: Prisma.DateTimeNullableFilter<"Order"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Order"> | Date | string
@@ -732,10 +724,10 @@ export type OrderCreateWithoutOrderItemsInput = {
   shippingAddress: Prisma.JsonNullValueInput | runtime.InputJsonValue
   paymentMethod: string
   paymentResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  itemsPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
-  shippingPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
-  taxPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  itemsPrice?: number
+  shippingPrice?: number
+  taxPrice?: number
+  totalPrice?: number
   isDelivered?: boolean
   deliveredAt?: Date | string | null
   createdAt?: Date | string
@@ -750,10 +742,10 @@ export type OrderUncheckedCreateWithoutOrderItemsInput = {
   shippingAddress: Prisma.JsonNullValueInput | runtime.InputJsonValue
   paymentMethod: string
   paymentResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  itemsPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
-  shippingPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
-  taxPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  itemsPrice?: number
+  shippingPrice?: number
+  taxPrice?: number
+  totalPrice?: number
   isDelivered?: boolean
   deliveredAt?: Date | string | null
   createdAt?: Date | string
@@ -782,10 +774,10 @@ export type OrderUpdateWithoutOrderItemsInput = {
   shippingAddress?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
   paymentResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  itemsPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  shippingPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  taxPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  itemsPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  shippingPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  taxPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  totalPrice?: Prisma.IntFieldUpdateOperationsInput | number
   isDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deliveredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -800,10 +792,10 @@ export type OrderUncheckedUpdateWithoutOrderItemsInput = {
   shippingAddress?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
   paymentResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  itemsPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  shippingPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  taxPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  itemsPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  shippingPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  taxPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  totalPrice?: Prisma.IntFieldUpdateOperationsInput | number
   isDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deliveredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -816,10 +808,10 @@ export type OrderCreateManyUserInput = {
   shippingAddress: Prisma.JsonNullValueInput | runtime.InputJsonValue
   paymentMethod: string
   paymentResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  itemsPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
-  shippingPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
-  taxPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  itemsPrice?: number
+  shippingPrice?: number
+  taxPrice?: number
+  totalPrice?: number
   isDelivered?: boolean
   deliveredAt?: Date | string | null
   createdAt?: Date | string
@@ -832,10 +824,10 @@ export type OrderUpdateWithoutUserInput = {
   shippingAddress?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
   paymentResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  itemsPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  shippingPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  taxPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  itemsPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  shippingPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  taxPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  totalPrice?: Prisma.IntFieldUpdateOperationsInput | number
   isDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deliveredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -849,10 +841,10 @@ export type OrderUncheckedUpdateWithoutUserInput = {
   shippingAddress?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
   paymentResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  itemsPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  shippingPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  taxPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  itemsPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  shippingPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  taxPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  totalPrice?: Prisma.IntFieldUpdateOperationsInput | number
   isDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deliveredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -866,10 +858,10 @@ export type OrderUncheckedUpdateManyWithoutUserInput = {
   shippingAddress?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
   paymentResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  itemsPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  shippingPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  taxPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  itemsPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  shippingPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  taxPrice?: Prisma.IntFieldUpdateOperationsInput | number
+  totalPrice?: Prisma.IntFieldUpdateOperationsInput | number
   isDelivered?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deliveredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1006,10 +998,10 @@ export type $OrderPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     shippingAddress: runtime.JsonValue
     paymentMethod: string
     paymentResult: runtime.JsonValue | null
-    itemsPrice: runtime.Decimal
-    shippingPrice: runtime.Decimal
-    taxPrice: runtime.Decimal
-    totalPrice: runtime.Decimal
+    itemsPrice: number
+    shippingPrice: number
+    taxPrice: number
+    totalPrice: number
     isDelivered: boolean
     deliveredAt: Date | null
     createdAt: Date
@@ -1445,10 +1437,10 @@ export interface OrderFieldRefs {
   readonly shippingAddress: Prisma.FieldRef<"Order", 'Json'>
   readonly paymentMethod: Prisma.FieldRef<"Order", 'String'>
   readonly paymentResult: Prisma.FieldRef<"Order", 'Json'>
-  readonly itemsPrice: Prisma.FieldRef<"Order", 'Decimal'>
-  readonly shippingPrice: Prisma.FieldRef<"Order", 'Decimal'>
-  readonly taxPrice: Prisma.FieldRef<"Order", 'Decimal'>
-  readonly totalPrice: Prisma.FieldRef<"Order", 'Decimal'>
+  readonly itemsPrice: Prisma.FieldRef<"Order", 'Int'>
+  readonly shippingPrice: Prisma.FieldRef<"Order", 'Int'>
+  readonly taxPrice: Prisma.FieldRef<"Order", 'Int'>
+  readonly totalPrice: Prisma.FieldRef<"Order", 'Int'>
   readonly isDelivered: Prisma.FieldRef<"Order", 'Boolean'>
   readonly deliveredAt: Prisma.FieldRef<"Order", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"Order", 'DateTime'>
