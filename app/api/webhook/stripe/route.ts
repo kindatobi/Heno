@@ -1,3 +1,4 @@
+import { ProductSize } from "@/generated/prisma/client";
 import prisma from "@/lib/prisma";
 import { redis } from "@/lib/redis";
 import { Cart } from "@/types";
@@ -63,6 +64,25 @@ export async function POST(req: Request) {
           },
         },
       });
+
+      await Promise.all(
+        cart?.items.map((item) =>
+          prisma.sizeStock.update({
+            where: {
+              productId_size: {
+                productId: item.productId,
+                size: item.size as ProductSize,
+              },
+            },
+            data: {
+              stock: {
+                decrement: item.qty,
+              },
+            },
+          })
+        ) || []
+      );
+
       await redis.del(`cart-${session.metadata?.userId}`);
       break;
     }

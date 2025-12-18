@@ -20,6 +20,7 @@ export default function CartAside() {
       const result = await checkoutProduct(cart);
 
       if (result.success) {
+        clearCart();
         window.location.href = result.url;
       } else {
         syncCart(result.adjustedCart);
