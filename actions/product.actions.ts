@@ -24,6 +24,7 @@ type CheckoutResult =
 export async function getProductBySlug(productSlug: string) {
   const data = (await prisma.product.findFirst({
     where: { slug: productSlug },
+    include: { sizeStock: true },
   })) as ProductItem;
   return data;
 }

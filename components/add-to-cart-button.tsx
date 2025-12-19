@@ -14,9 +14,11 @@ interface Product {
 export default function AddToCartButton({
   product,
   sizes,
+  productSizes,
 }: {
   product: Product;
   sizes: string[];
+  productSizes: string[];
 }) {
   const [selectedSize, setSelectedSize] = useState("");
   const addItemToBag = useCartStore((state) => state.addItemToBag);
@@ -43,15 +45,18 @@ export default function AddToCartButton({
         <p>size</p>
         <div className="flex gap-1">
           {sizes.map((x, i) => (
-            <p
+            <button
+              disabled={!productSizes.includes(x)}
               key={i}
               onClick={() => setSelectedSize(x)}
               className={`cursor-pointer p-2 border ${
                 selectedSize === x ? "bg-black text-white" : ""
+              } ${
+                !productSizes.includes(x) ? "opacity-50 cursor-not-allowed" : ""
               }`}
             >
               {x}
-            </p>
+            </button>
           ))}
         </div>
       </div>

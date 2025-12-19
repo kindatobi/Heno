@@ -20,11 +20,10 @@ export default function CartAside() {
       const result = await checkoutProduct(cart);
 
       if (result.success) {
-        clearCart();
         window.location.href = result.url;
       } else {
         syncCart(result.adjustedCart);
-        // You might want to show a toast/notification here
+
         alert(
           `Some items in your cart were adjusted due to stock changes:\n${result.adjustedItems
             .map(

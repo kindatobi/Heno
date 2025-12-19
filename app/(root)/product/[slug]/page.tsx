@@ -14,6 +14,8 @@ export default async function ProductDetailPage(props: {
   const product = await getProductBySlug(slug);
   if (!product) notFound();
 
+  const productSizes = product.sizeStock?.map((x) => x.size) ?? [];
+
   return (
     <div>
       <div className="flex">
@@ -81,6 +83,7 @@ export default async function ProductDetailPage(props: {
               shopImage: product.shopImage,
             }}
             sizes={ALL_SIZES}
+            productSizes={productSizes}
           />
         </div>
       </div>
