@@ -46,7 +46,7 @@ export default function SignUp() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form id="form-rhf-input" onSubmit={form.handleSubmit(onSubmit)}>
+        <form id="sign-up-form" onSubmit={form.handleSubmit(onSubmit)}>
           <FieldGroup>
             <Controller
               name="name"
@@ -136,7 +136,7 @@ export default function SignUp() {
       </CardContent>
       <CardFooter>
         <Field orientation="horizontal">
-          <Button type="submit" form="form-rhf-input">
+          <Button type="submit" form="sign-up-form">
             {form.formState.isSubmitting ? "Submitting..." : "Submit"}
           </Button>
         </Field>

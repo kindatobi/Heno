@@ -6,7 +6,7 @@ import prisma from "@/lib/prisma";
 import { redis } from "@/lib/redis";
 import { calcPrice } from "@/lib/utils";
 import { insertCartSchema } from "@/lib/validators";
-import { Cart, ProductItem } from "@/types";
+import { Cart } from "@/types";
 import { cookies, headers } from "next/headers";
 import Stripe from "stripe";
 
@@ -20,14 +20,6 @@ type AdjustedItems = {
 type CheckoutResult =
   | { success: false; adjustedCart: Cart; adjustedItems: AdjustedItems[] }
   | { success: true; url: string };
-
-export async function getProductBySlug(productSlug: string) {
-  const data = (await prisma.product.findFirst({
-    where: { slug: productSlug },
-    include: { sizeStock: true },
-  })) as ProductItem;
-  return data;
-}
 
 export async function checkoutProduct(
   data: Cart | null

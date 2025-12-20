@@ -1,5 +1,5 @@
-import { getProductBySlug } from "@/actions/product.actions";
 import AddToCartButton from "@/components/add-to-cart-button";
+import { getProductBySlug } from "@/lib/dal";
 import { formatCurrency } from "@/lib/utils";
 
 import Image from "next/image";

@@ -64,3 +64,35 @@ export type LowStockItem = {
     shopImage: string;
   };
 };
+
+// export type OrderItem = {
+//   orderId: string;
+//   productId: string;
+//   qty: number;
+//   price: number;
+//   name: string;
+//   slug: string;
+//   size: string;
+//   image: string;
+//   order: Order;
+//   product: Product;
+// };
+
+// export type Order = {
+//   id: string;
+//   userId: string | null;
+//   customerName: string;
+//   customerEmail: string;
+//   shippingAddress: Record<string, any> | null;
+//   paymentMethod: string;
+//   paymentResult: Record<string, any> | null;
+//   itemsPrice: number;
+//   shippingPrice: number;
+//   taxPrice: number;
+//   totalPrice: number;
+//   orderItems: OrderItem[];
+//   isDelivered: boolean;
+//   deliveredAt: Date | null;
+//   createdAt: Date;
+//   user: User | null;
+// };

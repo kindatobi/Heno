@@ -44,7 +44,7 @@ export default function SignIn() {
         <CardDescription>For returning customers</CardDescription>
       </CardHeader>
       <CardContent>
-        <form id="form-rhf-input" onSubmit={form.handleSubmit(onSubmit)}>
+        <form id="sign-in-form" onSubmit={form.handleSubmit(onSubmit)}>
           <FieldGroup>
             <Controller
               name="email"
@@ -91,7 +91,7 @@ export default function SignIn() {
       </CardContent>
       <CardFooter>
         <Field orientation="horizontal">
-          <Button type="submit" form="form-rhf-input">
+          <Button type="submit" form="sign-in-form">
             Log In
           </Button>
         </Field>

@@ -38,7 +38,7 @@ export async function signInUser(data: z.infer<typeof signInUserSchema>) {
         password: validatedUser.password,
       },
     });
-    return { success: true, message: "Account created successfully" };
+    return { success: true, message: "User signed in successfully" };
   } catch (error) {
     if (error instanceof Error && error.message === "NEXT_REDIRECT") {
       throw error;
