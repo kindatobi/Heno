@@ -4,9 +4,9 @@ import { ALLOWED_SHIPPING_COUNTRIES } from "@/constants";
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { redis } from "@/lib/redis";
-import { calcPrice } from "@/lib/utils";
-import { insertCartSchema } from "@/lib/validators";
-import { Cart } from "@/types";
+import { calcPrice, formatError } from "@/lib/utils";
+import { createProductSchema, insertCartSchema } from "@/lib/validators";
+import { Cart, ProductItem } from "@/types";
 import { cookies, headers } from "next/headers";
 import Stripe from "stripe";
 
@@ -134,4 +134,55 @@ export async function checkoutProduct(
   }
 
   return { success: true, url: session.url };
+}
+
+export async function createProduct(
+  data: Omit<ProductItem, "createdAt" | "id">
+) {
+  try {
+    const validatedProduct = createProductSchema.parse(data);
+    const newProduct = {
+      name: validatedProduct.name,
+      slug: validatedProduct.slug,
+      category: validatedProduct.category,
+      shopImage: validatedProduct.shopImage,
+      showcaseImages: validatedProduct.showcaseImages,
+      description: validatedProduct.description,
+      color: validatedProduct.color,
+      detail: validatedProduct.detail,
+      sizingInfo: validatedProduct.sizingInfo,
+      sizeStock: validatedProduct.sizeStock,
+      price: validatedProduct.price,
+      onSale: validatedProduct.onSale,
+      discountPercent: validatedProduct.discountPercent,
+      isFeatured: validatedProduct.isFeatured,
+      banner: validatedProduct.banner,
+    };
+    await prisma.product.create({
+      data: newProduct,
+    });
+
+    return { success: true, message: "Product created successfully" };
+  } catch (error) {
+    return { success: false, message: formatError(error) };
+  }
+}
+
+export async function updateProduct({
+  updatedValues,
+  id,
+}: {
+  updatedValues: Omit<ProductItem, "createdAt" | "id">;
+  id: string;
+}) {
+  try {
+    const validatedValues = createProductSchema.parse(updatedValues);
+    await prisma.product.update({
+      where: { id },
+      data: validatedValues,
+    });
+    return { success: true, message: "Product updated successfully" };
+  } catch (error) {
+    return { success: true, message: formatError(error) };
+  }
 }

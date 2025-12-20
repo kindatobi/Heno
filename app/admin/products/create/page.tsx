@@ -1,10 +1,5 @@
-import ProductForm from "@/components/admin/product-form";
+import ProductForm from "@/components/admin-product-form";
 import { requireAdmin } from "@/lib/auth-guard";
-import { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "",
-};
 
 export default async function CreateProductPage() {
   await requireAdmin();
