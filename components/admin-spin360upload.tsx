@@ -61,7 +61,9 @@ function SortableImage({
       <Image
         src={url}
         alt={`Frame ${index}`}
-        className="w-full h-full object-cover rounded"
+        width={50}
+        height={50}
+        className="object-cover rounded"
       />
 
       {/* Order indicator */}
