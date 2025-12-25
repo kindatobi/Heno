@@ -2,7 +2,13 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { Controller, useForm, FormProvider, useWatch } from "react-hook-form";
+import {
+  Controller,
+  useForm,
+  FormProvider,
+  useWatch,
+  Resolver,
+} from "react-hook-form";
 import { z } from "zod";
 import { Field, FieldError, FieldGroup, FieldLabel } from "./ui/field";
 import { Input } from "./ui/input";
@@ -33,7 +39,9 @@ export default function ProductForm({
   const router = useRouter();
 
   const form = useForm<z.infer<typeof createProductSchema>>({
-    resolver: zodResolver(createProductSchema),
+    resolver: zodResolver(createProductSchema) as Resolver<
+      z.infer<typeof createProductSchema>
+    >,
     defaultValues:
       product && type === "Update" ? product : productDefaultValues,
   });

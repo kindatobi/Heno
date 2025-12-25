@@ -7,7 +7,7 @@ import prisma from "@/lib/prisma";
 import { redis } from "@/lib/redis";
 import { calcPrice, formatError } from "@/lib/utils";
 import { createProductSchema, insertCartSchema } from "@/lib/validators";
-import { Cart, ProductItem } from "@/types";
+import { Cart } from "@/types";
 import { cookies, headers } from "next/headers";
 import Stripe from "stripe";
 import { z } from "zod";
@@ -95,7 +95,7 @@ export async function checkoutProduct(
   }
 
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-    apiVersion: "2025-11-17.clover",
+    apiVersion: "2025-12-15.clover",
   });
 
   const line_items: Stripe.Checkout.SessionCreateParams.LineItem[] =
@@ -164,20 +164,33 @@ export async function createProduct(data: z.infer<typeof createProductSchema>) {
 }
 
 export async function updateProduct({
-  updatedValues,
+  data,
   id,
 }: {
-  updatedValues: z.infer<typeof createProductSchema>;
+  data: z.infer<typeof createProductSchema>;
   id: string;
 }) {
   try {
-    const validatedValues = createProductSchema.parse(updatedValues);
+    const validatedProduct = createProductSchema.parse(data);
+
+    const { sizeStock, sizingInfo, ...productData } = validatedProduct;
+
     await prisma.product.update({
       where: { id },
-      data: validatedValues,
+      data: {
+        ...productData,
+        sizingInfo: sizingInfo === null ? Prisma.JsonNull : sizingInfo,
+        sizeStock: {
+          create: sizeStock.map((item) => ({
+            size: item.size,
+            stock: item.stock,
+          })),
+        },
+      },
     });
-    return { success: true, message: "Product updated successfully" };
+
+    return { success: true, message: "Product created successfully" };
   } catch (error) {
-    return { success: true, message: formatError(error) };
+    return { success: false, message: formatError(error) };
   }
 }
