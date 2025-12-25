@@ -55,7 +55,7 @@ export default function ProductForm({
         return;
       }
       const res = await updateProduct({
-        values,
+        data,
         id: productId,
       });
       if (!res.success) {
@@ -89,7 +89,7 @@ export default function ProductForm({
   const addSizingInfo = () => {
     form.setValue("sizingInfo", [
       ...sizingInfo,
-      { size: "", bodyLength: "", chest: "" },
+      { size: "S", bodyLength: "", chest: "" },
     ]);
   };
 
@@ -99,7 +99,7 @@ export default function ProductForm({
   };
 
   const addSizeStock = () => {
-    form.setValue("sizeStock", [...sizeStock, { size: "", stock: 0 }]);
+    form.setValue("sizeStock", [...sizeStock, { size: "S", stock: 0 }]);
   };
 
   const removeSizeStock = (index: number) => {

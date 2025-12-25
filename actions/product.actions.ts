@@ -1,6 +1,7 @@
 "use server";
 
 import { ALLOWED_SHIPPING_COUNTRIES } from "@/constants";
+import { Prisma } from "@/generated/prisma/client";
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { redis } from "@/lib/redis";
@@ -9,6 +10,7 @@ import { createProductSchema, insertCartSchema } from "@/lib/validators";
 import { Cart, ProductItem } from "@/types";
 import { cookies, headers } from "next/headers";
 import Stripe from "stripe";
+import { z } from "zod";
 
 type AdjustedItems = {
   name: string;
@@ -136,30 +138,23 @@ export async function checkoutProduct(
   return { success: true, url: session.url };
 }
 
-export async function createProduct(
-  data: Omit<ProductItem, "createdAt" | "id">
-) {
+export async function createProduct(data: z.infer<typeof createProductSchema>) {
   try {
     const validatedProduct = createProductSchema.parse(data);
-    const newProduct = {
-      name: validatedProduct.name,
-      slug: validatedProduct.slug,
-      category: validatedProduct.category,
-      shopImage: validatedProduct.shopImage,
-      showcaseImages: validatedProduct.showcaseImages,
-      description: validatedProduct.description,
-      color: validatedProduct.color,
-      detail: validatedProduct.detail,
-      sizingInfo: validatedProduct.sizingInfo,
-      sizeStock: validatedProduct.sizeStock,
-      price: validatedProduct.price,
-      onSale: validatedProduct.onSale,
-      discountPercent: validatedProduct.discountPercent,
-      isFeatured: validatedProduct.isFeatured,
-      banner: validatedProduct.banner,
-    };
+
+    const { sizeStock, sizingInfo, ...productData } = validatedProduct;
+
     await prisma.product.create({
-      data: newProduct,
+      data: {
+        ...productData,
+        sizingInfo: sizingInfo === null ? Prisma.JsonNull : sizingInfo,
+        sizeStock: {
+          create: sizeStock.map((item) => ({
+            size: item.size,
+            stock: item.stock,
+          })),
+        },
+      },
     });
 
     return { success: true, message: "Product created successfully" };
@@ -172,7 +167,7 @@ export async function updateProduct({
   updatedValues,
   id,
 }: {
-  updatedValues: Omit<ProductItem, "createdAt" | "id">;
+  updatedValues: z.infer<typeof createProductSchema>;
   id: string;
 }) {
   try {
