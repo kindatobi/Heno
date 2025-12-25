@@ -9,6 +9,7 @@ export const ourFileRouter = {
   imageUploader: f({
     image: {
       maxFileSize: "4MB",
+      maxFileCount: 8,
     },
   })
     .middleware(async () => {

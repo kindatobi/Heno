@@ -1,6 +1,7 @@
 "use client";
 
 import { useFormContext, useWatch } from "react-hook-form";
+import "@uploadthing/react/styles.css";
 import { UploadButton } from "@/lib/uploadthing";
 
 import { X, GripVertical } from "lucide-react";
@@ -27,7 +28,6 @@ import Image from "next/image";
 
 type Side = "left" | "right";
 
-// Sortable Image Component
 function SortableImage({
   url,
   index,
@@ -160,7 +160,7 @@ export function Spin360Upload() {
       <div>
         <div className="flex items-center justify-between mb-4">
           <label className="text-sm font-medium">
-            Left Side - Male Model
+            Left Side - Model
             <span className="ml-2 text-xs text-muted-foreground">
               ({leftImages.length}/8)
             </span>
@@ -217,7 +217,7 @@ export function Spin360Upload() {
       <div>
         <div className="flex items-center justify-between mb-4">
           <label className="text-sm font-medium">
-            Right Side - Female Model
+            Right Side - Model
             <span className="ml-2 text-xs text-muted-foreground">
               ({rightImages.length}/8)
             </span>

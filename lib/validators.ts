@@ -42,10 +42,7 @@ export const createProductSchema = z.object({
   ]),
   shopImage: z.string().min(1, "Shop Image is required"),
   showcaseImages: showcaseImagesSchema,
-  description: z
-    .string()
-    .min(1, "Description is required")
-    .max(32, "Description must be less than 32 words"),
+  description: z.string().min(1, "Description is required"),
   color: z.string().min(1, "Color is required"),
   detail: z.string().min(1, "Detail is required"),
   sizingInfo: z
@@ -65,7 +62,7 @@ export const createProductSchema = z.object({
   ),
   price: z.coerce.number().min(1, "Price is required"),
   onSale: z.boolean(),
-  discountPercent: z.coerce.number().int().min(0).max(100).nullable(),
+  discountPercent: z.coerce.number().int().min(0).max(100).nullish(),
   isFeatured: z.boolean(),
   banner: z.string().nullable(),
 });

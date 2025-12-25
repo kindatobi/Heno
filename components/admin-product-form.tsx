@@ -46,7 +46,11 @@ export default function ProductForm({
       product && type === "Update" ? product : productDefaultValues,
   });
 
+  console.log("Form errors:", form.formState.errors);
+  console.log("Is form valid:", form.formState.isValid);
+
   async function onSubmit(data: z.infer<typeof createProductSchema>) {
+    console.log("onSubmit called with data:", data);
     if (type === "Create") {
       const res = await createProduct(data);
       if (!res.success) {
@@ -158,6 +162,7 @@ export default function ProductForm({
                       id="product-slug"
                       aria-invalid={fieldState.invalid}
                       placeholder="Enter slug"
+                      disabled
                     />
                     <Button
                       type="button"
