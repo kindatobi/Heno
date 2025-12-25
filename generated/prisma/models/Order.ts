@@ -242,7 +242,7 @@ export type OrderGroupByOutputType = {
   userId: string | null
   customerName: string
   customerEmail: string
-  shippingAddress: runtime.JsonValue
+  shippingAddress: runtime.JsonValue | null
   paymentMethod: string
   paymentResult: runtime.JsonValue | null
   itemsPrice: number
@@ -282,7 +282,7 @@ export type OrderWhereInput = {
   userId?: Prisma.StringNullableFilter<"Order"> | string | null
   customerName?: Prisma.StringFilter<"Order"> | string
   customerEmail?: Prisma.StringFilter<"Order"> | string
-  shippingAddress?: Prisma.JsonFilter<"Order">
+  shippingAddress?: Prisma.JsonNullableFilter<"Order">
   paymentMethod?: Prisma.StringFilter<"Order"> | string
   paymentResult?: Prisma.JsonNullableFilter<"Order">
   itemsPrice?: Prisma.IntFilter<"Order"> | number
@@ -301,7 +301,7 @@ export type OrderOrderByWithRelationInput = {
   userId?: Prisma.SortOrderInput | Prisma.SortOrder
   customerName?: Prisma.SortOrder
   customerEmail?: Prisma.SortOrder
-  shippingAddress?: Prisma.SortOrder
+  shippingAddress?: Prisma.SortOrderInput | Prisma.SortOrder
   paymentMethod?: Prisma.SortOrder
   paymentResult?: Prisma.SortOrderInput | Prisma.SortOrder
   itemsPrice?: Prisma.SortOrder
@@ -323,7 +323,7 @@ export type OrderWhereUniqueInput = Prisma.AtLeast<{
   userId?: Prisma.StringNullableFilter<"Order"> | string | null
   customerName?: Prisma.StringFilter<"Order"> | string
   customerEmail?: Prisma.StringFilter<"Order"> | string
-  shippingAddress?: Prisma.JsonFilter<"Order">
+  shippingAddress?: Prisma.JsonNullableFilter<"Order">
   paymentMethod?: Prisma.StringFilter<"Order"> | string
   paymentResult?: Prisma.JsonNullableFilter<"Order">
   itemsPrice?: Prisma.IntFilter<"Order"> | number
@@ -342,7 +342,7 @@ export type OrderOrderByWithAggregationInput = {
   userId?: Prisma.SortOrderInput | Prisma.SortOrder
   customerName?: Prisma.SortOrder
   customerEmail?: Prisma.SortOrder
-  shippingAddress?: Prisma.SortOrder
+  shippingAddress?: Prisma.SortOrderInput | Prisma.SortOrder
   paymentMethod?: Prisma.SortOrder
   paymentResult?: Prisma.SortOrderInput | Prisma.SortOrder
   itemsPrice?: Prisma.SortOrder
@@ -367,7 +367,7 @@ export type OrderScalarWhereWithAggregatesInput = {
   userId?: Prisma.StringNullableWithAggregatesFilter<"Order"> | string | null
   customerName?: Prisma.StringWithAggregatesFilter<"Order"> | string
   customerEmail?: Prisma.StringWithAggregatesFilter<"Order"> | string
-  shippingAddress?: Prisma.JsonWithAggregatesFilter<"Order">
+  shippingAddress?: Prisma.JsonNullableWithAggregatesFilter<"Order">
   paymentMethod?: Prisma.StringWithAggregatesFilter<"Order"> | string
   paymentResult?: Prisma.JsonNullableWithAggregatesFilter<"Order">
   itemsPrice?: Prisma.IntWithAggregatesFilter<"Order"> | number
@@ -383,7 +383,7 @@ export type OrderCreateInput = {
   id?: string
   customerName: string
   customerEmail: string
-  shippingAddress: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  shippingAddress?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   paymentMethod: string
   paymentResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   itemsPrice?: number
@@ -402,7 +402,7 @@ export type OrderUncheckedCreateInput = {
   userId?: string | null
   customerName: string
   customerEmail: string
-  shippingAddress: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  shippingAddress?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   paymentMethod: string
   paymentResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   itemsPrice?: number
@@ -419,7 +419,7 @@ export type OrderUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   customerName?: Prisma.StringFieldUpdateOperationsInput | string
   customerEmail?: Prisma.StringFieldUpdateOperationsInput | string
-  shippingAddress?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  shippingAddress?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
   paymentResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   itemsPrice?: Prisma.IntFieldUpdateOperationsInput | number
@@ -438,7 +438,7 @@ export type OrderUncheckedUpdateInput = {
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customerName?: Prisma.StringFieldUpdateOperationsInput | string
   customerEmail?: Prisma.StringFieldUpdateOperationsInput | string
-  shippingAddress?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  shippingAddress?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
   paymentResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   itemsPrice?: Prisma.IntFieldUpdateOperationsInput | number
@@ -456,7 +456,7 @@ export type OrderCreateManyInput = {
   userId?: string | null
   customerName: string
   customerEmail: string
-  shippingAddress: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  shippingAddress?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   paymentMethod: string
   paymentResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   itemsPrice?: number
@@ -472,7 +472,7 @@ export type OrderUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   customerName?: Prisma.StringFieldUpdateOperationsInput | string
   customerEmail?: Prisma.StringFieldUpdateOperationsInput | string
-  shippingAddress?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  shippingAddress?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
   paymentResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   itemsPrice?: Prisma.IntFieldUpdateOperationsInput | number
@@ -489,7 +489,7 @@ export type OrderUncheckedUpdateManyInput = {
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customerName?: Prisma.StringFieldUpdateOperationsInput | string
   customerEmail?: Prisma.StringFieldUpdateOperationsInput | string
-  shippingAddress?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  shippingAddress?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
   paymentResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   itemsPrice?: Prisma.IntFieldUpdateOperationsInput | number
@@ -641,7 +641,7 @@ export type OrderCreateWithoutUserInput = {
   id?: string
   customerName: string
   customerEmail: string
-  shippingAddress: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  shippingAddress?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   paymentMethod: string
   paymentResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   itemsPrice?: number
@@ -658,7 +658,7 @@ export type OrderUncheckedCreateWithoutUserInput = {
   id?: string
   customerName: string
   customerEmail: string
-  shippingAddress: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  shippingAddress?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   paymentMethod: string
   paymentResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   itemsPrice?: number
@@ -705,7 +705,7 @@ export type OrderScalarWhereInput = {
   userId?: Prisma.StringNullableFilter<"Order"> | string | null
   customerName?: Prisma.StringFilter<"Order"> | string
   customerEmail?: Prisma.StringFilter<"Order"> | string
-  shippingAddress?: Prisma.JsonFilter<"Order">
+  shippingAddress?: Prisma.JsonNullableFilter<"Order">
   paymentMethod?: Prisma.StringFilter<"Order"> | string
   paymentResult?: Prisma.JsonNullableFilter<"Order">
   itemsPrice?: Prisma.IntFilter<"Order"> | number
@@ -721,7 +721,7 @@ export type OrderCreateWithoutOrderItemsInput = {
   id?: string
   customerName: string
   customerEmail: string
-  shippingAddress: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  shippingAddress?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   paymentMethod: string
   paymentResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   itemsPrice?: number
@@ -739,7 +739,7 @@ export type OrderUncheckedCreateWithoutOrderItemsInput = {
   userId?: string | null
   customerName: string
   customerEmail: string
-  shippingAddress: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  shippingAddress?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   paymentMethod: string
   paymentResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   itemsPrice?: number
@@ -771,7 +771,7 @@ export type OrderUpdateWithoutOrderItemsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   customerName?: Prisma.StringFieldUpdateOperationsInput | string
   customerEmail?: Prisma.StringFieldUpdateOperationsInput | string
-  shippingAddress?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  shippingAddress?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
   paymentResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   itemsPrice?: Prisma.IntFieldUpdateOperationsInput | number
@@ -789,7 +789,7 @@ export type OrderUncheckedUpdateWithoutOrderItemsInput = {
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customerName?: Prisma.StringFieldUpdateOperationsInput | string
   customerEmail?: Prisma.StringFieldUpdateOperationsInput | string
-  shippingAddress?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  shippingAddress?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
   paymentResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   itemsPrice?: Prisma.IntFieldUpdateOperationsInput | number
@@ -805,7 +805,7 @@ export type OrderCreateManyUserInput = {
   id?: string
   customerName: string
   customerEmail: string
-  shippingAddress: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  shippingAddress?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   paymentMethod: string
   paymentResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   itemsPrice?: number
@@ -821,7 +821,7 @@ export type OrderUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   customerName?: Prisma.StringFieldUpdateOperationsInput | string
   customerEmail?: Prisma.StringFieldUpdateOperationsInput | string
-  shippingAddress?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  shippingAddress?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
   paymentResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   itemsPrice?: Prisma.IntFieldUpdateOperationsInput | number
@@ -838,7 +838,7 @@ export type OrderUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   customerName?: Prisma.StringFieldUpdateOperationsInput | string
   customerEmail?: Prisma.StringFieldUpdateOperationsInput | string
-  shippingAddress?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  shippingAddress?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
   paymentResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   itemsPrice?: Prisma.IntFieldUpdateOperationsInput | number
@@ -855,7 +855,7 @@ export type OrderUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   customerName?: Prisma.StringFieldUpdateOperationsInput | string
   customerEmail?: Prisma.StringFieldUpdateOperationsInput | string
-  shippingAddress?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  shippingAddress?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   paymentMethod?: Prisma.StringFieldUpdateOperationsInput | string
   paymentResult?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   itemsPrice?: Prisma.IntFieldUpdateOperationsInput | number
@@ -995,7 +995,7 @@ export type $OrderPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     userId: string | null
     customerName: string
     customerEmail: string
-    shippingAddress: runtime.JsonValue
+    shippingAddress: runtime.JsonValue | null
     paymentMethod: string
     paymentResult: runtime.JsonValue | null
     itemsPrice: number

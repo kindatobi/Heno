@@ -1,6 +1,6 @@
 import { Product, SizeStock } from "@/generated/prisma/client";
 import { createProductSchema, signUpUserSchema } from "@/lib/validators";
-import z from "zod";
+import { z } from "zod";
 
 export type CreateProduct = z.infer<typeof createProductSchema> & {
   id: string;
@@ -18,7 +18,7 @@ type ShowcaseImages = {
 };
 
 type SizingInfo = Array<{
-  size: string;
+  size: "XS" | "S" | "M" | "L" | "XL" | "XXL" | "XXXL" | "ONE_SIZE";
   bodyLength: string;
   chest: string;
 }>;

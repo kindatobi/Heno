@@ -73,3 +73,12 @@ export async function getLowStockProducts() {
 
   return lowStockItems;
 }
+
+export async function getProductById(id: string) {
+  const data = await prisma.product.findFirst({
+    where: { id },
+    include: { sizeStock: true },
+  });
+  if (!data) throw new Error("Product not found");
+  return data as ProductItem;
+}

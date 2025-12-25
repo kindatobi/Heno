@@ -2,13 +2,8 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import {
-  Controller,
-  SubmitHandler,
-  useForm,
-  FormProvider,
-} from "react-hook-form";
-import z from "zod";
+import { Controller, useForm, FormProvider, useWatch } from "react-hook-form";
+import { z } from "zod";
 import { Field, FieldError, FieldGroup, FieldLabel } from "./ui/field";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
@@ -43,13 +38,9 @@ export default function ProductForm({
       product && type === "Update" ? product : productDefaultValues,
   });
 
-  const onSubmit: SubmitHandler<z.infer<typeof createProductSchema>> = async (
-    values
-  ) => {
-    console.log("Form values:", values);
-
+  async function onSubmit(data: z.infer<typeof createProductSchema>) {
     if (type === "Create") {
-      const res = await createProduct(values);
+      const res = await createProduct(data);
       if (!res.success) {
         toast.error(res.message);
       } else {
@@ -74,15 +65,18 @@ export default function ProductForm({
         router.push("/admin/products");
       }
     }
-  };
+  }
 
-  const regularImages = form.watch("showcaseImages.regular") || [];
-  const isFeatured = form.watch("isFeatured");
-  const banner = form.watch("banner");
-  const onSale = form.watch("onSale");
-  const shopImage = form.watch("shopImage");
-  const sizingInfo = form.watch("sizingInfo") || [];
-  const sizeStock = form.watch("sizeStock") || [];
+  const regularImages =
+    useWatch({ control: form.control, name: "showcaseImages.regular" }) || [];
+  const isFeatured = useWatch({ control: form.control, name: "isFeatured" });
+  const banner = useWatch({ control: form.control, name: "banner" });
+  const onSale = useWatch({ control: form.control, name: "onSale" });
+  const shopImage = useWatch({ control: form.control, name: "shopImage" });
+  const sizingInfo =
+    useWatch({ control: form.control, name: "sizingInfo" }) || [];
+  const sizeStock =
+    useWatch({ control: form.control, name: "sizeStock" }) || [];
 
   const removeRegularImage = (index: number) => {
     const updated = regularImages.filter((_, idx) => idx !== index);
@@ -274,6 +268,7 @@ export default function ProductForm({
                       {...field}
                       id="discount-percent"
                       type="number"
+                      value={field.value ?? ""}
                       aria-invalid={fieldState.invalid}
                       placeholder="Enter discount percentage"
                     />

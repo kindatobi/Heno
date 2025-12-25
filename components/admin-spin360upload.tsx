@@ -1,6 +1,6 @@
 "use client";
 
-import { useFormContext } from "react-hook-form";
+import { useFormContext, useWatch } from "react-hook-form";
 import { UploadButton } from "@/lib/uploadthing";
 
 import { X, GripVertical } from "lucide-react";
@@ -66,12 +66,10 @@ function SortableImage({
         className="object-cover rounded"
       />
 
-      {/* Order indicator */}
       <span className="absolute top-2 left-2 bg-black text-white text-xs font-bold px-2 py-1 rounded">
         {index}
       </span>
 
-      {/* Drag handle */}
       <button
         type="button"
         className="absolute top-2 right-2 bg-white p-1 rounded opacity-0 group-hover:opacity-100 cursor-grab active:cursor-grabbing transition-opacity"
@@ -81,7 +79,6 @@ function SortableImage({
         <GripVertical size={16} className="text-gray-600" />
       </button>
 
-      {/* Remove button */}
       <button
         type="button"
         onClick={onRemove}
@@ -94,11 +91,20 @@ function SortableImage({
 }
 
 export function Spin360Upload() {
-  const { setValue, watch } =
+  const { setValue, control } =
     useFormContext<z.infer<typeof createProductSchema>>();
 
-  const leftImages = watch("showcaseImages.spin360.left") || [];
-  const rightImages = watch("showcaseImages.spin360.right") || [];
+  const leftImages =
+    useWatch({
+      control,
+      name: "showcaseImages.spin360.left",
+    }) || [];
+
+  const rightImages =
+    useWatch({
+      control,
+      name: "showcaseImages.spin360.right",
+    }) || [];
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -109,7 +115,6 @@ export function Spin360Upload() {
 
   const handleUploadComplete = (side: Side, urls: string[]) => {
     const currentImages = side === "left" ? leftImages : rightImages;
-    // Append new images to existing ones
     setValue(`showcaseImages.spin360.${side}`, [...currentImages, ...urls], {
       shouldValidate: true,
       shouldDirty: true,

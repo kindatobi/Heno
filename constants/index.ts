@@ -26,7 +26,7 @@ export const PAYMENT_METHODS = process.env.PAYMENT_METHODS
 export const productDefaultValues = {
   name: "",
   slug: "",
-  category: "",
+  category: "TOPS" as const,
   color: "",
   shopImage: "",
   showcaseImages: {
@@ -41,7 +41,7 @@ export const productDefaultValues = {
   sizingInfo: null,
   price: 0,
   onSale: false,
-  discountPercent: null,
+  discountPercent: undefined,
   isFeatured: false,
   banner: null,
   sizeStock: [],
