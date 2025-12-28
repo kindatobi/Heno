@@ -9,6 +9,30 @@ export async function getProductBySlug(productSlug: string) {
   return data;
 }
 
+export async function getAllProducts({
+  page,
+  query,
+  category,
+}: {
+  page: number;
+  query?: string;
+  category?: string;
+}) {
+  const where = {};
+  if (query) where.name = { contains: query, mode: "insensitive" };
+  if (category) where.category = category;
+
+  const data = (await prisma.product.findMany({
+    where,
+    skip: (page - 1) * 10,
+    take: 10,
+    include: { sizeStock: true },
+  })) as ProductItem[];
+
+  const totalCount = await prisma.product.count();
+  return { data, totalPages: Math.ceil(totalCount / 10) };
+}
+
 export async function getDashboardSummary() {
   const [totalRevenue, totalOrders, totalProducts, totalUsers, latestSales] =
     await Promise.all([

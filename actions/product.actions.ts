@@ -10,7 +10,7 @@ import { createProductSchema, insertCartSchema } from "@/lib/validators";
 import { Cart } from "@/types";
 import { cookies, headers } from "next/headers";
 import Stripe from "stripe";
-import { z } from "zod";
+import { success, z } from "zod";
 
 type AdjustedItems = {
   name: string;
@@ -190,6 +190,17 @@ export async function updateProduct({
     });
 
     return { success: true, message: "Product created successfully" };
+  } catch (error) {
+    return { success: false, message: formatError(error) };
+  }
+}
+
+export async function deleteProduct(id: string) {
+  try {
+    await prisma.product.delete({
+      where: { id },
+    });
+    return { success: true, message: "Product deleted successfully" };
   } catch (error) {
     return { success: false, message: formatError(error) };
   }
