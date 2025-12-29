@@ -1,12 +1,37 @@
-import { signOutUser } from "@/actions/user.action";
-import { Button } from "@/components/ui/button";
-
 export default function Home() {
   return (
-    <main className="h-screen w-screen">
-      <form action={signOutUser}>
-        <Button>Log out</Button>
-      </form>
+    <main className="relative h-screen w-screen overflow-hidden">
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute top-0 left-0 w-full h-full object-cover"
+      >
+        <source src="/background-vid.mp4" type="video/mp4" />
+      </video>
+
+      <div className="absolute top-0 left-0 w-full h-full bg-black/40" />
+
+      <div className="absolute bottom-6 left-6 z-10 text-white text-xs uppercase tracking-wider font-mono">
+        <div>
+          {new Date().toLocaleTimeString("en-US", {
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: true,
+          })}
+        </div>
+        <div>WELCOME TO HENO...</div>
+        <div>Dec 28,2025 - LAGOS, NG</div>
+        <div>©2025 Heno Project</div>
+      </div>
+
+      <div className="relative z-10 flex items-center justify-center h-full">
+        <p className=" text-white text-xs uppercase tracking-wider font-mono">
+          Enter shop?
+        </p>
+      </div>
     </main>
   );
 }

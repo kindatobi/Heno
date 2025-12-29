@@ -56,8 +56,8 @@ export default async function AdminProductsPage(props: {
             <TableHead>NAME</TableHead>
             <TableHead className="text-right">PRICE</TableHead>
             <TableHead>CATEGORY</TableHead>
-            <TableHead>STOCK</TableHead>
-            <TableHead>RATING</TableHead>
+            <TableHead>DISCOUNT</TableHead>
+
             <TableHead className="w-25">ACTIONS</TableHead>
           </TableRow>
         </TableHeader>
@@ -70,11 +70,13 @@ export default async function AdminProductsPage(props: {
                 {formatCurrency(product.price)}
               </TableCell>
               <TableCell>{product.category}</TableCell>
-              <TableCell>{product.stock}</TableCell>
-              <TableCell>{product.rating}</TableCell>
+              <TableCell>
+                {product.onSale ? `${product.discountPercent}% OFF` : "No sale"}
+              </TableCell>
+
               <TableCell className="flex gap-1">
                 <Button asChild variant="outline" size="sm">
-                  <Link href={`/admin/products/${product.id}`}>Edit</Link>
+                  <Link href={`/admin/products/${product.id}/edit`}>Edit</Link>
                 </Button>
                 <DeleteDialog id={product.id} action={deleteProduct} />
               </TableCell>
