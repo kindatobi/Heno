@@ -22,8 +22,14 @@ export const signInUserSchema = z.object({
 export const showcaseImagesSchema = z.object({
   spin360: z
     .object({
-      left: z.array(z.string()).length(8, "Must be exactly 8 images"),
-      right: z.array(z.string()).length(8, "Must be exactly 8 images"),
+      left: z
+        .array(z.string())
+        .length(8, "Must be exactly 8 images")
+        .nullable(),
+      right: z
+        .array(z.string())
+        .length(8, "Must be exactly 8 images")
+        .nullable(),
     })
     .nullable(),
   regular: z.array(z.string()).min(1, "At least one regular image required"),

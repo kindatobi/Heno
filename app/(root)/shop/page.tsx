@@ -13,7 +13,7 @@ export default async function ShopPage() {
   return (
     <div>
       <p> Hey there, what do you wanna get</p>
-      <div>
+      <div className="grid grid-cols-6 w-full">
         {shopProducts.map((product) => (
           <ShopProductCard
             key={product.slug}

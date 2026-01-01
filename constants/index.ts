@@ -31,8 +31,8 @@ export const productDefaultValues = {
   shopImage: "",
   showcaseImages: {
     spin360: {
-      left: [],
-      right: [],
+      left: null,
+      right: null,
     },
     regular: [],
   },

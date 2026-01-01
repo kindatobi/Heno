@@ -8,6 +8,7 @@ import { redis } from "@/lib/redis";
 import { calcPrice, formatError } from "@/lib/utils";
 import { createProductSchema, insertCartSchema } from "@/lib/validators";
 import { Cart } from "@/types";
+import { revalidatePath } from "next/cache";
 import { cookies, headers } from "next/headers";
 import Stripe from "stripe";
 import { success, z } from "zod";
@@ -200,6 +201,7 @@ export async function deleteProduct(id: string) {
     await prisma.product.delete({
       where: { id },
     });
+    revalidatePath("/admin/products");
     return { success: true, message: "Product deleted successfully" };
   } catch (error) {
     return { success: false, message: formatError(error) };
