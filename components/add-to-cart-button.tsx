@@ -1,7 +1,6 @@
 "use client";
 
 import { useCartStore } from "@/lib/store/cart.store";
-import { useState } from "react";
 
 interface Product {
   id: string;
@@ -13,14 +12,11 @@ interface Product {
 
 export default function AddToCartButton({
   product,
-  sizes,
-  productSizes,
+  selectedSize,
 }: {
   product: Product;
-  sizes: string[];
-  productSizes: string[];
+  selectedSize: string;
 }) {
-  const [selectedSize, setSelectedSize] = useState("");
   const addItemToBag = useCartStore((state) => state.addItemToBag);
 
   const handleAddToCart = () => {
@@ -41,31 +37,11 @@ export default function AddToCartButton({
 
   return (
     <div>
-      <div>
-        <p>size</p>
-        <div className="flex gap-1">
-          {sizes.map((x, i) => (
-            <button
-              disabled={!productSizes.includes(x)}
-              key={i}
-              onClick={() => setSelectedSize(x)}
-              className={`cursor-pointer p-2 border ${
-                selectedSize === x ? "bg-black text-white" : ""
-              } ${
-                !productSizes.includes(x) ? "opacity-50 cursor-not-allowed" : ""
-              }`}
-            >
-              {x}
-            </button>
-          ))}
-        </div>
-      </div>
-
       <button
         onClick={handleAddToCart}
-        className="bg-black p-2 rounded-sm text-white cursor-pointer"
+        className="w-full bg-black text-white py-4 px-6 text-sm uppercase tracking-wider font-medium hover:bg-gray-900 transition-colors"
       >
-        add to cart
+        ADD TO BAG
       </button>
     </div>
   );
