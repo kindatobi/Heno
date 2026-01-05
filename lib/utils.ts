@@ -79,8 +79,8 @@ export function formatError(error: unknown): string {
 }
 
 // Format currency
-const CURRENCY_FORMATTER = new Intl.NumberFormat("en-NG", {
-  currency: "NGN",
+const CURRENCY_FORMATTER = new Intl.NumberFormat("en-US", {
+  currency: "USD",
   style: "currency",
   minimumFractionDigits: 2,
 });

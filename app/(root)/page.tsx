@@ -22,9 +22,8 @@ export default function Home() {
             hour12: true,
           })}
         </div>
-        <div>WELCOME TO HENO...</div>
         <div>Dec 28,2025 - LAGOS, NG</div>
-        <div>©2025 Heno Project</div>
+        <div>Inspired by the ©2025 Usal Project</div>
       </div>
 
       <div className="relative z-10 flex items-center justify-center h-full">

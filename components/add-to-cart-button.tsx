@@ -39,7 +39,7 @@ export default function AddToCartButton({
     <div>
       <button
         onClick={handleAddToCart}
-        className="w-full bg-black text-white py-4 px-6 text-sm uppercase tracking-wider font-medium hover:bg-gray-900 transition-colors"
+        className="w-full bg-black text-white rounded-[6px] py-4 px-6 text-sm uppercase tracking-wider font-medium hover:bg-gray-900 transition-colors"
       >
         ADD TO BAG
       </button>

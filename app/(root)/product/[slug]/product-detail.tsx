@@ -36,31 +36,30 @@ export default function ProductDetail({ product }: { product: ProductItem }) {
 
   return (
     <div>
-      <div className="flex">
-        <div className="w-1/2">
+      <div className="flex pt-32">
+        <div className="w-1/2 ">
           {has360 && (
             <div className="flex gap-4 mb-8">
               {hasLeft && product.showcaseImages.spin360?.left && (
-                <div className="relative h-[500px] w-full">
+                <div className="relative h-auto  w-full">
                   <Image
                     src={product.showcaseImages.spin360.left[currentIndex]}
                     alt={`${product.name} - left view ${currentIndex + 1}`}
-                    width={250}
-                    height={250}
-                    className="absolute top-0 left-0"
+                    fill
+                    className="object-cover"
                     priority
                   />
                 </div>
               )}
 
               {hasRight && product.showcaseImages.spin360?.right && (
-                <div className="relative h-[500px] w-full">
+                <div className="relative  w-full">
                   <Image
                     src={product.showcaseImages.spin360.right[currentIndex]}
                     alt={`${product.name} - right view ${currentIndex + 1}`}
                     width={250}
                     height={250}
-                    className="absolute top-0 left-0"
+                    className="w-full h-auto"
                   />
                 </div>
               )}
@@ -84,15 +83,15 @@ export default function ProductDetail({ product }: { product: ProductItem }) {
         </div>
 
         {/* RIGHT SIDE - Details */}
-        <div className="w-1/2 pl-16 pt-8">
-          <h1 className="text-5xl font-serif mb-6">{product.name}</h1>
+        <div className="w-1/2 pr-6 space-y-4">
+          <h1 className="text-5xl capitalize font-serif">{product.name}</h1>
 
-          <p className="text-lg leading-relaxed mb-12">{product.description}</p>
+          <p className="text-[16px] leading-relaxed">{product.description}</p>
 
-          <hr className="border-t border-black mb-8" />
+          <hr className="border-t border-black" />
 
-          <div className="mb-6">
-            <label className="block text-xs uppercase tracking-wider mb-3">
+          <div>
+            <label className="block text-xs uppercase tracking-wider">
               SIZE
             </label>
             <div className="flex gap-3">
@@ -106,15 +105,13 @@ export default function ProductDetail({ product }: { product: ProductItem }) {
                     onClick={() => available && setSelectedSize(size)}
                     disabled={!available}
                     className={`
-                  px-5 py-3 text-sm font-medium transition-colors
-                  ${
-                    available
-                      ? isSelected
-                        ? "bg-black text-white"
-                        : "bg-gray-200 text-black hover:bg-gray-300"
-                      : "bg-gray-100 text-gray-400 line-through cursor-not-allowed"
-                  }
-                `}
+            px-4 py-2 rounded-[5px] text-sm font-medium transition-colors
+            ${isSelected ? "bg-black text-white" : "text-black"}
+            ${!available ? "line-through cursor-not-allowed opacity-50" : ""}
+          `}
+                    style={
+                      !isSelected ? { backgroundColor: "#D9D9D9" } : undefined
+                    }
                   >
                     {size.replace("_", " ")}
                   </button>
@@ -122,14 +119,10 @@ export default function ProductDetail({ product }: { product: ProductItem }) {
               })}
             </div>
           </div>
-
-          <div className="flex items-start gap-6 mb-8">
-            <div className="flex-shrink-0">
-              <p className="text-5xl font-light mb-2">
+          <div className="flex items-start gap-6 pb-2">
+            <div className="shrink-0">
+              <p className="text-5xl font-light">
                 {formatCurrency(product.price)}
-              </p>
-              <p className="text-sm">
-                *<span className="uppercase">VAT</span> included
               </p>
             </div>
 
@@ -147,58 +140,65 @@ export default function ProductDetail({ product }: { product: ProductItem }) {
             </div>
           </div>
 
-          <hr className="border-t border-black my-8" />
-
-          {/* Sizing Information */}
-          {product.sizingInfo && product.sizingInfo.length > 0 && (
-            <details className="group mb-6">
-              <summary className="flex justify-between items-center cursor-pointer py-4">
-                <span className="text-lg font-serif">Sizing information</span>
-                <span className="text-2xl transition-transform group-open:rotate-45">
-                  +
-                </span>
-              </summary>
-              <div className="pt-4 pb-6">
-                <table className="w-full text-sm">
-                  <thead>
-                    <tr className="border-b border-gray-300">
-                      <th className="text-left py-2 font-medium">Size</th>
-                      <th className="text-left py-2 font-medium">
-                        Body Length
-                      </th>
-                      <th className="text-left py-2 font-medium">Chest</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {product.sizingInfo.map((info, i) => (
-                      <tr key={i} className="border-b border-gray-200">
-                        <td className="py-3">{info.size}</td>
-                        <td className="py-3">{info.bodyLength}</td>
-                        <td className="py-3">{info.chest}</td>
+          <div>
+            {/* Sizing Information */}
+            {product.sizingInfo && product.sizingInfo.length > 0 && (
+              <details className="group border-t border-black py-1">
+                <summary className="flex justify-between items-center cursor-pointer">
+                  <span className="text-[16px] font-serif">Size chart</span>
+                  <span className="text-2xl transition-transform group-open:rotate-45">
+                    +
+                  </span>
+                </summary>
+                <div>
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="border-b border-gray-300">
+                        <th className="text-left font-medium">Size</th>
+                        <th className="text-left font-medium">Body Length</th>
+                        <th className="text-left font-medium">Chest</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </details>
-          )}
+                    </thead>
+                    <tbody>
+                      {product.sizingInfo.map((info, i) => (
+                        <tr
+                          key={i}
+                          className={`${
+                            i === product.sizingInfo!.length - 1
+                              ? ""
+                              : "border-b border-gray-200"
+                          }`}
+                        >
+                          <td>{info.size}</td>
+                          <td>{info.bodyLength}</td>
+                          <td>{info.chest}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </details>
+            )}
 
-          <hr className="border-t border-black my-6" />
-
-          {/* Product Details */}
-          {product.detail && (
-            <details className="group">
-              <summary className="flex justify-between items-center cursor-pointer py-4">
-                <span className="text-lg font-serif">Product details</span>
-                <span className="text-2xl transition-transform group-open:rotate-45">
-                  +
-                </span>
-              </summary>
-              <div className="pt-4 pb-6">
-                <p className="text-base leading-relaxed">{product.detail}</p>
-              </div>
-            </details>
-          )}
+            {/* Product Details */}
+            {product.detail && (
+              <details className="border-t border-black group py-1">
+                <summary className="flex justify-between items-center cursor-pointer">
+                  <span className="text-[16px] font-serif">
+                    Product details
+                  </span>
+                  <span className="text-2xl transition-transform group-open:rotate-45">
+                    +
+                  </span>
+                </summary>
+                <div>
+                  <p className="text-[14px] leading-relaxed">
+                    {product.detail}
+                  </p>
+                </div>
+              </details>
+            )}
+          </div>
         </div>
       </div>
     </div>
