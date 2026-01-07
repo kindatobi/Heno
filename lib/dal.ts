@@ -9,6 +9,14 @@ export async function getProductBySlug(productSlug: string) {
   return data;
 }
 
+export async function getAllCategories() {
+  const data = await prisma.product.groupBy({
+    by: ["category"],
+    _count: true,
+  });
+  return data;
+}
+
 export async function getAllProducts({
   page,
   query,

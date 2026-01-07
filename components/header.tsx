@@ -4,10 +4,12 @@ import { usePathname } from "next/navigation";
 import CartModal from "./cart-modal";
 import Bag from "./bag";
 import { useCartStore } from "@/lib/store/cart.store";
+import { useUIStore } from "@/lib/store/ui.store";
 import Link from "next/link";
 
 export default function Header() {
   const pathname = usePathname();
+  const { toggleShop, toggleMenu } = useUIStore();
   const { cart } = useCartStore();
   const totalItems =
     cart?.items.reduce((total, item) => total + item.qty, 0) ?? 0;
@@ -32,10 +34,16 @@ export default function Header() {
         </Link>
 
         <div className="flex items-center gap-2 text-white text-[14px] tracking-[0.02em] font-light font-mono">
-          <button className="uppercase hover:bg-[#F5F6F4] hover:text-black transition-colors bg-black rounded-[5.5px] py-1.5 px-5">
+          <button
+            onClick={toggleShop}
+            className="uppercase hover:bg-[#F5F6F4] hover:text-black transition-colors bg-black rounded-[5.5px] py-1.5 px-5"
+          >
             Shop
           </button>
-          <button className="uppercase hover:bg-[#F5F6F4] hover:text-black transition-colors rounded-[5.5px] bg-black py-1.5 px-5">
+          <button
+            onClick={toggleMenu}
+            className="uppercase hover:bg-[#F5F6F4] hover:text-black transition-colors rounded-[5.5px] bg-black py-1.5 px-5"
+          >
             Menu
           </button>
           <Bag totalItems={totalItems} />
