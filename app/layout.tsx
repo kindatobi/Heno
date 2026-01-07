@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { Toaster } from "sonner";
 import { CartHydration } from "@/components/cart-hydration";
@@ -12,6 +13,82 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const neueHaas = localFont({
+  src: [
+    {
+      path: "../public/fonts/Neue Haas Grotesk Display Family/NeueHaasGrotDisp-25XThin-Trial.otf",
+      weight: "200",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Neue Haas Grotesk Display Family/NeueHaasGrotDisp-26XThinItalic-Trial.otf",
+      weight: "200",
+      style: "italic",
+    },
+    {
+      path: "../public/fonts/Neue Haas Grotesk Display Family/NeueHaasGrotDisp-35Thin-Trial.otf",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Neue Haas Grotesk Display Family/NeueHaasGrotDisp-36ThinItalic-Trial.otf",
+      weight: "300",
+      style: "italic",
+    },
+    {
+      path: "../public/fonts/Neue Haas Grotesk Display Family/NeueHaasGrotDisp-45Light-Trial.otf",
+      weight: "350",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Neue Haas Grotesk Display Family/NeueHaasGrotDisp-46LightItalic-Trial.otf",
+      weight: "350",
+      style: "italic",
+    },
+    {
+      path: "../public/fonts/Neue Haas Grotesk Display Family/NeueHaasGrotDisp-55Roman-Trial.otf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Neue Haas Grotesk Display Family/NeueHaasGrotDisp-56Italic-Trial.otf",
+      weight: "400",
+      style: "italic",
+    },
+    {
+      path: "../public/fonts/Neue Haas Grotesk Display Family/NeueHaasGrotDisp-65Medium-Trial.otf",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Neue Haas Grotesk Display Family/NeueHaasGrotDisp-66MediumItalic-Trial.otf",
+      weight: "500",
+      style: "italic",
+    },
+    {
+      path: "../public/fonts/Neue Haas Grotesk Display Family/NeueHaasGrotDisp-75Bold-Trial.otf",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Neue Haas Grotesk Display Family/NeueHaasGrotDisp-76BoldItalic-Trial.otf",
+      weight: "700",
+      style: "italic",
+    },
+    {
+      path: "../public/fonts/Neue Haas Grotesk Display Family/NeueHaasGrotDisp-95Black-Trial.otf",
+      weight: "900",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Neue Haas Grotesk Display Family/NeueHaasGrotDisp-96BlackItalic-Trial.otf",
+      weight: "900",
+      style: "italic",
+    },
+  ],
+  variable: "--font-neue-haas",
 });
 
 export const metadata: Metadata = {
@@ -27,7 +104,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${neueHaas.variable} ${geistMono.variable} antialiased`}
       >
         <CartHydration />
         {children}

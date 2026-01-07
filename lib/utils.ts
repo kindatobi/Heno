@@ -14,7 +14,11 @@ export function convertToPlainObject<T>(value: T): T {
 // Format number with decimal places
 export function formatNumberWithDecimal(num: number): string {
   const [int, decimal] = num.toString().split(".");
-  return decimal ? `${int}.${decimal.padEnd(2, "0")}` : `${int}.00`;
+  // Only add decimals if they exist and are not just zeros
+  if (decimal && parseInt(decimal) !== 0) {
+    return `${int}.${decimal.padEnd(2, "0")}`;
+  }
+  return int;
 }
 
 // Format errors
@@ -82,7 +86,8 @@ export function formatError(error: unknown): string {
 const CURRENCY_FORMATTER = new Intl.NumberFormat("en-US", {
   currency: "USD",
   style: "currency",
-  minimumFractionDigits: 2,
+  minimumFractionDigits: 0,
+  maximumFractionDigits: 2,
 });
 
 export function formatCurrency(amount: number | string | null) {

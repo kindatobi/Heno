@@ -23,22 +23,19 @@ export default function Header() {
       <div className="flex items-start justify-between">
         <Link href={"/"}>
           <div
-            className={`text-9xl font-bold tracking-tight leading-[0.65] transition-colors relative ${
+            className={`text-[120px]  font-normal tracking-[-0.08em] leading-[0.65] transition-colors relative ${
               isLightBackground ? "text-black" : "text-white"
             }`}
           >
-            heno
-            <sup className="text-[50px] absolute top-0 right-0 translate-x-2">
-              ®
-            </sup>
+            heno.
           </div>
         </Link>
 
-        <div className="flex items-center gap-2 text-white text-[14px] tracking-wider font-mono">
-          <button className="uppercase hover:bg-[#F5F6F4] hover:text-black transition-colors bg-black rounded-[4.5px] py-1.5 px-4">
+        <div className="flex items-center gap-2 text-white text-[14px] tracking-[0.02em] font-light font-mono">
+          <button className="uppercase hover:bg-[#F5F6F4] hover:text-black transition-colors bg-black rounded-[5.5px] py-1.5 px-5">
             Shop
           </button>
-          <button className="uppercase hover:bg-[#F5F6F4] hover:text-black transition-colors rounded-[4.5px] bg-black py-1.5 px-4">
+          <button className="uppercase hover:bg-[#F5F6F4] hover:text-black transition-colors rounded-[5.5px] bg-black py-1.5 px-5">
             Menu
           </button>
           <Bag totalItems={totalItems} />

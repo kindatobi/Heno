@@ -13,7 +13,7 @@ export default function Home() {
 
       <div className="absolute top-0 left-0 w-full h-full bg-black/40" />
 
-      <div className="absolute bottom-6 left-6 z-10 text-white text-xs uppercase tracking-wider font-mono">
+      <div className="absolute bottom-6 left-6 z-10 text-white text-[14px] uppercase tracking-[0.01em] font-light font-mono">
         <div>
           {new Date().toLocaleTimeString("en-US", {
             hour: "2-digit",
@@ -27,7 +27,7 @@ export default function Home() {
       </div>
 
       <div className="relative z-10 flex items-center justify-center h-full">
-        <p className=" text-white text-xs uppercase tracking-wider font-mono">
+        <p className=" text-white text-[14px] uppercase tracking-[0.01em] font-light font-mono">
           Enter shop?
         </p>
       </div>

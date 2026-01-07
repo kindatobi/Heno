@@ -182,6 +182,7 @@ export async function updateProduct({
         ...productData,
         sizingInfo: sizingInfo === null ? Prisma.JsonNull : sizingInfo,
         sizeStock: {
+          deleteMany: {},
           create: sizeStock.map((item) => ({
             size: item.size,
             stock: item.stock,
@@ -190,7 +191,7 @@ export async function updateProduct({
       },
     });
 
-    return { success: true, message: "Product created successfully" };
+    return { success: true, message: "Product updated successfully" };
   } catch (error) {
     return { success: false, message: formatError(error) };
   }

@@ -44,7 +44,7 @@ export default function CartAside() {
   return (
     <aside
       onClick={(e) => e.stopPropagation()}
-      className="w-[35%] p-6 bg-[#000000] flex flex-col h-full border-l border-[#282828]"
+      className="p-6 bg-[#000000] flex flex-col h-full border-l border-[#282828]"
     >
       {/* ASIDE NAV */}
       <div className="flex justify-between items-center mb-6 pb-4 border-b border-[#282828]">
@@ -127,7 +127,7 @@ export default function CartAside() {
         <button
           onClick={handleCheckout}
           disabled={isProcessing || !cart || cart.items.length === 0}
-          className="bg-white hover:bg-[#B3B3B3] text-black font-bold p-4 rounded-full cursor-pointer w-full uppercase tracking-wider text-sm transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+          className="bg-white hover:bg-[#B3B3B3] text-black font-bold px-4 py-2.5 rounded-[6px] cursor-pointer w-full uppercase tracking-wider text-sm transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
         >
           {isProcessing ? "Processing..." : "Continue to Checkout"}
         </button>
