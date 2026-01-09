@@ -19,11 +19,11 @@ export default function CartModal() {
         {
           opacity: 0,
         },
-        { opacity: 1, duration: 0.2, ease: "power2.out" }
+        { opacity: 1, duration: 0.3, ease: "power2.out" }
       )
       .to(asideRef.current, {
         x: 0,
-        duration: 0.2,
+        duration: 0.3,
         ease: "power2.out",
       });
   };
@@ -33,12 +33,12 @@ export default function CartModal() {
       .timeline()
       .to(asideRef.current, {
         x: "100%",
-        duration: 0.2,
+        duration: 0.3,
         ease: "power2.in",
       })
       .to(modalRef.current, {
         opacity: 0,
-        duration: 0.2,
+        duration: 0.3,
         ease: "power2.in",
       });
   };

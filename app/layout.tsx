@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { Toaster } from "sonner";
 import { CartHydration } from "@/components/cart-hydration";
+import TransitionProvider from "@/providers/TransitionProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -107,7 +108,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${neueHaas.variable} ${geistMono.variable} antialiased`}
       >
         <CartHydration />
-        {children}
+        <TransitionProvider>{children}</TransitionProvider>
         <Toaster />
       </body>
     </html>

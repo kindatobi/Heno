@@ -1,4 +1,4 @@
-import { ProductItem } from "@/types";
+import { CategoryWithCount, ProductItem } from "@/types";
 import prisma from "./prisma";
 
 export async function getProductBySlug(productSlug: string) {
@@ -9,12 +9,17 @@ export async function getProductBySlug(productSlug: string) {
   return data;
 }
 
+export async function getProductsCount() {
+  const data = await prisma.product.count();
+  return data;
+}
+
 export async function getAllCategories() {
   const data = await prisma.product.groupBy({
     by: ["category"],
     _count: true,
   });
-  return data;
+  return data as CategoryWithCount;
 }
 
 export async function getAllProducts({

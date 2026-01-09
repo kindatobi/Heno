@@ -7,6 +7,7 @@ interface UIStore {
   toggleMenu: () => void;
   shopOpen: boolean;
   toggleShop: () => void;
+  resetUI: () => void;
 }
 
 export const useUIStore = create<UIStore>((set) => ({
@@ -16,4 +17,5 @@ export const useUIStore = create<UIStore>((set) => ({
   toggleMenu: () => set((state) => ({ menuOpen: !state.menuOpen })),
   shopOpen: false,
   toggleShop: () => set((state) => ({ shopOpen: !state.shopOpen })),
+  resetUI: () => set({ cartOpen: false, menuOpen: false, shopOpen: false }),
 }));

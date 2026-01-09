@@ -167,3 +167,12 @@ export const calcPrice = (items: CartItem[]) => {
     totalPrice: Number(totalPrice.toFixed(2)),
   };
 };
+
+export const CATEGORY_LABELS: Record<string, string> = {
+  TOPS: "Tops",
+  BOTTOMS: "Bottoms",
+  DENIMS: "Denims",
+  LEATHER: "Leather",
+  OUTERWEAR: "Outerwear",
+  ACCESSORIES: "Accessories",
+};

@@ -1,5 +1,6 @@
 import Transition from "react-transition-group/Transition";
 import { useUIStore } from "@/lib/store/ui.store";
+import { gsap } from "gsap";
 import { useRef } from "react";
 
 export default function MenuModal() {

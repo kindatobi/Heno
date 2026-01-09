@@ -1,4 +1,4 @@
-import { Product, SizeStock } from "@/generated/prisma/client";
+import { Product, ProductCategory, SizeStock } from "@/generated/prisma/client";
 import { createProductSchema, signUpUserSchema } from "@/lib/validators";
 import { z } from "zod";
 
@@ -74,3 +74,10 @@ export type ProductSizeString =
   | "XXL"
   | "XXXL"
   | "ONE_SIZE";
+
+export type CategoryWithCount = [
+  {
+    _count: number;
+    category: ProductCategory;
+  }
+];

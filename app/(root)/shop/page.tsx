@@ -13,7 +13,7 @@ export default async function ShopPage() {
   return (
     <div className="bg-[#F5F6F4]">
       <p> Hey there, what do you wanna get</p>
-      <div className="grid grid-cols-6 w-full">
+      <div className="grid grid-cols-4 md:grid-cols-6 w-full">
         {shopProducts.map((product) => (
           <ShopProductCard
             key={product.slug}
