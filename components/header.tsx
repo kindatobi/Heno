@@ -22,7 +22,7 @@ export default function Header({
 }) {
   const pathname = usePathname();
   const henoRef = useRef(null);
-  const { toggleMenu, shopOpen, menuOpen } = useUIStore();
+  const { toggleMenu, toggleCart, shopOpen, menuOpen } = useUIStore();
   const { cart } = useCartStore();
 
   const totalItems =
@@ -81,7 +81,10 @@ export default function Header({
               >
                 Menu
               </button>
-              <button className="uppercase hover:bg-[#F5F6F4] hover:text-black transition-colors bg-black rounded-[5.5px] py-1.5 px-4 md:py-1.5 md:px-5">
+              <button
+                onClick={toggleCart}
+                className="uppercase hover:bg-[#F5F6F4] hover:text-black transition-colors bg-black rounded-[5.5px] py-1.5 px-4 md:py-1.5 md:px-5"
+              >
                 <Bag totalItems={totalItems} />
               </button>
             </div>
