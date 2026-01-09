@@ -1,49 +1,53 @@
 import Transition from "react-transition-group/Transition";
 import { useUIStore } from "@/lib/store/ui.store";
 import { gsap } from "gsap";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
+import Link from "next/link";
 
 export default function MenuModal() {
-  const { menuOpen } = useUIStore();
+  const { menuOpen, toggleMenu } = useUIStore();
   const modalRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && menuOpen) {
+        toggleMenu();
+      }
+    };
+
+    window.addEventListener("keydown", handleEsc);
+    return () => window.removeEventListener("keydown", handleEsc);
+  }, [menuOpen, toggleMenu]);
+
   const onEnter = () => {
-    gsap
-      .timeline()
-      .fromTo(
-        modalRef.current,
-        {
-          opacity: 0,
-        },
-        { opacity: 1, duration: 0.2, ease: "power2.out" }
-      )
-      .to(contentRef.current, {
-        x: 0,
-        duration: 0.2,
-        ease: "power2.out",
-      });
+    gsap.timeline().fromTo(
+      modalRef.current,
+      {
+        opacity: 0,
+      },
+      { opacity: 1, duration: 0.3, ease: "power2.out" }
+    );
   };
 
   const onExit = () => {
-    gsap
-      .timeline()
-      .to(contentRef.current, {
-        x: "100%",
-        duration: 0.2,
-        ease: "power2.in",
-      })
-      .to(modalRef.current, {
-        opacity: 0,
-        duration: 0.2,
-        ease: "power2.in",
-      });
+    gsap.timeline().to(modalRef.current, {
+      opacity: 0,
+      duration: 0.3,
+      ease: "power2.out",
+    });
   };
+
+  const menuItems = [
+    { label: "About", href: "/about" },
+    { label: "Privacy", href: "/privacy" },
+    { label: "Refund & Returns", href: "/refund-and-return-policy" },
+  ];
 
   return (
     <Transition
       in={menuOpen}
-      timeout={600}
+      timeout={300}
       mountOnEnter
       unmountOnExit
       onEnter={onEnter}
@@ -54,16 +58,30 @@ export default function MenuModal() {
         <div
           ref={modalRef}
           className="
-            fixed inset-0 z-50 flex justify-end
+            fixed inset-0 z-40 flex
             bg-neutral-500/40
             backdrop-blur-[50px]
+            pt-17 md:pt-[75px]
           "
         >
-          <div
-            ref={contentRef}
-            className="w-[35%] h-full"
-            style={{ transform: "translateX(100%)" }}
-          ></div>
+          <div ref={contentRef} className="my-x-cont">
+            {menuItems.map((item, i) => (
+              <div key={i}>
+                <Link href={item.href}>
+                  <span className="text-5xl md:text-[64px] leading-none font-normal font-neue-haas capitalize text-[#F5F6F4] hover:opacity-70 transition-opacity">
+                    {item.label}
+                  </span>
+                </Link>
+              </div>
+            ))}
+          </div>
+
+          <button
+            onClick={toggleMenu}
+            className="fixed bottom-0 pb-3 md:pb-6 text-3xl md:text-[52px] right-2 md:right-4 text-[#F5F6F4] font-neue-haas hover:opacity-70 transition-opacity"
+          >
+            Close [esc]
+          </button>
         </div>
       )}
     </Transition>

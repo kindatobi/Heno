@@ -8,11 +8,12 @@ export default function AboutPage() {
 
         <div className="space-y-9 text-[50px] font-neue-haas leading-[1.1em] font-normal">
           <p>
-            Heno is a contemporary fashion label rooted in Lagos, Nigeria,
-            founded by Tobi Ojo alongside Ifeoluwa Ogunseye and Toluwalase
-            Benson. The collective came together with a shared vision: to build
-            a brand that reflects how young Africans actually live, think, and
-            dress—unfiltered, expressive, and deeply individual.
+            Heno is a contemporary fashion label inspired by the Usal Project
+            rooted in Lagos, Nigeria, founded by Tobi Ojo alongside Ifeoluwa
+            Ogunseye and Toluwalase Benson. The collective came together with a
+            shared vision: to build a brand that reflects how young Africans
+            actually live, think, and dress—unfiltered, expressive, and deeply
+            individual.
           </p>
 
           <p>

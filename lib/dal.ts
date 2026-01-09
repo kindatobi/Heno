@@ -1,3 +1,4 @@
+import { ProductCategory } from "@/generated/prisma/client";
 import { CategoryWithCount, ProductItem } from "@/types";
 import prisma from "./prisma";
 
@@ -29,7 +30,7 @@ export async function getAllProducts({
 }: {
   page: number;
   query?: string;
-  category?: string;
+  category?: ProductCategory;
 }) {
   const where = {};
   if (query) where.name = { contains: query, mode: "insensitive" };
@@ -42,7 +43,7 @@ export async function getAllProducts({
     include: { sizeStock: true },
   })) as ProductItem[];
 
-  const totalCount = await prisma.product.count();
+  const totalCount = await prisma.product.count({ where });
   return { data, totalPages: Math.ceil(totalCount / 10) };
 }
 

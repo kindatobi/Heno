@@ -46,7 +46,7 @@ export default function Home() {
       <div className="absolute top-0 left-0 w-full h-full bg-black/40" />
 
       <div className="absolute inset-0 z-10 flex items-center justify-center">
-        <button onClick={toggleShop}>
+        <button className="cursor-pointer" onClick={toggleShop}>
           <p className="text-white underline text-[14px] uppercase tracking-[0.01em] font-light font-mono">
             Click to Enter shop
           </p>

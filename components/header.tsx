@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import CartModal from "./cart-modal";
+import { gsap } from "gsap";
 import Bag from "./bag";
 import { useCartStore } from "@/lib/store/cart.store";
 import { useUIStore } from "@/lib/store/ui.store";
@@ -9,6 +10,8 @@ import Link from "next/link";
 import MenuModal from "./menu-modal";
 import ShopModal from "./shop-modal";
 import { CategoryWithCount } from "@/types";
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
 
 export default function Header({
   categories,
@@ -18,8 +21,10 @@ export default function Header({
   categoryCount: number;
 }) {
   const pathname = usePathname();
-  const { toggleMenu } = useUIStore();
+  const henoRef = useRef(null);
+  const { toggleMenu, shopOpen, menuOpen } = useUIStore();
   const { cart } = useCartStore();
+
   const totalItems =
     cart?.items.reduce((total, item) => total + item.qty, 0) ?? 0;
 
@@ -27,6 +32,24 @@ export default function Header({
     pathname === "/shop" ||
     pathname.startsWith("/shop/") ||
     pathname.startsWith("/product/");
+
+  const whenHover = () => {
+    if (pathname === "/") return;
+    gsap.to(henoRef.current, { y: 0, duration: 0.3 });
+  };
+
+  const whenNotHover = () => {
+    if (pathname === "/") return;
+    gsap.to(henoRef.current, { y: -55, duration: 0.3 });
+  };
+
+  useGSAP(() => {
+    if (pathname !== "/" || shopOpen || menuOpen) {
+      gsap.to(henoRef.current, { y: -35, duration: 0.3 });
+    } else {
+      gsap.to(henoRef.current, { y: 0, duration: 0.3 });
+    }
+  }, [pathname, shopOpen, menuOpen]);
 
   return (
     <>
@@ -36,9 +59,14 @@ export default function Header({
         <CartModal />
         <div className="my-x-cont py-1.5 md:py-1.5">
           <div className="flex items-start justify-between">
-            <Link href={"/"}>
+            <Link
+              onMouseEnter={whenHover}
+              onMouseLeave={whenNotHover}
+              href={"/"}
+            >
               <div
-                className={`-ml-[0.04em] text-[100px] md:text-[120px]  font-normal tracking-[-0.08em] leading-[0.65] transition-colors ${
+                ref={henoRef}
+                className={`italic -ml-[0.04em] text-[100px] md:text-[120px]  font-normal tracking-[-0.08em] leading-[0.65] transition-colors ${
                   isLightBackground ? "text-black" : "text-white"
                 }`}
               >
