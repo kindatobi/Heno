@@ -1,4 +1,5 @@
-import Footer from "@/components/footer";
+import ConditionalFooter from "@/components/conditional-footer";
+
 import Header from "@/components/header";
 import { getAllCategories, getProductsCount } from "@/lib/dal";
 
@@ -11,10 +12,10 @@ export default async function RootLayout({
   const categoryCount = await getProductsCount();
 
   return (
-    <div className="flex h-screen flex-col">
+    <>
       <Header categories={categories} categoryCount={categoryCount} />
-      <main className="flex-1 wrapper">{children}</main>
-      <Footer />
-    </div>
+      <main>{children}</main>
+      <ConditionalFooter />
+    </>
   );
 }
