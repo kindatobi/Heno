@@ -1,6 +1,8 @@
 "use client";
 
 import { useCartStore } from "@/lib/store/cart.store";
+import { useState } from "react";
+import { ProductToast } from "@/components/product-toast";
 
 interface Product {
   id: string;
@@ -18,6 +20,7 @@ export default function AddToCartButton({
   selectedSize: string;
 }) {
   const addItemToBag = useCartStore((state) => state.addItemToBag);
+  const [showToast, setShowToast] = useState(false);
 
   const handleAddToCart = () => {
     if (!selectedSize) {
@@ -33,16 +36,26 @@ export default function AddToCartButton({
       size: selectedSize,
       image: product.shopImage,
     });
+
+    setShowToast(true);
   };
 
   return (
-    <div>
+    <>
       <button
         onClick={handleAddToCart}
-        className="w-full  bg-black text-white rounded-[6px] py-4 px-6 text-sm uppercase tracking-wider font-medium hover:bg-[#3C3C3C] transition-colors"
+        className="w-full bg-black text-white rounded-[6px] py-4 px-6 text-sm uppercase tracking-wider font-medium hover:bg-[#3C3C3C] transition-colors"
       >
         ADD TO BAG
       </button>
-    </div>
+
+      {showToast && (
+        <ProductToast
+          show={showToast}
+          message="Item has been added to cart"
+          onClose={() => setShowToast(false)}
+        />
+      )}
+    </>
   );
 }

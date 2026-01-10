@@ -1,4 +1,5 @@
-import { ProductCategory } from "@/generated/prisma/client";
+import { ProductWhereInput } from "./../generated/prisma/models/Product";
+import { Prisma, ProductCategory } from "@/generated/prisma/client";
 import { CategoryWithCount, ProductItem } from "@/types";
 import prisma from "./prisma";
 
@@ -32,14 +33,13 @@ export async function getAllProducts({
   query?: string;
   category?: ProductCategory;
 }) {
-  const where = {};
+  const where: Prisma.ProductWhereInput = {};
   if (query) where.name = { contains: query, mode: "insensitive" };
   if (category) where.category = category;
 
   const data = (await prisma.product.findMany({
     where,
     skip: (page - 1) * 10,
-    take: 10,
     include: { sizeStock: true },
   })) as ProductItem[];
 

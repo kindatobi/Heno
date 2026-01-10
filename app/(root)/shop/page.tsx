@@ -6,16 +6,19 @@ import { ProductItem } from "@/types";
 import { notFound } from "next/navigation";
 
 export default async function ShopPage({
-  params,
   searchParams,
 }: {
-  params: Promise<{ page?: string }>;
-  searchParams: Promise<{ query?: string; category?: ProductCategory }>;
+  searchParams: Promise<{
+    page: string;
+    query?: string;
+    category?: ProductCategory;
+  }>;
 }) {
-  const resolvedParams = await params;
   const resolvedSearchParams = await searchParams;
 
-  const page = resolvedParams.page || 1;
+  const page = resolvedSearchParams.page
+    ? Number(resolvedSearchParams.page)
+    : 1;
   const query = resolvedSearchParams.query;
   const category = resolvedSearchParams.category;
 
@@ -30,7 +33,7 @@ export default async function ShopPage({
   return (
     <div className="bg-[#F5F6F4] pt-20">
       <p></p>
-      <div className="grid grid-cols-4 md:grid-cols-6 w-full">
+      <div className=" grid grid-cols-4 md:grid-cols-6 w-full">
         {shopProducts.data.map((product) => (
           <ShopProductCard
             key={product.slug}

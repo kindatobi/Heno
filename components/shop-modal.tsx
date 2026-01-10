@@ -1,3 +1,5 @@
+"use client";
+
 import Transition from "react-transition-group/Transition";
 import { useUIStore } from "@/lib/store/ui.store";
 import { gsap } from "gsap";
@@ -68,16 +70,21 @@ export default function ShopModal({
           "
         >
           <div ref={contentRef} className="my-x-cont">
-            <p className="text-5xl md:text-[64px] leading-none font-normal font-neue-haas capitalize text-[#F5F6F4]">
-              Shop all
-              <span className="text-sm align-top ml-1">[{categoryCount}]</span>
-            </p>
+            <Link href={"/shop"}>
+              <span className="hover:opacity-70 transition-opacity text-5xl md:text-[64px] leading-none font-normal font-neue-haas capitalize text-[#F5F6F4]">
+                Shop all
+                <span className="text-sm align-top ml-1">
+                  [{categoryCount}]
+                </span>
+              </span>
+            </Link>
+
             {categories.map((category, i) => (
               <div key={i}>
                 <Link href={`/shop?category=${category.category}`}>
-                  <span className="text-5xl md:text-[64px] leading-none font-normal font-neue-haas capitalize text-[#F5F6F4]">
+                  <span className="hover:opacity-70 transition-opacity text-5xl md:text-[64px] leading-none font-normal font-neue-haas capitalize text-[#F5F6F4]">
                     {CATEGORY_LABELS[category.category]}
-                    <span className="text-sm align-top ml-1">
+                    <span className=" text-sm align-top ml-1">
                       {category._count < 10
                         ? `[0${category._count}]`
                         : `[${category._count}]`}

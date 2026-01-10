@@ -28,11 +28,6 @@ export default function Header({
   const totalItems =
     cart?.items.reduce((total, item) => total + item.qty, 0) ?? 0;
 
-  const isLightBackground =
-    pathname === "/shop" ||
-    pathname.startsWith("/shop/") ||
-    pathname.startsWith("/product/");
-
   const whenHover = () => {
     if (pathname === "/") return;
     gsap.to(henoRef.current, { y: 0, duration: 0.3 });
@@ -66,8 +61,8 @@ export default function Header({
             >
               <div
                 ref={henoRef}
-                className={`italic -ml-[0.04em] text-[100px] md:text-[120px]  font-normal tracking-[-0.08em] leading-[0.65] transition-colors ${
-                  isLightBackground ? "text-black" : "text-white"
+                className={` -ml-[0.04em] text-[100px] md:text-[120px]  font-normal tracking-[-0.08em] leading-[0.65] transition-colors ${
+                  pathname === "/" ? "text-white" : "text-[#191919]"
                 }`}
               >
                 heno.

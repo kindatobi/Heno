@@ -1,19 +1,21 @@
+import Image from "next/image";
+
 export default function AboutPage() {
   return (
-    <div className="min-h-screen py-16 bg-[#F5F6F4] ">
-      <div>
-        <h1 className="text-6xl font-neue-haas md:text-[120px] font-medium mb-16 leading-tight">
+    <div className="min-h-screen  py-16 bg-[#F5F6F4] ">
+      <div className="my-x-cont">
+        <h1 className="text-6xl font-neue-haas md:text-[120px] font-medium mb-7 md:mb-16 leading-none">
           About Heno
         </h1>
 
-        <div className="space-y-9 text-[50px] font-neue-haas leading-[1.1em] font-normal">
+        <div className="space-y-9 text-[16px] md:text-[40px] font-neue-haas  leading-[1.1em] font-normal">
           <p>
-            Heno is a contemporary fashion label inspired by the Usal Project
-            rooted in Lagos, Nigeria, founded by Tobi Ojo alongside Ifeoluwa
-            Ogunseye and Toluwalase Benson. The collective came together with a
-            shared vision: to build a brand that reflects how young Africans
-            actually live, think, and dress—unfiltered, expressive, and deeply
-            individual.
+            Heno is a contemporary fashion label rooted in Lagos, Nigeria. It
+            was inspired by the Usal Project and founded by Tobi Ojo alongside
+            Ifeoluwa Ogunseye and Toluwalase Benson in 1921. The collective came
+            together with a shared vision: to build a brand that reflects how
+            young Africans actually live, think, and dress—unfiltered,
+            expressive, and deeply individual.
           </p>
 
           <p>
@@ -24,6 +26,16 @@ export default function AboutPage() {
             confidence—and translates them into garments that feel personal and
             intentional.
           </p>
+
+          <div>
+            <Image
+              src="/about-image1.webp"
+              alt="About image 2"
+              width={2400}
+              height={1500}
+              priority
+            />
+          </div>
 
           <p>
             At its core, Heno is about representation. Creating clothing that
@@ -42,6 +54,15 @@ export default function AboutPage() {
             streets, and conversations around us, while staying grounded in
             quality and thoughtful design.
           </p>
+          <div className="flex justify-end">
+            <Image
+              src="/about-image.webp"
+              alt="About image"
+              width={1600}
+              height={2000}
+              priority
+            />
+          </div>
 
           <p>
             As a growing participant in the global fashion conversation, Heno
@@ -59,6 +80,15 @@ export default function AboutPage() {
             inspiration—built to push culture forward and redefine what African
             fashion looks like on a global stage.
           </p>
+          <div>
+            <Image
+              src="/about-image3.webp"
+              alt="About image 2"
+              width={2000}
+              height={1250}
+              priority
+            />
+          </div>
         </div>
       </div>
     </div>

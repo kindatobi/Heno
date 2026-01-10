@@ -176,3 +176,10 @@ export const CATEGORY_LABELS: Record<string, string> = {
   OUTERWEAR: "Outerwear",
   ACCESSORIES: "Accessories",
 };
+
+export function formatCategory(category: string): string {
+  return category
+    .split("_")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(" ");
+}
