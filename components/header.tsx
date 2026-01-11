@@ -12,6 +12,7 @@ import ShopModal from "./shop-modal";
 import { CategoryWithCount } from "@/types";
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
+import { TrademarkRegistered } from "@phosphor-icons/react";
 
 export default function Header({
   categories,
@@ -40,7 +41,7 @@ export default function Header({
 
   useGSAP(() => {
     if (pathname !== "/" || shopOpen || menuOpen) {
-      gsap.to(henoRef.current, { y: -35, duration: 0.3 });
+      gsap.to(henoRef.current, { y: -31, duration: 0.3 });
     } else {
       gsap.to(henoRef.current, { y: 0, duration: 0.3 });
     }
@@ -61,11 +62,11 @@ export default function Header({
             >
               <div
                 ref={henoRef}
-                className={` -ml-[0.04em] text-[100px] md:text-[120px]  font-normal tracking-[-0.08em] leading-[0.65] transition-colors ${
+                className={` -ml-[0.04em] text-[100px] md:text-[120px]  font-normal font-neue-haas tracking-[-0.07em] leading-[0.65] transition-colors ${
                   pathname === "/" ? "text-white" : "text-[#191919]"
                 }`}
               >
-                heno.
+                heno
               </div>
             </Link>
 
