@@ -26,8 +26,8 @@ export default function Footer() {
             <span className="block w-full bg-black h-px"></span>
           </div>
           <div>
-            <p>Blog</p>
-            <p>Editorials</p>
+            <p className="hover:underline cursor-pointer">Blog</p>
+            <p className="hover:underline cursor-pointer">Editorials</p>
           </div>
         </div>
         <div className=" md:hidden block uppercase text-[14px] space-y-10  md:text-[16px] font-mono">
@@ -62,11 +62,20 @@ export default function Footer() {
         <div className="hidden font-mono  uppercase  md:flex md:justify-between">
           <p className="text-[12px]  md:text-[16px]">2025 heno</p>
           <div className="flex justify-center gap-2 text-[12px]  md:text-[16px]">
-            <span>privacy policy</span>/<span>refunds and returns</span>
+            <Link href="/privacy" className="hover:underline cursor-pointer">
+              privacy policy
+            </Link>
+            /
+            <Link
+              href="refund-and-return-policy"
+              className="hover:underline cursor-pointer"
+            >
+              refunds and returns
+            </Link>
           </div>
           <Link
             className="text-[12px]  md:text-[16px] cursor-pointer underline"
-            href={"/about"}
+            href="/about"
           >
             <p>about</p>
           </Link>

@@ -62,7 +62,9 @@ export default function Header({
               <div
                 ref={henoRef}
                 className={` -ml-[0.04em] text-[100px] md:text-[120px]  font-normal font-neue-haas tracking-[-0.07em] leading-[0.65] transition-colors ${
-                  pathname === "/" ? "text-white" : "text-[#191919]"
+                  pathname === "/" || pathname === "/about"
+                    ? "text-white"
+                    : "text-[#191919]"
                 }`}
               >
                 heno
@@ -70,7 +72,7 @@ export default function Header({
             </Link>
 
             <div className="flex items-center gap-1 md:gap-2 text-white text-[14px] tracking-[0.02em] font-light font-mono">
-              <div className="flex w-[600px] overflow-hidden uppercase text-white  rounded-[5.5px] bg-black py-1.5 px-2">
+              {/* <div className="flex w-[600px] overflow-hidden uppercase text-white  rounded-[5.5px] bg-black py-1.5 px-2">
                 <p className="whitespace-nowrap">
                   Heno is a contemporary fashion label rooted in Lagos, Nigeria.
                   It was inspired by the Usal Project and founded by Tobi Ojo
@@ -87,7 +89,7 @@ export default function Header({
                   brand that reflects how young Africans actually live, think,
                   and dress—unfiltered, expressive, and deeply individual.
                 </p>
-              </div>
+              </div> */}
               <button
                 onClick={toggleMenu}
                 className="uppercase hover:bg-[#F5F6F4] hover:text-black transition-colors rounded-[5.5px] bg-black py-1.5 px-5"

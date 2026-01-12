@@ -53,7 +53,7 @@ export default function Home() {
         </button>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 z-10 pb-1.5">
+      <div className="absolute bottom-0 left-0 right-0 z-10 pb-1.5 md:pb-5">
         <div className="my-x-cont text-white text-[14px] uppercase tracking-[0.01em] font-light font-mono leading-tight">
           <p className="m-0" suppressHydrationWarning>
             {hours}
