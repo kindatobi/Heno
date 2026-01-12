@@ -157,8 +157,8 @@ export default function MenuModal() {
           className="
             fixed inset-0 z-40 flex
             bg-neutral-500/40
-            backdrop-blur-[50px]
-            pt-17 md:pt-[75px]
+            backdrop-blur-xl
+            pt-17 md:pt-18.75
           "
         >
           <div ref={contentRef} className="my-x-cont">

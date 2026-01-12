@@ -65,7 +65,7 @@ export default function CartModal() {
         >
           <div
             ref={asideRef}
-            className="w-[35%] h-full"
+            className="w-full md:w-[35%] h-full"
             style={{ transform: "translateX(100%)" }}
           >
             <CartAside />

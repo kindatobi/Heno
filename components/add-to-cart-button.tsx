@@ -24,10 +24,9 @@ export default function AddToCartButton({
 
   const handleAddToCart = () => {
     if (!selectedSize) {
-      alert("Please select a size");
+      setShowToast(true);
       return;
     }
-
     addItemToBag({
       productId: product.id,
       name: product.name,
@@ -52,7 +51,11 @@ export default function AddToCartButton({
       {showToast && (
         <ProductToast
           show={showToast}
-          message="Item has been added to cart"
+          message={
+            selectedSize
+              ? "Item has been added to cart"
+              : "You need to select a size first"
+          }
           onClose={() => setShowToast(false)}
         />
       )}

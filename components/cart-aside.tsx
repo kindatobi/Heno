@@ -6,11 +6,16 @@ import { useUIStore } from "@/lib/store/ui.store";
 import { formatCurrency } from "@/lib/utils";
 import { useState } from "react";
 import Image from "next/image";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { AlertCircle, X } from "lucide-react";
 
 export default function CartAside() {
   const { toggleCart } = useUIStore();
   const { clearCart, removeFromBag, cart, syncCart } = useCartStore();
   const [isProcessing, setIsProcessing] = useState(false);
+  const [adjustedItems, setAdjustedItems] = useState<
+    Array<{ name: string; size: string; oldQty: number; newQty: number }>
+  >([]);
 
   const handleCheckout = async () => {
     if (!cart || cart.items.length === 0) return;
@@ -23,15 +28,7 @@ export default function CartAside() {
         window.location.href = result.url;
       } else {
         syncCart(result.adjustedCart);
-
-        alert(
-          `Some items in your cart were adjusted due to stock changes:\n${result.adjustedItems
-            .map(
-              (item) =>
-                `${item.name} (${item.size}): ${item.oldQty} → ${item.newQty}`
-            )
-            .join("\n")}`
-        );
+        setAdjustedItems(result.adjustedItems);
       }
     } catch (error) {
       console.error("Checkout error:", error);
@@ -39,6 +36,10 @@ export default function CartAside() {
     } finally {
       setIsProcessing(false);
     }
+  };
+
+  const dismissAdjustmentAlert = () => {
+    setAdjustedItems([]);
   };
 
   return (
@@ -64,6 +65,52 @@ export default function CartAside() {
           </p>
         </div>
       </div>
+
+      {/* STOCK ADJUSTMENT ALERT */}
+      {adjustedItems.length > 0 && (
+        <Alert className="mb-4 bg-[#181818] border-yellow-600/50 relative">
+          <AlertCircle className="h-4 w-4 text-yellow-500" />
+          <button
+            onClick={dismissAdjustmentAlert}
+            className="absolute top-3 right-3 text-[#B3B3B3] hover:text-white transition-colors"
+          >
+            <X className="h-4 w-4" />
+          </button>
+          <AlertTitle className="text-yellow-500 font-bold mb-2">
+            Cart Items Adjusted
+          </AlertTitle>
+          <AlertDescription className="text-[#B3B3B3] text-sm">
+            <p className="mb-3">
+              Some items were adjusted due to stock changes:
+            </p>
+            <div className="space-y-2">
+              {adjustedItems.map((item, index) => (
+                <div
+                  key={index}
+                  className="p-2 rounded bg-[#0a0a0a] border border-[#282828]"
+                >
+                  <p className="text-white font-medium text-xs mb-1">
+                    {item.name}
+                  </p>
+                  <div className="flex items-center gap-2 text-xs">
+                    <span className="text-[#B3B3B3] uppercase">
+                      {item.size}
+                    </span>
+                    <span className="text-[#B3B3B3]">•</span>
+                    <span className="text-red-400 line-through">
+                      {item.oldQty}
+                    </span>
+                    <span className="text-[#B3B3B3]">→</span>
+                    <span className="text-green-400 font-semibold">
+                      {item.newQty}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </AlertDescription>
+        </Alert>
+      )}
 
       {/* CONTENT */}
       {!cart || cart.items.length === 0 ? (
@@ -120,7 +167,7 @@ export default function CartAside() {
             Subtotal
           </p>
           <p className="font-bold text-lg">
-            {formatCurrency(Number(cart?.itemsPrice))}
+            {formatCurrency(Number(cart?.itemsPrice) || 0)}
           </p>
         </div>
 

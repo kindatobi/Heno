@@ -5,6 +5,7 @@ import "./globals.css";
 import { Toaster } from "sonner";
 import { CartHydration } from "@/components/cart-hydration";
 import TransitionProvider from "@/providers/TransitionProvider";
+import { ReactLenis } from "../lib/lenis";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -104,13 +105,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${neueHaas.variable} ${geistMono.variable} antialiased`}
-      >
-        <CartHydration />
-        <TransitionProvider>{children}</TransitionProvider>
-        <Toaster />
-      </body>
+      <ReactLenis root>
+        <body
+          className={`${geistSans.variable} ${neueHaas.variable} ${geistMono.variable} antialiased`}
+        >
+          <CartHydration />
+          <TransitionProvider>{children}</TransitionProvider>
+          <Toaster />
+        </body>
+      </ReactLenis>
     </html>
   );
 }

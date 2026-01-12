@@ -12,7 +12,6 @@ import ShopModal from "./shop-modal";
 import { CategoryWithCount } from "@/types";
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
-import { TrademarkRegistered } from "@phosphor-icons/react";
 
 export default function Header({
   categories,
@@ -69,6 +68,25 @@ export default function Header({
                 heno
               </div>
             </Link>
+
+            <div className="flex w-[400px] overflow-hidden uppercase text-white  rounded-[5.5px] bg-black py-1.5 px-5">
+              <p className="whitespace-nowrap">
+                Heno is a contemporary fashion label rooted in Lagos, Nigeria.
+                It was inspired by the Usal Project and founded by Tobi Ojo
+                alongside Ifeoluwa Ogunseye and Toluwalase Benson in 1921. The
+                collective came together with a shared vision: to build a brand
+                that reflects how young Africans actually live, think, and
+                dress—unfiltered, expressive, and deeply individual.
+              </p>
+              <p className="whitespace-nowrap">
+                Heno is a contemporary fashion label rooted in Lagos, Nigeria.
+                It was inspired by the Usal Project and founded by Tobi Ojo
+                alongside Ifeoluwa Ogunseye and Toluwalase Benson in 1921. The
+                collective came together with a shared vision: to build a brand
+                that reflects how young Africans actually live, think, and
+                dress—unfiltered, expressive, and deeply individual.
+              </p>
+            </div>
 
             <div className="flex items-center gap-1 md:gap-2 text-white text-[14px] tracking-[0.02em] font-light font-mono">
               <button
