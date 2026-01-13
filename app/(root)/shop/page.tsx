@@ -3,8 +3,10 @@ import { ProductCategory } from "@/generated/prisma/enums";
 import { getAllProducts } from "@/lib/dal";
 import { ProductItem } from "@/types";
 import { Metadata } from "next";
+import Link from "next/link";
 
 import { notFound } from "next/navigation";
+import ShopToggleBtn from "./shop-toggle-btn";
 
 export const metadata: Metadata = {
   title: "Shop",
@@ -36,8 +38,15 @@ export default async function ShopPage({
   if (!shopProducts) notFound();
 
   return (
-    <div className="bg-[#F5F6F4] pt-20">
-      <p></p>
+    <div className="bg-[#F5F6F4] pt-20 md:pt-25">
+      <div className="my-x-cont">
+        <div className="flex justify-between pb-2">
+          <button className="uppercase underline">
+            <Link href="/shop">shop</Link>
+          </button>
+          <ShopToggleBtn />
+        </div>
+      </div>
       <div className=" grid grid-cols-4 md:grid-cols-6 w-full">
         {shopProducts.data.map((product) => (
           <ShopProductCard

@@ -8,6 +8,7 @@ import { useRef, useEffect } from "react";
 import { CategoryWithCount } from "@/types";
 import { CATEGORY_LABELS } from "@/lib/utils";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function ShopModal({
   categories,
@@ -19,6 +20,11 @@ export default function ShopModal({
   const { shopOpen, toggleShop } = useUIStore();
   const modalRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
+
+  const isHomepage = pathname === "/";
+  const textColor =
+    isHomepage || pathname === "/about" ? "text-white" : "text-[#191919]";
 
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
@@ -71,7 +77,9 @@ export default function ShopModal({
         >
           <div ref={contentRef} className="my-x-cont">
             <Link href={"/shop"}>
-              <span className="hover:opacity-70 transition-opacity text-5xl md:text-[64px] leading-none font-normal font-neue-haas capitalize text-[#F5F6F4]">
+              <span
+                className={`text-5xl md:text-[64px] leading-none font-normal font-neue-haas capitalize ${textColor} hover:opacity-70 transition-opacity`}
+              >
                 Shop all
                 <span className="text-sm align-top ml-1">
                   [{categoryCount}]
@@ -82,7 +90,9 @@ export default function ShopModal({
             {categories.map((category, i) => (
               <div key={i}>
                 <Link href={`/shop?category=${category.category}`}>
-                  <span className="hover:opacity-70 transition-opacity text-5xl md:text-[64px] leading-none font-normal font-neue-haas capitalize text-[#F5F6F4]">
+                  <span
+                    className={`text-5xl md:text-[64px] leading-none font-normal font-neue-haas capitalize ${textColor} hover:opacity-70 transition-opacity`}
+                  >
                     {CATEGORY_LABELS[category.category]}
                     <span className=" text-sm align-top ml-1">
                       {category._count < 10
@@ -97,7 +107,7 @@ export default function ShopModal({
 
           <button
             onClick={toggleShop}
-            className="fixed bottom-0 pb-3 md:pb-6 text-3xl md:text-[52px] right-2 md:right-4 text-[#F5F6F4] font-neue-haas  hover:opacity-70 transition-opacity"
+            className={`fixed bottom-0 pb-3 md:pb-6 text-3xl md:text-[52px] right-2 md:right-4 ${textColor} font-neue-haas hover:opacity-70 transition-opacity`}
           >
             Close [esc]
           </button>
