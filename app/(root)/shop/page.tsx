@@ -2,8 +2,13 @@ import ShopProductCard from "@/components/shop-product-card";
 import { ProductCategory } from "@/generated/prisma/enums";
 import { getAllProducts } from "@/lib/dal";
 import { ProductItem } from "@/types";
+import { Metadata } from "next";
 
 import { notFound } from "next/navigation";
+
+export const metadata: Metadata = {
+  title: "Shop",
+};
 
 export default async function ShopPage({
   searchParams,

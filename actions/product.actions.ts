@@ -103,12 +103,10 @@ export async function checkoutProduct(
     vCart.items.map((item) => ({
       price_data: {
         currency: "usd",
-        unit_amount: item.price,
+        unit_amount: item.price * 100,
         product_data: {
           name: item.name,
-          images: [
-            "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400",
-          ],
+          images: [item.image],
         },
       },
       quantity: item.qty,

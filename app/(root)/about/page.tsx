@@ -1,4 +1,9 @@
+import { Metadata } from "next";
 import Image from "next/image";
+
+export const metadata: Metadata = {
+  title: "About",
+};
 
 export default function AboutPage() {
   return (
@@ -138,15 +143,15 @@ export default function AboutPage() {
 
             <div className="py-12 flex flex-col items-end">
               <div className="space-y-1 max-w-[40%]">
-                <h1 className="font-mono uppercase text-[14px]">
+                <h1 className="font-mono underline uppercase text-[14px]">
                   Our Core values
                 </h1>
                 <p className="tracking-wide leading-[1.2em]">
-                  At its core, Heno is about representation. Creating clothing
-                  that resonates with a generation of Africans shaping culture
-                  across multiple disciplines: artists, designers, athletes,
-                  developers, storytellers, and innovators both on the continent
-                  and in the diaspora.
+                  At it&apos;s core, Heno is about representation. Creating
+                  clothing that resonates with a generation of Africans shaping
+                  culture across multiple disciplines: artists, designers,
+                  athletes, developers, storytellers, and innovators both on the
+                  continent and in the diaspora.
                 </p>
               </div>
             </div>
