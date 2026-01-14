@@ -94,48 +94,6 @@ const neueHaas = localFont({
   variable: "--font-neue-haas",
 });
 
-const rmMono = localFont({
-  src: [
-    {
-      path: "../public/fonts/RMMono/RMMono-Light.ttf",
-      weight: "300",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/RMMono/RMMono-Regular.ttf",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/RMMono/RMMono-SemiBold.ttf",
-      weight: "600",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/RMMono/RMMono-Bold.ttf",
-      weight: "700",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/RMMono/RMMono-Black.ttf",
-      weight: "900",
-      style: "normal",
-    },
-  ],
-  variable: "--font-rm-mono",
-});
-
-const abcDiatype = localFont({
-  src: [
-    {
-      path: "../public/fonts/ABC/ABC Diatype Mono.ttf",
-      weight: "300",
-      style: "normal",
-    },
-  ],
-  variable: "--font-abc-diatype",
-});
-
 const bcdDiatype = localFont({
   src: [
     {
@@ -186,7 +144,7 @@ export default function RootLayout({
     <html lang="en">
       <ReactLenis root>
         <body
-          className={`${geistSans.variable} ${neueHaas.variable} ${bcdDiatype.variable} ${abcDiatype.variable} ${rmMono.variable} ${geistMono.variable} antialiased`}
+          className={`${geistSans.variable} ${neueHaas.variable} ${bcdDiatype.variable}  ${geistMono.variable} antialiased`}
         >
           <CartHydration />
           <TransitionProvider>{children}</TransitionProvider>
