@@ -40,7 +40,7 @@ export default async function ShopPage({
   return (
     <div className="bg-[#F5F6F4] pt-20 md:pt-25">
       <div className="my-x-cont">
-        <div className="flex justify-between pb-2">
+        <div className="flex font-mono justify-between pb-2">
           <button className="uppercase underline">
             <Link href="/shop">shop</Link>
           </button>
