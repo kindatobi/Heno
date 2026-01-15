@@ -37,7 +37,7 @@ export default function ProductDetail({ product }: { product: ProductItem }) {
 
   return (
     <div>
-      <div className="hidden md:flex pt-32 md:pt-25">
+      <div className="hidden md:flex pt-32 md:pt-28">
         <div className="w-1/2">
           {has360 ? (
             <div className="flex gap-4 mb-8 justify-center">
@@ -108,7 +108,7 @@ export default function ProductDetail({ product }: { product: ProductItem }) {
           <hr className="border-t border-black" />
 
           <div className="space-y-2 pb-1.5">
-            <label className="block text-[14px] uppercase tracking-wider">
+            <label className="block text-[14px] uppercase font-bcd-diatype tracking-[0.08em]">
               SIZE
             </label>
             <div className="flex gap-2">
@@ -166,7 +166,7 @@ export default function ProductDetail({ product }: { product: ProductItem }) {
             {/* Color */}
             <details className="group border-t border-black py-1">
               <summary className="flex justify-between items-center cursor-pointer">
-                <span className="text-[14px] uppercase tracking-[-0.03em]">
+                <span className="text-[14px] font-bcd-diatype uppercase tracking-[0.08em]">
                   Color
                 </span>
                 <span className="text-2xl transition-transform group-open:rotate-45">
@@ -183,7 +183,7 @@ export default function ProductDetail({ product }: { product: ProductItem }) {
             {/* Category */}
             <details className="group border-t border-black py-1">
               <summary className="flex justify-between items-center cursor-pointer">
-                <span className="text-[14px] uppercase tracking-[-0.03em]">
+                <span className="text-[14px] font-bcd-diatype uppercase tracking-[0.08em]">
                   Category
                 </span>
                 <span className="text-2xl transition-transform group-open:rotate-45">
@@ -201,7 +201,7 @@ export default function ProductDetail({ product }: { product: ProductItem }) {
             {product.sizingInfo && product.sizingInfo.length > 0 && (
               <details className="group border-t border-black py-1">
                 <summary className="flex justify-between items-center cursor-pointer">
-                  <span className="text-[14px] uppercase tracking-[-0.03em]">
+                  <span className="text-[14px] uppercase font-bcd-diatype tracking-[0.08em]">
                     Size chart
                   </span>
                   <span className="text-2xl transition-transform group-open:rotate-45">
@@ -242,7 +242,7 @@ export default function ProductDetail({ product }: { product: ProductItem }) {
             {product.detail && (
               <details className="border-t border-black group py-1">
                 <summary className="flex justify-between items-center cursor-pointer">
-                  <span className="text-[14px] uppercase tracking-[-0.03em]">
+                  <span className="text-[14px] uppercase font-bcd-diatype tracking-[0.08em]">
                     Product details
                   </span>
                   <span className="text-2xl transition-transform group-open:rotate-45">
@@ -311,19 +311,19 @@ export default function ProductDetail({ product }: { product: ProductItem }) {
 
         <div className="grid grid-cols-2 gap-4 mb-6 text-sm">
           <div>
-            <p className="uppercase text-[12px] tracking-wider text-gray-600">
+            <p className="uppercase text-[12px] font-bcd-diatype tracking-[0.08em]">
               Color
             </p>
             <p className="capitalize font-medium">{product.color}</p>
           </div>
           <div>
-            <p className="uppercase text-[12px] tracking-wider text-gray-600">
+            <p className="uppercase text-[12px] font-bcd-diatype tracking-[0.08em] ">
               Category
             </p>
             <p className="font-medium">{product.category}</p>
           </div>
           <div>
-            <p className="uppercase text-[12px] tracking-wider text-gray-600">
+            <p className="uppercase text-[12px] font-bcd-diatype tracking-[0.08em]">
               Ships In
             </p>
             <p className="font-medium">Within 2 Weeks</p>
@@ -331,7 +331,7 @@ export default function ProductDetail({ product }: { product: ProductItem }) {
         </div>
 
         <div className="mb-6">
-          <label className="block text-[12px] uppercase tracking-wider mb-3">
+          <label className="block text-[12px] uppercase font-bcd-diatype tracking-[0.08em] mb-3">
             Size
           </label>
           <div className="flex flex-wrap gap-2">
@@ -411,7 +411,7 @@ export default function ProductDetail({ product }: { product: ProductItem }) {
 
         {product.sizingInfo && product.sizingInfo.length > 0 && (
           <div className="py-4">
-            <h3 className="text-[12px] uppercase tracking-[-0.03em] mb-3">
+            <h3 className="text-[12px] uppercase font-bcd-diatype tracking-[0.08em] mb-3">
               Size chart
             </h3>
             <table className="w-full text-xs">
@@ -444,7 +444,7 @@ export default function ProductDetail({ product }: { product: ProductItem }) {
 
         {product.detail && (
           <div className="py-4">
-            <h3 className="text-[12px] uppercase tracking-[-0.03em] mb-3">
+            <h3 className="text-[12px] uppercase font-bcd-diatype tracking-[0.08em] mb-3">
               Product details
             </h3>
             <p className="text-[12px] leading-relaxed">{product.detail}</p>

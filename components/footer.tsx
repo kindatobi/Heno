@@ -59,11 +59,11 @@ export default function Footer() {
           <HenoWordmark className="w-full h-auto text-black" />
         </div>
 
-        <div className="hidden font-bcd-diatype  uppercase  md:flex md:justify-between">
-          <p className="text-[12px] tracking-[0.08em]  md:text-[14px]">
-            2025 heno 419 grift ave lekki lagos
+        <div className="hidden font-bcd-diatype uppercase md:flex md:justify-between">
+          <p className="flex-1 text-[12px] tracking-[0.08em] md:text-[14px]">
+            2026 heno 419 grift ave lekki lagos
           </p>
-          <div className="flex justify-center gap-2 text-[12px] tracking-[0.08em]  md:text-[14px]">
+          <div className="flex flex-1 justify-center gap-2 text-[12px] tracking-[0.08em] md:text-[14px]">
             <Link href="/privacy" className="hover:underline cursor-pointer">
               privacy policy
             </Link>
@@ -76,7 +76,7 @@ export default function Footer() {
             </Link>
           </div>
           <Link
-            className="text-[12px]  md:text-[14px] tracking-[0.08em] cursor-pointer underline"
+            className="flex-1 text-[12px] text-right md:text-[14px] tracking-[0.08em] cursor-pointer underline"
             href="/about"
           >
             <p>about</p>

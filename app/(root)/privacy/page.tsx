@@ -15,7 +15,7 @@ export default function PrivacyPage() {
             Privacy policy
           </h1>
 
-          <div className="space-y-9 text-[16px] font-neue-haas leading-[1.1em] font-normal">
+          <div className="space-y-9 tracking-[0.035em] text-[14px] leading-[1.4em] font-neue-haas  font-normal">
             <p>
               Heno is committed to protecting your privacy and maintaining the
               security of any personal information received from you. We

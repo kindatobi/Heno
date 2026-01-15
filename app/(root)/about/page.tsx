@@ -120,7 +120,7 @@ export default function AboutPage() {
           <div className="space-y-9 text-[16px] font-neue-haas leading-[1.1em] font-normal mt-16">
             <div className="space-y-6 max-w-[60%] mx-auto">
               <h1 className="text-[40px]">How We Started The Brand</h1>
-              <p className="pr-26 tracking-wide leading-[1.2em] ">
+              <p className="pr-26 tracking-[0.035em] text-[14px] leading-[1.4em] ">
                 Heno is a contemporary fashion label rooted in Lagos, Nigeria.
                 It was inspired by the Usal Project and founded by Tobi Ojo
                 alongside Ifeoluwa Ogunseye and Toluwalase Benson in 1921.
@@ -128,7 +128,7 @@ export default function AboutPage() {
             </div>
 
             <div className="-mt-2 space-y-6 max-w-[60%] mx-auto">
-              <p className="tracking-wide leading-[1.2em]">
+              <p className="tracking-[0.035em] text-[14px] leading-[1.4em]">
                 The collective came together with a shared vision: to build a
                 brand that reflects how young Africans actually live, think, and
                 dress—unfiltered, expressive, and deeply individual. Heno was
@@ -143,10 +143,10 @@ export default function AboutPage() {
 
             <div className="py-12 flex flex-col items-end">
               <div className="space-y-1 max-w-[40%]">
-                <h1 className="font-mono underline uppercase text-[14px]">
+                <h1 className="font-bcd-diatype tracking-[0.08em] underline uppercase text-[14px]">
                   Our Core values
                 </h1>
-                <p className="tracking-wide leading-[1.2em]">
+                <p className="tracking-[0.035em] text-[14px] leading-[1.4em]">
                   At it&apos;s core, Heno is about representation. Creating
                   clothing that resonates with a generation of Africans shaping
                   culture across multiple disciplines: artists, designers,
@@ -179,7 +179,7 @@ export default function AboutPage() {
 
             <div className="py-6 flex flex-col items-end">
               <div className="space-y-1 max-w-[60%] mx-auto">
-                <p className="tracking-wide leading-[1.2em]">
+                <p className="tracking-[0.035em] text-[14px] leading-[1.4em]">
                   Each piece is designed as a reflection of environment and
                   experience, capturing moments, moods, and movement in a
                   constantly evolving creative landscape. Heno approaches
@@ -197,7 +197,7 @@ export default function AboutPage() {
 
             <div className="py-12 flex flex-col items-end">
               <div className="space-y-1 max-w-[40%]">
-                <p className="tracking-wide leading-[1.2em]">
+                <p className="tracking-[0.035em] text-[14px] leading-[1.4em]">
                   Every collection is a snapshot in time, shaped by the people,
                   streets, and conversations around us, while staying grounded
                   in quality and thoughtful design. As a growing participant in
@@ -212,10 +212,10 @@ export default function AboutPage() {
             </div>
 
             <div className="pb-35 space-y-1 max-w-[60%] mx-auto">
-              <h1 className="font-mono uppercase underline text-[14px]">
+              <h1 className="font-bcd-diatype tracking-[0.08em] uppercase underline text-[14px]">
                 Our mission
               </h1>
-              <p className="tracking-wide leading-[1.2em]">
+              <p className="tracking-[0.035em] text-[14px] leading-[1.4em]">
                 In a world where global brands often create for us but not from
                 us, Heno exists to tell our stories on our terms. More than a
                 clothing brand, it is a platform for community, collaboration,
