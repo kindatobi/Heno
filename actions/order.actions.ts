@@ -38,7 +38,7 @@ export async function sendOrderSuccessEmail(order: OrderWithItems) {
     const shippingAddress = order.shippingAddress as ShippingAddress | null;
 
     const { data, error } = await resend.emails.send({
-      from: "Your Store <orders@yourdomain.com>", // Replace with your verified domain
+      from: "Heno <orders@heno.kindatobi.dev>",
       to: [order.customerEmail],
       subject: `Order Confirmation #${order.id} - Thank you for your purchase!`,
       html: `
@@ -59,7 +59,7 @@ export async function sendOrderSuccessEmail(order: OrderWithItems) {
             <h2 style="color: #333; margin-top: 0;">Order Details</h2>
             <p style="margin: 5px 0;"><strong>Order ID:</strong> ${order.id}</p>
             <p style="margin: 5px 0;"><strong>Order Date:</strong> ${new Date(
-              order.createdAt
+              order.createdAt,
             ).toLocaleDateString()}</p>
             <p style="margin: 5px 0;"><strong>Payment Method:</strong> ${
               order.paymentMethod
@@ -78,8 +78,8 @@ export async function sendOrderSuccessEmail(order: OrderWithItems) {
                 : ""
             }
             <p style="margin: 5px 0;">${shippingAddress.city}, ${
-                  shippingAddress.state
-                } ${shippingAddress.postal_code}</p>
+              shippingAddress.state
+            } ${shippingAddress.postal_code}</p>
             <p style="margin: 5px 0;">${shippingAddress.country}</p>
           </div>
           `
@@ -121,10 +121,10 @@ export async function sendOrderSuccessEmail(order: OrderWithItems) {
                       item.qty
                     }</td>
                     <td style="text-align: right; padding: 15px;">$${item.price.toFixed(
-                      2
+                      2,
                     )}</td>
                   </tr>
-                `
+                `,
                   )
                   .join("")}
               </tbody>
@@ -136,25 +136,25 @@ export async function sendOrderSuccessEmail(order: OrderWithItems) {
               <tr>
                 <td style="padding: 5px 0; text-align: right;"><strong>Subtotal:</strong></td>
                 <td style="padding: 5px 0; text-align: right; width: 100px;">$${order.itemsPrice.toFixed(
-                  2
+                  2,
                 )}</td>
               </tr>
               <tr>
                 <td style="padding: 5px 0; text-align: right;"><strong>Shipping:</strong></td>
                 <td style="padding: 5px 0; text-align: right;">$${order.shippingPrice.toFixed(
-                  2
+                  2,
                 )}</td>
               </tr>
               <tr>
                 <td style="padding: 5px 0; text-align: right;"><strong>Tax:</strong></td>
                 <td style="padding: 5px 0; text-align: right;">$${order.taxPrice.toFixed(
-                  2
+                  2,
                 )}</td>
               </tr>
               <tr style="border-top: 2px solid #333;">
                 <td style="padding: 10px 0; text-align: right; font-size: 18px;"><strong>Total:</strong></td>
                 <td style="padding: 10px 0; text-align: right; font-size: 18px; color: #4CAF50;"><strong>$${order.totalPrice.toFixed(
-                  2
+                  2,
                 )}</strong></td>
               </tr>
             </table>
