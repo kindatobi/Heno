@@ -45,138 +45,160 @@ export default function CartAside() {
   return (
     <aside
       onClick={(e) => e.stopPropagation()}
-      className="p-6 bg-[#000000] flex flex-col h-full border-l border-[#282828]"
+      className="p-3 bg-[#F5F6F4] flex flex-col h-screen overflow-hidden"
     >
-      {/* ASIDE NAV */}
-      <div className="flex justify-between items-center mb-6 pb-4 border-b border-[#282828]">
-        <h2 className="text-white font-bold text-lg tracking-wide">YOUR BAG</h2>
-        <div className="flex gap-4">
+      <div className="flex border-b border-[#D9D9D9] justify-between items-center pb-3 shrink-0">
+        <h2 className="text-black tracking-[0.04em] font-normal font-neue-haas text-base">
+          Your Bag ({cart?.items.length || 0})
+        </h2>
+        <div className="flex items-center justify-center gap-2">
           <p
-            className="cursor-pointer text-[#B3B3B3] hover:text-white text-sm font-medium transition-colors uppercase tracking-wide"
+            className="cursor-pointer tracking-[0.04em] text-black font-neue-haas hover:underline text-base "
             onClick={clearCart}
           >
-            CLEAR
+            Clear
           </p>
+          <p>/</p>
           <p
-            className="cursor-pointer text-[#B3B3B3] hover:text-white text-sm font-medium transition-colors uppercase tracking-wide"
+            className="cursor-pointer tracking-[0.04em] text-black font-neue-haas hover:underline text-base"
             onClick={toggleCart}
           >
-            CLOSE
+            Close
           </p>
         </div>
       </div>
 
-      {/* STOCK ADJUSTMENT ALERT */}
-      {adjustedItems.length > 0 && (
-        <Alert className="mb-4 bg-[#181818] border-yellow-600/50 relative">
-          <AlertCircle className="h-4 w-4 text-yellow-500" />
-          <button
-            onClick={dismissAdjustmentAlert}
-            className="absolute top-3 right-3 text-[#B3B3B3] hover:text-white transition-colors"
-          >
-            <X className="h-4 w-4" />
-          </button>
-          <AlertTitle className="text-yellow-500 font-bold mb-2">
-            Cart Items Adjusted
-          </AlertTitle>
-          <AlertDescription className="text-[#B3B3B3] text-sm">
-            <p className="mb-3">
-              Some items were adjusted due to stock changes:
-            </p>
-            <div className="space-y-2">
-              {adjustedItems.map((item, index) => (
-                <div
-                  key={index}
-                  className="p-2 rounded bg-[#0a0a0a] border border-[#282828]"
-                >
-                  <p className="text-white font-medium text-xs mb-1">
-                    {item.name}
-                  </p>
-                  <div className="flex items-center gap-2 text-xs">
-                    <span className="text-[#B3B3B3] uppercase">
-                      {item.size}
-                    </span>
-                    <span className="text-[#B3B3B3]">•</span>
-                    <span className="text-red-400 line-through">
-                      {item.oldQty}
-                    </span>
-                    <span className="text-[#B3B3B3]">→</span>
-                    <span className="text-green-400 font-semibold">
-                      {item.newQty}
-                    </span>
+      <div
+        className="flex-1 overflow-y-auto min-h-0"
+        style={{
+          msOverflowStyle: "none",
+          scrollbarWidth: "none",
+          WebkitOverflowScrolling: "touch",
+        }}
+      >
+        {adjustedItems.length > 0 && (
+          <Alert className="mt-4 mb-4 bg-yellow-50 border-yellow-200 relative">
+            <AlertCircle className="h-4 w-4 text-yellow-600" />
+            <button
+              onClick={dismissAdjustmentAlert}
+              className="absolute top-3 right-3 text-gray-500 hover:text-black transition-colors"
+            >
+              <X className="h-4 w-4" />
+            </button>
+            <AlertTitle className="text-yellow-800 font-bold mb-2">
+              Cart Items Adjusted
+            </AlertTitle>
+            <AlertDescription className="text-gray-700 text-sm">
+              <p className="mb-3">
+                Some items were adjusted due to stock changes:
+              </p>
+              <div className="space-y-2">
+                {adjustedItems.map((item, index) => (
+                  <div
+                    key={index}
+                    className="p-2 rounded bg-white border border-yellow-200"
+                  >
+                    <p className="text-black font-medium text-xs mb-1">
+                      {item.name}
+                    </p>
+                    <div className="flex items-center gap-2 text-xs">
+                      <span className="text-gray-600 uppercase">
+                        {item.size}
+                      </span>
+                      <span className="text-gray-400">•</span>
+                      <span className="text-red-500 line-through">
+                        {item.oldQty}
+                      </span>
+                      <span className="text-gray-400">→</span>
+                      <span className="text-green-600 font-semibold">
+                        {item.newQty}
+                      </span>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          </AlertDescription>
-        </Alert>
-      )}
+                ))}
+              </div>
+            </AlertDescription>
+          </Alert>
+        )}
 
-      {/* CONTENT */}
-      {!cart || cart.items.length === 0 ? (
-        <div className="flex-1 flex items-center justify-center">
-          <p className="text-[#B3B3B3] text-center">Your cart is empty</p>
-        </div>
-      ) : (
-        <div className="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-[#282828] scrollbar-track-transparent pr-2">
-          <ul className="space-y-2">
+        {!cart || cart.items.length === 0 ? (
+          <div className="flex items-center justify-center h-full">
+            <p className="text-center font-neue-haas tracking-[0.04em]">
+              Your cart is empty
+            </p>
+          </div>
+        ) : (
+          <ul className="pt-2">
             {cart.items.map((item, i) => (
               <li
                 key={i}
-                className="flex gap-2 p-2 rounded-md bg-[#181818] hover:bg-[#282828] transition-colors"
+                className="flex py-3 gap-4 border-b border-[#D9D9D9] last:border-0"
               >
-                <div className="shrink-0">
+                <div className="relative h-25 w-12.5 bg-[#F5F6F4] shrink-0">
                   <Image
                     src={item.image}
                     alt={`this is an image of ${item.name}`}
-                    width={48}
-                    height={48}
-                    className="rounded-sm"
+                    fill
+                    className="object-contain object-center"
                   />
                 </div>
-                <div className="flex-1 flex flex-col justify-center gap-1">
-                  <p className="text-white text-sm font-medium leading-tight">
-                    {item.name}
-                  </p>
-                  <div className="flex justify-between items-center text-xs">
-                    <div className="flex gap-2 text-[#B3B3B3]">
-                      <p className="uppercase">{item.size}</p>
-                      <p>{item.qty}X</p>
+                <div className="flex-1 flex flex-col justify-between">
+                  <div>
+                    <div className="flex justify-between items-start mb-2">
+                      <div>
+                        <p className="text-black font-normal tracking-[0.04em] text-[14px] font-neue-haas capitalize mb-1">
+                          {item.name}
+                        </p>
+                        <p className="font-bcd-diatype text-sm uppercase">
+                          SIZE: {item.size}
+                        </p>
+                      </div>
+                      <p className="text-black font-normal text-base">
+                        {formatCurrency(item.price)}
+                      </p>
                     </div>
-                    <p className="text-white font-semibold">
-                      {formatCurrency(item.price)}
-                    </p>
-                    <p
-                      className="cursor-pointer text-[#B3B3B3] hover:text-white uppercase tracking-wide transition-colors"
+                  </div>
+
+                  <div className="flex justify-between items-center mt-4">
+                    <div className="flex items-center">
+                      <p className="font-neue-haas text-[14px] tracking-[0.04em]">
+                        {item.qty}X {item.size}
+                      </p>
+                    </div>
+                    <button
+                      className="font-bcd-diatype hover:text-black text-sm uppercase tracking-wider transition-colors underline"
                       onClick={() => removeFromBag(item.productId, item.size)}
                     >
-                      remove
-                    </p>
+                      REMOVE
+                    </button>
                   </div>
                 </div>
               </li>
             ))}
           </ul>
-        </div>
-      )}
+        )}
+      </div>
 
-      {/* FOOTER */}
-      <div className="mt-6 pt-4 border-t border-[#282828] space-y-4">
-        <div className="flex justify-between items-center text-white">
-          <p className="text-[#B3B3B3] uppercase text-sm tracking-wide">
+      <div className="space-y-1.5 md:space-y-2 pt-2 border-t border-[#D9D9D9] shrink-0">
+        <div className="flex justify-between items-center">
+          <p className="text-black font-neue-haas text-[24px] font-normal">
             Subtotal
           </p>
-          <p className="font-bold text-lg">
+          <p className="text-black font-bold text-[24px]">
             {formatCurrency(Number(cart?.itemsPrice) || 0)}
           </p>
         </div>
 
+        <p className="tracking-[0.04em] font-neue-haas font-normal text-sm">
+          Taxes and shipping calculated at checkout.
+        </p>
+
         <button
           onClick={handleCheckout}
           disabled={isProcessing || !cart || cart.items.length === 0}
-          className="bg-white hover:bg-[#B3B3B3] text-black font-bold px-4 py-2.5 rounded-[6px] cursor-pointer w-full uppercase tracking-wider text-sm transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+          className="bg-black font-bcd-diatype hover:bg-gray-800 text-white font-normal px-6 py-2 rounded cursor-pointer w-full uppercase tracking-widest text-sm transition-all disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {isProcessing ? "Processing..." : "Continue to Checkout"}
+          {isProcessing ? "Processing..." : "CHECKOUT"}
         </button>
       </div>
     </aside>

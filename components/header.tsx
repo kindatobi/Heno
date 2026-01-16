@@ -12,6 +12,7 @@ import ShopModal from "./shop-modal";
 import { CategoryWithCount } from "@/types";
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
+import HeaderMarquee from "./header-marquee";
 
 export default function Header({
   categories,
@@ -39,8 +40,11 @@ export default function Header({
   };
 
   const myStyle =
-    pathname === "/"
-      ? "text-[#F5F6F4] bg-[#3C3C3C]/50 "
+    pathname === "/" ||
+    pathname === "/about" ||
+    pathname === "/privacy" ||
+    pathname === "/refund-and-return-policy"
+      ? "text-[#F5F6F4] bg-[#3C3C3C]/50"
       : "bg-[#D9D9D9] text-[#191919]";
 
   useGSAP(() => {
@@ -77,26 +81,7 @@ export default function Header({
             </Link>
 
             <div className="flex items-center gap-1 md:gap-2 text-white text-[14px] tracking-[0.08em] font-bcd-diatype">
-              <div
-                className={`hidden md:flex w-150 overflow-hidden uppercase rounded-[5.5px] py-1.5 px-2 ${myStyle}`}
-              >
-                <p className="whitespace-nowrap">
-                  Heno is a contemporary fashion label rooted in Lagos, Nigeria.
-                  It was inspired by the Usal Project and founded by Tobi Ojo
-                  alongside Ifeoluwa Ogunseye and Toluwalase Benson in 1921. The
-                  collective came together with a shared vision: to build a
-                  brand that reflects how young Africans actually live, think,
-                  and dress—unfiltered, expressive, and deeply individual.
-                </p>
-                <p className="whitespace-nowrap">
-                  Heno is a contemporary fashion label rooted in Lagos, Nigeria.
-                  It was inspired by the Usal Project and founded by Tobi Ojo
-                  alongside Ifeoluwa Ogunseye and Toluwalase Benson in 1921. The
-                  collective came together with a shared vision: to build a
-                  brand that reflects how young Africans actually live, think,
-                  and dress—unfiltered, expressive, and deeply individual.
-                </p>
-              </div>
+              <HeaderMarquee myStyle={myStyle} />
               <button
                 onClick={toggleMenu}
                 className="uppercase hover:bg-[#F5F6F4] hover:text-black transition-colors rounded-[5.5px] bg-black py-1.5 px-5"

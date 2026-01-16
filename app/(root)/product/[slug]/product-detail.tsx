@@ -101,7 +101,7 @@ export default function ProductDetail({ product }: { product: ProductItem }) {
             {product.name}
           </h1>
 
-          <p className="text-[16px] font-neue-haas leading-[1.4em]">
+          <p className="text-[16px] font-neue-haas tracking-[0.03em] leading-[1.4em]">
             {product.description}
           </p>
 
@@ -174,7 +174,7 @@ export default function ProductDetail({ product }: { product: ProductItem }) {
                 </span>
               </summary>
               <div>
-                <p className="text-[14px] leading-relaxed capitalize">
+                <p className="text-[14px] tracking-[0.04em] leading-relaxed capitalize">
                   {product.color}
                 </p>
               </div>
@@ -191,7 +191,7 @@ export default function ProductDetail({ product }: { product: ProductItem }) {
                 </span>
               </summary>
               <div>
-                <p className="text-[14px] leading-relaxed">
+                <p className="text-[14px] tracking-[0.04em] leading-relaxed">
                   {formatCategory(product.category)}
                 </p>
               </div>
@@ -209,7 +209,7 @@ export default function ProductDetail({ product }: { product: ProductItem }) {
                   </span>
                 </summary>
                 <div>
-                  <table className="w-full text-sm">
+                  <table className="w-full tracking-[0.04em] text-sm">
                     <thead>
                       <tr className="border-b border-gray-300">
                         <th className="text-left font-medium">Size</th>
@@ -250,7 +250,7 @@ export default function ProductDetail({ product }: { product: ProductItem }) {
                   </span>
                 </summary>
                 <div>
-                  <p className="text-[14px] leading-relaxed">
+                  <p className="text-[14px] tracking-[0.04em] leading-relaxed">
                     {product.detail}
                   </p>
                 </div>

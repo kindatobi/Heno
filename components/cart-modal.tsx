@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import CartAside from "./cart-aside";
 import { useUIStore } from "@/lib/store/ui.store";
@@ -10,6 +10,18 @@ export default function CartModal() {
   const { cartOpen, toggleCart } = useUIStore();
   const modalRef = useRef<HTMLDivElement>(null);
   const asideRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (cartOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [cartOpen]);
 
   const onEnter = () => {
     gsap
@@ -57,15 +69,17 @@ export default function CartModal() {
         <div
           ref={modalRef}
           onClick={toggleCart}
+          data-lenis-prevent
           className="
             fixed inset-0 z-50 flex justify-end
             bg-neutral-500/40
             backdrop-blur-[50px]
+            overflow-hidden
           "
         >
           <div
             ref={asideRef}
-            className="w-full md:w-[35%] h-full"
+            className="w-full md:w-[40%] h-screen overflow-hidden"
             style={{ transform: "translateX(100%)" }}
           >
             <CartAside />
