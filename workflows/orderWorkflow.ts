@@ -4,12 +4,13 @@ import { ProductSize, Order, OrderItem } from "@/generated/prisma/client";
 import { Cart } from "@/types";
 import { FatalError } from "workflow";
 import { sendOrderSuccessEmail } from "@/actions/order.actions";
+import Stripe from "stripe";
 
 type WorkflowInput = {
   userId: string;
   sessionCartId: string;
   stripeSessionId: string;
-  customerDetails: any;
+  customerDetails: Stripe.Checkout.Session.CustomerDetails | null;
   amountTotal: number;
 };
 
@@ -43,6 +44,7 @@ async function loadCart(sessionCartId: string) {
 
 async function createOrder(input: WorkflowInput, cart: Cart) {
   "use step";
+  assertCustomerDetails(input.customerDetails);
 
   const order = await prisma.order.create({
     data: {
@@ -115,4 +117,15 @@ async function sendSuccessEmail(order: OrderWithItems) {
   "use step";
 
   await sendOrderSuccessEmail(order);
+}
+
+function assertCustomerDetails(
+  details: Stripe.Checkout.Session.CustomerDetails | null
+): asserts details is Stripe.Checkout.Session.CustomerDetails & {
+  name: string;
+  email: string;
+} {
+  if (!details?.name || !details.email) {
+    throw new FatalError("Missing customer details from Stripe");
+  }
 }
