@@ -53,6 +53,7 @@
     "react-hook-form": "^7.67.0",
     "react-transition-group": "^4.4.5",
     "recharts": "^2.15.4",
+    "resend": "^6.7.0",
     "slugify": "^1.6.6",
     "sonner": "^2.0.7",
     "stripe": "^20.0.0",
@@ -60,6 +61,7 @@
     "tailwind-merge": "^3.4.0",
     "uploadthing": "^7.7.4",
     "vaul": "^1.1.2",
+    "workflow": "^4.0.1-beta.47",
     "zod": "^4.1.13",
     "zustand": "^5.0.9"
   },
