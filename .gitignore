@@ -20,6 +20,9 @@
 # production
 /build
 
+# swc
+.swc/
+
 # misc
 .DS_Store
 *.pem
