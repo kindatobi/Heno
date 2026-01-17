@@ -25,7 +25,7 @@ type CheckoutResult =
   | { success: true; url: string };
 
 export async function checkoutProduct(
-  data: Cart | null
+  data: Cart | null,
 ): Promise<CheckoutResult> {
   const userSession = await auth.api.getSession({
     headers: await headers(),
@@ -116,8 +116,8 @@ export async function checkoutProduct(
     payment_method_types: ["card"],
     line_items,
     mode: "payment",
-    success_url: "http://localhost:3000/payment/success",
-    cancel_url: "http://localhost:3000",
+    success_url: `${process.env.NEXT_PUBLIC_APP_URL}/payment/success`,
+    cancel_url: process.env.NEXT_PUBLIC_APP_URL,
     phone_number_collection: {
       enabled: true,
     },
