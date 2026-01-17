@@ -5,12 +5,14 @@ import AdminSearch from "@/components/admin-search";
 import MainNav from "./main-nav";
 import { APP_NAME } from "@/constants";
 import Menu from "@/components/admin-menu";
+import { connection } from "next/server";
 
-export default function AdminLayout({
+export default async function AdminLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  await connection();
   return (
     <>
       <div className="flex flex-col">
