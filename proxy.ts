@@ -25,12 +25,3 @@ export function proxy(request: NextRequest) {
 
   return response;
 }
-
-export const config = {
-  matcher: [
-    {
-      source:
-        "/((?!_next/static|_next/image|favicon.ico|.well-known/workflow/).*)",
-    },
-  ],
-};
