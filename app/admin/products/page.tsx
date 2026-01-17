@@ -11,6 +11,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { ProductCategory } from "@/generated/prisma/client";
 
 import { requireAdmin } from "@/lib/auth-guard";
 import { getAllProducts } from "@/lib/dal";
@@ -19,13 +20,17 @@ import { formatCurrency, formatId } from "@/lib/utils";
 import Link from "next/link";
 
 export default async function AdminProductsPage(props: {
-  searchParams: Promise<{ page: string; query: string; category: string }>;
+  searchParams: Promise<{
+    page: string;
+    query?: string;
+    category?: ProductCategory;
+  }>;
 }) {
   await requireAdmin();
   const searchParams = await props.searchParams;
   const page = Number(searchParams.page) || 1;
   const searchText = searchParams.query || "";
-  const category = searchParams.category || "";
+  const category = searchParams.category;
 
   const products = await getAllProducts({ page, query: searchText, category });
 

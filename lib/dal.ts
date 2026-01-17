@@ -1,4 +1,3 @@
-import { ProductWhereInput } from "./../generated/prisma/models/Product";
 import { Prisma, ProductCategory } from "@/generated/prisma/client";
 import { CategoryWithCount, ProductItem } from "@/types";
 import prisma from "./prisma";
@@ -72,8 +71,12 @@ export async function getAllOrders({
   page: number;
   query: string;
 }) {
+  const where: Prisma.OrderWhereInput = {};
+  if (query) where.customerName = { contains: query, mode: "insensitive" };
+
   const [allOrders, totalCount] = await Promise.all([
     prisma.order.findMany({
+      where,
       orderBy: { createdAt: "desc" },
       skip: (page - 1) * 10,
       take: 10,

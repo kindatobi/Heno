@@ -8,7 +8,6 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <div className="min-h-screen pt-16 md:pt-0 bg-[#F5F6F4] text-[#191919]">
-      {/* Mobile Layout — untouched */}
       <div className="md:hidden">
         <div className="my-x-cont">
           <h1 className="text-6xl font-neue-haas font-medium mb-7 leading-none">
@@ -42,9 +41,7 @@ export default function PrivacyPage() {
         </div>
       </div>
 
-      {/* Desktop Layout */}
       <div className="hidden md:block">
-        {/* Hero Image */}
         <div className="h-screen relative">
           <Image
             src="/about-image1.webp"
@@ -58,7 +55,6 @@ export default function PrivacyPage() {
           </h1>
         </div>
 
-        {/* Content */}
         <div className="my-x-cont">
           <div className="space-y-4 mt-20 text-[16px] font-neue-haas leading-[1.2em] font-normal">
             <div className="space-y-6 max-w-[60%] mx-auto">

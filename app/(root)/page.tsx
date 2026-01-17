@@ -1,6 +1,5 @@
 "use client";
 
-import QrCode from "@/components/qr-code";
 import { useUIStore } from "@/lib/store/ui.store";
 import { useEffect, useState } from "react";
 
@@ -20,12 +19,6 @@ export default function Home() {
     hour: "2-digit",
     minute: "2-digit",
     hour12: true,
-  });
-
-  const dateString = time.toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
   });
 
   const [timePart, period] = timeString.split(" ");
@@ -69,10 +62,6 @@ export default function Home() {
             </p>
             <p>THE ©2026 HENO PROJECT</p>
           </div>
-
-          {/* <div className="w-20 h-20 md:w-24 md:h-24">
-            <QrCode className="w-full h-full text-white block" />
-          </div> */}
         </div>
       </div>
     </div>

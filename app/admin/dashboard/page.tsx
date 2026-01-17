@@ -13,7 +13,6 @@ import { BadgeDollarSign, Barcode, CreditCard, Users } from "lucide-react";
 
 import Link from "next/link";
 
-import Charts from "./charts";
 import { requireAdmin } from "@/lib/auth-guard";
 import { getDashboardSummary } from "@/lib/dal";
 
@@ -33,7 +32,7 @@ export default async function DashboardPage() {
           <CardContent>
             <div className="text-2xl font-bold">
               {formatCurrency(
-                summary.totalRevenue._sum.totalPrice?.toString() || 0
+                summary.totalRevenue._sum.totalPrice?.toString() || 0,
               )}
             </div>
           </CardContent>
@@ -77,9 +76,6 @@ export default async function DashboardPage() {
           <CardHeader>
             <CardTitle>Overview</CardTitle>
           </CardHeader>
-          {/* <CardContent>
-            <Charts data={{ salesData: summary.salesData }} />
-          </CardContent> */}
         </Card>
         <Card className="col-span-3">
           <CardHeader>
