@@ -8,6 +8,10 @@ First, run the development server:
 npm run dev
 # or
 yarn dev
+
+https://github.com/user-attachments/assets/4726a7f1-bdf7-4d81-9ee8-334253511a89
+
+
 # or
 pnpm dev
 # or
