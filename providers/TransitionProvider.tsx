@@ -25,7 +25,7 @@ export default function TransitionProvider({
         resetUI();
         gsap.to(transitionRectRef.current, {
           opacity: 1,
-          duration: 0.7,
+          duration: 0.4,
           ease: "power2.out",
           onComplete: next,
         });
@@ -33,7 +33,7 @@ export default function TransitionProvider({
       enter={(next) => {
         gsap.to(transitionRectRef.current, {
           opacity: 0,
-          duration: 0.7,
+          duration: 0.4,
           ease: "power2.out",
           onComplete: next,
         });
