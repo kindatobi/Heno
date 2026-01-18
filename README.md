@@ -4,7 +4,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 First, run the development server:
 
-![Demo Video](https://github.com/user-attachments/assets/4726a7f1-bdf7-4d81-9ee8-334253511a89)
+![Interactive Styling Canvas Demo](https://github.com/user-attachments/assets/4726a7f1-bdf7-4d81-9ee8-334253511a89)
 
 
 # or
