@@ -45,7 +45,7 @@ export default function CartAside() {
   return (
     <aside
       onClick={(e) => e.stopPropagation()}
-      className="p-3 bg-[#F5F6F4] flex flex-col h-screen overflow-hidden"
+      className="p-3 bg-[#F5F6F4] flex flex-col h-[100dvh] overflow-hidden"
     >
       <div className="flex border-b border-[#D9D9D9] justify-between items-center pb-3 shrink-0">
         <h2 className="text-black tracking-[0.04em] font-normal font-neue-haas text-base">

@@ -31,7 +31,7 @@ export default function CartModal() {
         {
           opacity: 0,
         },
-        { opacity: 1, duration: 0.3, ease: "power2.out" }
+        { opacity: 1, duration: 0.3, ease: "power2.out" },
       )
       .to(asideRef.current, {
         x: 0,
@@ -73,6 +73,7 @@ export default function CartModal() {
           className="
             fixed inset-0 z-50 flex justify-end
             bg-neutral-500/40
+            h-[100dvh]
             backdrop-blur-[50px]
             overflow-hidden
           "
