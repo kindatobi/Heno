@@ -25,7 +25,7 @@ export default function TransitionProvider({
         resetUI();
         gsap.to(transitionRectRef.current, {
           opacity: 1,
-          duration: 0.4,
+          duration: 0.2,
           ease: "power2.out",
           onComplete: next,
         });
@@ -33,7 +33,7 @@ export default function TransitionProvider({
       enter={(next) => {
         gsap.to(transitionRectRef.current, {
           opacity: 0,
-          duration: 0.4,
+          duration: 0.2,
           ease: "power2.out",
           onComplete: next,
         });
@@ -41,7 +41,7 @@ export default function TransitionProvider({
     >
       <div
         ref={transitionRectRef}
-        className="fixed inset-0 z-200 pointer-events-none bg-black"
+        className="fixed inset-0 z-200 pointer-events-none bg-[#191919]"
       />
       {children}
     </TransitionRouter>
