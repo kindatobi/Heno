@@ -41,7 +41,7 @@ export default function TransitionProvider({
     >
       <div
         ref={transitionRectRef}
-        className="fixed inset-0 z-200 pointer-events-none bg-[#191919]"
+        className="fixed inset-0 z-200 pointer-events-none bg-black"
       />
       {children}
     </TransitionRouter>
