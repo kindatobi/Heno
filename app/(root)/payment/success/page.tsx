@@ -1,30 +1,35 @@
-import { Metadata } from "next";
-import Image from "next/image";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Payment Success",
-};
+import { useCartStore } from "@/lib/store/cart.store";
+
+import Image from "next/image";
+import { useEffect } from "react";
 
 export default function PaymentSuccessPage() {
+  const { clearCart } = useCartStore();
+  useEffect(() => {
+    clearCart();
+  }, [clearCart]);
+
   return (
-    <div className="min-h-screen pt-16 md:pt-0 bg-[#F5F6F4] text-[#191919]">
+    <div className="pt-16 md:pt-0 bg-[#F5F6F4] text-[#191919]">
       <div className="md:hidden">
         <div className="my-x-cont">
           <h1 className="text-6xl font-neue-haas font-medium mb-7 leading-none">
             Thank you for your order!
           </h1>
 
-          <div className="space-y-9 tracking-[0.035em] text-[14px] leading-[1.4em] font-neue-haas font-normal">
-            <p>
+          <div className="space-y-9 text-[16px] font-neue-haas tracking-wide leading-[1.1em] font-normal">
+            <p className="font-neue-haas">
               We&apos;ve received your payment and are processing your order.
             </p>
 
-            <p>
+            <p className="font-neue-haas">
               You&apos;ll receive a confirmation email shortly at the address
               you provided with all the details of your purchase.
             </p>
 
-            <p>
+            <p className="font-neue-haas">
               If you have any questions about your order, please don&apos;t
               hesitate to contact us.
             </p>

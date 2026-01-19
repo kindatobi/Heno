@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 export default function RefundAndReturnPolicyPage() {
   return (
-    <div className="min-h-screen pt-16 md:pt-0 bg-[#F5F6F4] text-[#191919]">
+    <div className="pt-16 md:pt-0 bg-[#F5F6F4] text-[#191919]">
       {/* Mobile Layout */}
       <div className="md:hidden">
         <div className="my-x-cont">
@@ -15,7 +15,7 @@ export default function RefundAndReturnPolicyPage() {
             Refunds & Returns
           </h1>
 
-          <div className="space-y-9 text-[16px] font-neue-haas leading-[1.1em] font-normal">
+          <div className="space-y-9 text-[16px] font-neue-haas tracking-wide leading-[1.1em] font-normal">
             <p>
               All sales made through Heno are final. We do not offer refunds,
               returns, or exchanges once an order has been confirmed and

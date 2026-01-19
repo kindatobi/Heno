@@ -7,14 +7,14 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <div className="min-h-screen pt-16 md:pt-0 bg-[#F5F6F4] text-[#191919]">
+    <div className="pt-16 md:pt-0 bg-[#F5F6F4] text-[#191919]">
       <div className="md:hidden">
         <div className="my-x-cont">
           <h1 className="text-6xl font-neue-haas font-medium mb-7 leading-none">
             Privacy policy
           </h1>
 
-          <div className="space-y-9 tracking-[0.035em] text-[14px] leading-[1.4em] font-neue-haas  font-normal">
+          <div className="space-y-9 text-[16px] font-neue-haas tracking-wide leading-[1.1em] font-normal">
             <p>
               Heno is committed to protecting your privacy and maintaining the
               security of any personal information received from you. We
