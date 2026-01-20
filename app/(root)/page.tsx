@@ -1,3 +1,73 @@
+// "use client";
+
+// import { useUIStore } from "@/lib/store/ui.store";
+// import { useEffect, useState } from "react";
+
+// export default function Home() {
+//   const { toggleShop } = useUIStore();
+//   const [time, setTime] = useState(new Date());
+
+//   useEffect(() => {
+//     const timer = setInterval(() => {
+//       setTime(new Date());
+//     }, 300);
+
+//     return () => clearInterval(timer);
+//   }, []);
+
+//   const timeString = time.toLocaleTimeString("en-US", {
+//     hour: "2-digit",
+//     minute: "2-digit",
+//     hour12: true,
+//   });
+
+//   const [timePart, period] = timeString.split(" ");
+//   const showColon = Math.floor(time.getSeconds()) % 2 === 0;
+//   const [hours, minutes] = timePart.split(":");
+
+//   return (
+//     <div className="fixed inset-0 overflow-hidden">
+//       <video
+//         autoPlay
+//         loop
+//         muted
+//         playsInline
+//         className="absolute top-0 bg-black left-0 w-full h-full object-cover"
+//       >
+//         <source src="/back-vid1.mp4" type="video/mp4" />
+//       </video>
+
+//       <div className="absolute top-0 left-0 w-full h-full bg-black/40" />
+
+//       <div className="absolute inset-0 z-10 flex items-center justify-center">
+//         <button className="cursor-pointer" onClick={toggleShop}>
+//           <p className="text-white text-[14px] uppercase tracking-[0.08em]   font-normal font-bcd-diatype">
+//             [ click to enter shop ]
+//           </p>
+//         </button>
+//       </div>
+
+//       <div className="absolute bottom-0 left-0 right-0 z-10 pb-1.5 md:pb-5">
+//         <div className="my-x-cont flex justify-between items-baseline">
+//           <div className="text-white text-[14px] uppercase tracking-[0.01em] font-300 font-bcd-diatype leading-tight">
+//             <p className="m-0" suppressHydrationWarning>
+//               {hours}
+//               {showColon ? ":" : " "}
+//               {minutes} {period}
+//             </p>
+//             <p>WELCOME TO HENO</p>
+
+//             <p className="m-0" suppressHydrationWarning>
+//               FROM LAGOS, NIGERIA
+//             </p>
+//             <p>THE ©2026 HENO PROJECT</p>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
 "use client";
 
 import { useUIStore } from "@/lib/store/ui.store";
@@ -5,25 +75,32 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   const { toggleShop } = useUIStore();
-  const [time, setTime] = useState(new Date());
+  const [time, setTime] = useState(() => new Date());
 
+  // Sync clock updates exactly to the next second
   useEffect(() => {
-    const timer = setInterval(() => {
-      setTime(new Date());
-    }, 300);
+    const tick = () => setTime(new Date());
 
-    return () => clearInterval(timer);
+    const timeout = setTimeout(
+      () => {
+        tick();
+        const interval = setInterval(tick, 1000);
+        return () => clearInterval(interval);
+      },
+      1000 - (Date.now() % 1000),
+    );
+
+    return () => clearTimeout(timeout);
   }, []);
 
-  const timeString = time.toLocaleTimeString("en-US", {
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: true,
-  });
+  // Manual, stable time formatting
+  const hours24 = time.getHours();
+  const minutes = time.getMinutes().toString().padStart(2, "0");
 
-  const [timePart, period] = timeString.split(" ");
-  const showColon = Math.floor(time.getSeconds()) % 2 === 0;
-  const [hours, minutes] = timePart.split(":");
+  const period = hours24 >= 12 ? "PM" : "AM";
+  const hours = (((hours24 + 11) % 12) + 1).toString().padStart(2, "0");
+
+  const showColon = time.getSeconds() % 2 === 0;
 
   return (
     <div className="fixed inset-0 overflow-hidden">
@@ -32,7 +109,7 @@ export default function Home() {
         loop
         muted
         playsInline
-        className="absolute top-0 bg-black left-0 w-full h-full object-cover"
+        className="absolute top-0 left-0 w-full h-full object-cover bg-black"
       >
         <source src="/back-vid1.mp4" type="video/mp4" />
       </video>
@@ -41,7 +118,7 @@ export default function Home() {
 
       <div className="absolute inset-0 z-10 flex items-center justify-center">
         <button className="cursor-pointer" onClick={toggleShop}>
-          <p className="text-white text-[14px] uppercase tracking-[0.08em]   font-normal font-bcd-diatype">
+          <p className="text-white text-[14px] uppercase tracking-[0.08em] font-normal font-bcd-diatype">
             [ click to enter shop ]
           </p>
         </button>
@@ -50,16 +127,15 @@ export default function Home() {
       <div className="absolute bottom-0 left-0 right-0 z-10 pb-1.5 md:pb-5">
         <div className="my-x-cont flex justify-between items-baseline">
           <div className="text-white text-[14px] uppercase tracking-[0.01em] font-300 font-bcd-diatype leading-tight">
-            <p className="m-0" suppressHydrationWarning>
+            <p className="m-0">
               {hours}
               {showColon ? ":" : " "}
               {minutes} {period}
             </p>
+
             <p>WELCOME TO HENO</p>
 
-            <p className="m-0" suppressHydrationWarning>
-              FROM LAGOS, NIGERIA
-            </p>
+            <p className="m-0">FROM LAGOS, NIGERIA</p>
             <p>THE ©2026 HENO PROJECT</p>
           </div>
         </div>
