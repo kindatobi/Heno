@@ -122,6 +122,13 @@ export const metadata: Metadata = {
       template: `%s | Heno`,
       default: "Heno",
     },
+    images: [
+      {
+        url: "/og.jpg",
+        width: 1200,
+        height: 630,
+      },
+    ],
     description: APP_DESC,
     siteName: "Heno",
   },
