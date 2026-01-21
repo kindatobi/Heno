@@ -139,6 +139,7 @@ export const metadata: Metadata = {
     },
     description: APP_DESC,
     card: "summary_large_image",
+    images: ["https://heno.kindatobi.dev/og.jpg"],
   },
 };
 
