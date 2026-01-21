@@ -124,7 +124,7 @@ export const metadata: Metadata = {
     },
     images: [
       {
-        url: "/og.jpg",
+        url: "https://heno.kindatobi.dev/og.jpg",
         width: 1200,
         height: 630,
       },
