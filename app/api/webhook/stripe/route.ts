@@ -24,7 +24,7 @@ export async function POST(req: Request) {
   if (event.type === "checkout.session.completed") {
     const session = event.data.object as Stripe.Checkout.Session;
 
-    await inngest.send({
+    const result = await inngest.send({
       name: "order/created",
       data: {
         userId: session.metadata!.userId,
@@ -34,6 +34,7 @@ export async function POST(req: Request) {
         amountTotal: session.amount_total!,
       },
     });
+    console.log("📤 Inngest result:", result);
   }
 
   return new Response(null, { status: 200 });
