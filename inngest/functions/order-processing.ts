@@ -7,7 +7,6 @@ import { sendOrderSuccessEmail } from "@/actions/order.actions";
 import { NonRetriableError } from "inngest";
 import Stripe from "stripe";
 
-// Add this type to handle serialized dates from Inngest
 type SerializedOrder = Omit<Order, "createdAt" | "paidAt" | "deliveredAt"> & {
   createdAt: string;
   paidAt: string | null;
@@ -19,7 +18,6 @@ export const processOrder = inngest.createFunction(
   { id: "process-order" },
   { event: "order/created" },
   async ({ event, step }) => {
-    // Step 1: Load cart
     const cart = await step.run("load-cart", async () => {
       const cart: Cart | null = await redis.get(
         `cart-${event.data.sessionCartId}`,
@@ -32,7 +30,6 @@ export const processOrder = inngest.createFunction(
       return cart;
     });
 
-    // Step 2: Create order
     const order = (await step.run("create-order", async () => {
       assertCustomerDetails(event.data.customerDetails);
 
@@ -73,7 +70,6 @@ export const processOrder = inngest.createFunction(
       });
     })) as SerializedOrder;
 
-    // Step 3: Update inventory
     await step.run("update-inventory", async () => {
       await Promise.all(
         cart.items.map((item) =>
@@ -94,14 +90,11 @@ export const processOrder = inngest.createFunction(
       );
     });
 
-    // Step 4: Clear cart
     await step.run("clear-cart", async () => {
       await redis.del(`cart-${event.data.sessionCartId}`);
     });
 
-    // Step 5: Send confirmation email
     await step.run("send-confirmation-email", async () => {
-      // Convert string dates back to Date objects
       const orderWithDates = {
         ...order,
         createdAt: new Date(order.createdAt),
