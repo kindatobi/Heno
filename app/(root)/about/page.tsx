@@ -8,7 +8,6 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <div className="min-h-screen pt-16 md:pt-0 text-[#F5F6F4] bg-[#191919]">
-      {/* Mobile Layout */}
       <div className="md:hidden">
         <div className="my-x-cont">
           <h1 className="text-6xl font-neue-haas font-medium mb-7 leading-none">
@@ -100,7 +99,6 @@ export default function AboutPage() {
         </div>
       </div>
 
-      {/* Desktop Layout */}
       <div className="hidden md:block">
         <div className="h-screen relative">
           <Image

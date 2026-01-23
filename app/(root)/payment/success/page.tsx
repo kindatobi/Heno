@@ -51,7 +51,6 @@ export default function PaymentSuccessPage() {
           </h1>
         </div>
 
-        {/* Content */}
         <div className="my-x-cont">
           <div className="space-y-4 mt-20 text-[16px] font-neue-haas leading-[1.2em] font-normal">
             <div className="space-y-6 max-w-[60%] mx-auto">
