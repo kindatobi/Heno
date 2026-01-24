@@ -17,7 +17,7 @@ export default function HeaderMarquee({ myStyle }: { myStyle: string }) {
     <div
       className={`hidden md:flex w-150 overflow-hidden uppercase rounded-[5.5px] py-1.5 px-2 ${myStyle}`}
     >
-      <div ref={slider} className="flex">
+      <div ref={slider} className="flex whitespace-nowrap">
         <p className="text-nowrap">
           Heno is a contemporary fashion label rooted in Lagos, Nigeria.It was
           inspired by the Usal Project and founded by Tobi Ojo alongside
