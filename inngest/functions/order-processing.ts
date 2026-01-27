@@ -64,9 +64,6 @@ export const processOrder = inngest.createFunction(
             })),
           },
         },
-        include: {
-          orderItems: true,
-        },
       });
     })) as SerializedOrder;
 
