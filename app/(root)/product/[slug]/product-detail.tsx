@@ -42,39 +42,39 @@ export default function ProductDetail({ product }: { product: ProductItem }) {
           {has360 ? (
             <div className="flex gap-4 mb-8 justify-center">
               {hasLeft && product.showcaseImages.spin360?.left && (
-                <div className="relative w-1/2">
+                <div className="relative w-1/2 aspect-[93/200]">
                   <Image
                     src={product.showcaseImages.spin360.left[currentIndex]}
                     alt={`${product.name} - left view ${currentIndex + 1}`}
-                    width={400}
-                    height={400}
-                    className="w-full h-auto"
+                    fill
+                    sizes="25vw"
+                    className="object-cover"
                     priority
                   />
                 </div>
               )}
 
               {hasRight && product.showcaseImages.spin360?.right && (
-                <div className="relative w-1/2">
+                <div className="relative w-1/2 aspect-[93/200]">
                   <Image
                     src={product.showcaseImages.spin360.right[currentIndex]}
                     alt={`${product.name} - right view ${currentIndex + 1}`}
-                    width={400}
-                    height={400}
-                    className="w-full h-auto"
+                    fill
+                    sizes="25vw"
+                    className="object-cover"
                     priority
                   />
                 </div>
               )}
             </div>
           ) : (
-            <div className="relative w-full mb-8">
+            <div className="relative w-full aspect-[93/200] mb-8">
               <Image
                 src={product.shopImage}
                 alt={`${product.name} - shop image`}
-                width={800}
-                height={800}
-                className="w-full h-auto"
+                fill
+                sizes="50vw"
+                className="object-cover"
                 priority
               />
             </div>
@@ -82,13 +82,13 @@ export default function ProductDetail({ product }: { product: ProductItem }) {
 
           <div className="flex flex-col gap-3">
             {product.showcaseImages.regular.map((img, i) => (
-              <div key={i} className="relative w-full">
+              <div key={i} className="relative w-full aspect-[93/200]">
                 <Image
                   src={img}
                   alt={`${product.name} - image ${i + 1}`}
-                  width={800}
-                  height={800}
-                  className="w-full h-auto"
+                  fill
+                  sizes="50vw"
+                  className="object-cover"
                   priority
                 />
               </div>
@@ -265,25 +265,25 @@ export default function ProductDetail({ product }: { product: ProductItem }) {
         {has360 ? (
           <div className="flex gap-4 mb-6 justify-center">
             {hasLeft && product.showcaseImages.spin360?.left && (
-              <div className="relative w-1/2">
+              <div className="relative w-1/2 aspect-[93/200]">
                 <Image
                   src={product.showcaseImages.spin360.left[currentIndex]}
                   alt={`${product.name} - left view ${currentIndex + 1}`}
-                  width={250}
-                  height={250}
-                  className="w-full h-auto"
+                  fill
+                  sizes="50vw"
+                  className="object-cover"
                   priority
                 />
               </div>
             )}
             {hasRight && product.showcaseImages.spin360?.right && (
-              <div className="relative w-1/2">
+              <div className="relative w-1/2 aspect-[93/200]">
                 <Image
                   src={product.showcaseImages.spin360.right[currentIndex]}
                   alt={`${product.name} - right view ${currentIndex + 1}`}
-                  width={250}
-                  height={250}
-                  className="w-full h-auto"
+                  fill
+                  sizes="50vw"
+                  className="object-cover"
                   priority
                 />
               </div>
