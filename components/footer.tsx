@@ -1,7 +1,33 @@
 "use client";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 import { HenoWordmark } from "./heno-wordmark";
+
+const lagosTimeFormat = new Intl.DateTimeFormat("en-US", {
+  timeZone: "Africa/Lagos",
+  hour: "2-digit",
+  minute: "2-digit",
+  second: "2-digit",
+  hour12: true,
+});
+
+function formatLagosTime(date: Date) {
+  return lagosTimeFormat.format(date).replace(/\s/g, "");
+}
+
+function LagosClock() {
+  const [time, setTime] = useState<string | null>(null);
+
+  useEffect(() => {
+    setTime(formatLagosTime(new Date()));
+    const id = setInterval(() => setTime(formatLagosTime(new Date())), 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  if (!time) return <p className="invisible">00:00:00AM</p>;
+  return <p>{time}</p>;
+}
 
 export default function Footer() {
   return (
@@ -9,7 +35,7 @@ export default function Footer() {
       <div className="my-x-cont py-4">
         <div className="hidden md:flex justify-between uppercase text-[14px] tracking-[0.08em] font-bcd-diatype">
           <div>
-            <p>12:05:15PM</p>
+            <LagosClock />
             <p>WELCOME TO HENO</p>
             <p>LAGOS, NIGERIA UTC+1</p>
           </div>
@@ -33,7 +59,7 @@ export default function Footer() {
         <div className=" md:hidden block uppercase text-[14px] tracking-[0.08em] space-y-10  font-bcd-diatype">
           <div className="flex justify-between">
             <div>
-              <p>12:05:15PM</p>
+              <LagosClock />
               <p>WELCOME TO HENO</p>
               <p>LAGOS, NIGERIA </p>
             </div>

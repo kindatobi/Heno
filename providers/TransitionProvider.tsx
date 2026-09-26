@@ -1,6 +1,7 @@
 "use client";
 
 import { TransitionRouter } from "next-transition-router";
+import { useRouter } from "next/navigation";
 import { useRef } from "react";
 import { gsap } from "gsap";
 import { useUIStore } from "@/lib/store/ui.store";
@@ -13,6 +14,7 @@ export default function TransitionProvider({
 }) {
   const transitionRectRef = useRef(null);
   const { resetUI } = useUIStore();
+  const router = useRouter();
 
   useGSAP(() => {
     gsap.set(transitionRectRef.current, { opacity: 0, pointerEvents: "none" });
@@ -21,7 +23,9 @@ export default function TransitionProvider({
   return (
     <TransitionRouter
       auto
-      leave={(next) => {
+      leave={(next, _from, to) => {
+        // Start fetching the next page now so it loads during the fade instead of after it
+        if (to) router.prefetch(to);
         resetUI();
         gsap.to(transitionRectRef.current, {
           opacity: 1,

@@ -1,14 +1,16 @@
 import { Prisma, ProductCategory } from "@/generated/prisma/client";
 import { CategoryWithCount, ProductItem } from "@/types";
+import { cache } from "react";
 import prisma from "./prisma";
 
-export async function getProductBySlug(productSlug: string) {
+
+export const getProductBySlug = cache(async (productSlug: string) => {
   const data = (await prisma.product.findFirst({
     where: { slug: productSlug },
     include: { sizeStock: true },
   })) as ProductItem;
   return data;
-}
+});
 
 export async function getProductsCount() {
   const data = await prisma.product.count();
