@@ -1,32 +1,17 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 
+import { useLagosTime } from "@/hooks/use-lagos-time";
 import { HenoWordmark } from "./heno-wordmark";
 
-const lagosTimeFormat = new Intl.DateTimeFormat("en-US", {
-  timeZone: "Africa/Lagos",
-  hour: "2-digit",
-  minute: "2-digit",
-  second: "2-digit",
-  hour12: true,
-});
-
-function formatLagosTime(date: Date) {
-  return lagosTimeFormat.format(date).replace(/\s/g, "");
-}
-
 function LagosClock() {
-  const [time, setTime] = useState<string | null>(null);
+  const { hours, minutes, seconds, period } = useLagosTime();
 
-  useEffect(() => {
-    setTime(formatLagosTime(new Date()));
-    const id = setInterval(() => setTime(formatLagosTime(new Date())), 1000);
-    return () => clearInterval(id);
-  }, []);
-
-  if (!time) return <p className="invisible">00:00:00AM</p>;
-  return <p>{time}</p>;
+  return (
+    <p suppressHydrationWarning>
+      {`${hours}:${minutes}:${seconds}${period}`}
+    </p>
+  );
 }
 
 export default function Footer() {

@@ -1,34 +1,13 @@
 "use client";
 
+import { useLagosTime } from "@/hooks/use-lagos-time";
 import { useUIStore } from "@/lib/store/ui.store";
-import { useEffect, useState } from "react";
 
 export default function Home() {
   const { toggleShop } = useUIStore();
-  const [time, setTime] = useState(() => new Date());
+  const { hours, minutes, seconds, period } = useLagosTime();
 
-  useEffect(() => {
-    const tick = () => setTime(new Date());
-
-    const timeout = setTimeout(
-      () => {
-        tick();
-        const interval = setInterval(tick, 1000);
-        return () => clearInterval(interval);
-      },
-      1000 - (Date.now() % 1000),
-    );
-
-    return () => clearTimeout(timeout);
-  }, []);
-
-  const hours24 = time.getHours();
-  const minutes = time.getMinutes().toString().padStart(2, "0");
-
-  const period = hours24 >= 12 ? "PM" : "AM";
-  const hours = (((hours24 + 11) % 12) + 1).toString().padStart(2, "0");
-
-  const showColon = time.getSeconds() % 2 === 0;
+  const showColon = Number(seconds) % 2 === 0;
 
   return (
     <div className="fixed inset-0 overflow-hidden">
@@ -55,7 +34,7 @@ export default function Home() {
       <div className="absolute bottom-0 left-0 right-0 z-10 pb-1.5 md:pb-5">
         <div className="my-x-cont flex justify-between items-baseline">
           <div className="text-white text-[14px] uppercase tracking-[0.01em] font-300 font-bcd-diatype leading-tight">
-            <p className="m-0">
+            <p className="m-0" suppressHydrationWarning>
               {hours}
               {showColon ? ":" : " "}
               {minutes} {period}
