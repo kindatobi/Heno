@@ -4,11 +4,11 @@ import AddToCartButton from "@/components/add-to-cart-button";
 import { formatCategory, formatCurrency } from "@/lib/utils";
 import { ProductItem, ProductSizeString } from "@/types";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import Spin360Pair from "./spin-360";
 
 export default function ProductDetail({ product }: { product: ProductItem }) {
   const [selectedSize, setSelectedSize] = useState<ProductSizeString | "">("");
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [showMoreImages, setShowMoreImages] = useState(false);
 
   const ALL_SIZES: ProductSizeString[] = [
@@ -27,46 +27,18 @@ export default function ProductDetail({ product }: { product: ProductItem }) {
   const hasRight = product.showcaseImages.spin360?.right != null;
   const has360 = hasLeft || hasRight;
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev < 7 ? prev + 1 : 0));
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <div>
       <div className="hidden md:flex pt-32 md:pt-28">
         <div className="w-1/2">
           {has360 ? (
-            <div className="flex gap-4 mb-8 justify-center">
-              {hasLeft && product.showcaseImages.spin360?.left && (
-                <div className="relative w-1/2 aspect-[93/200]">
-                  <Image
-                    src={product.showcaseImages.spin360.left[currentIndex]}
-                    alt={`${product.name} - left view ${currentIndex + 1}`}
-                    fill
-                    sizes="25vw"
-                    className="object-cover"
-                    priority
-                  />
-                </div>
-              )}
-
-              {hasRight && product.showcaseImages.spin360?.right && (
-                <div className="relative w-1/2 aspect-[93/200]">
-                  <Image
-                    src={product.showcaseImages.spin360.right[currentIndex]}
-                    alt={`${product.name} - right view ${currentIndex + 1}`}
-                    fill
-                    sizes="25vw"
-                    className="object-cover"
-                    priority
-                  />
-                </div>
-              )}
-            </div>
+            <Spin360Pair
+              left={product.showcaseImages.spin360?.left}
+              right={product.showcaseImages.spin360?.right}
+              name={product.name}
+              sizes="25vw"
+              className="flex gap-4 mb-8 justify-center"
+            />
           ) : (
             <div className="relative w-full aspect-[93/200] mb-8">
               <Image
@@ -82,13 +54,13 @@ export default function ProductDetail({ product }: { product: ProductItem }) {
 
           <div className="flex flex-col gap-3">
             {product.showcaseImages.regular.map((img, i) => (
-              <div key={i} className="relative w-full aspect-[93/200]">
+              <div key={i} className="relative w-full">
                 <Image
                   src={img}
                   alt={`${product.name} - image ${i + 1}`}
-                  fill
-                  sizes="50vw"
-                  className="object-cover"
+                  width={800}
+                  height={800}
+                  className="w-full h-auto"
                   priority
                 />
               </div>
@@ -263,32 +235,13 @@ export default function ProductDetail({ product }: { product: ProductItem }) {
       {/* MOBILE LAYOUT */}
       <div className="md:hidden pt-20 my-x-cont">
         {has360 ? (
-          <div className="flex gap-4 mb-6 justify-center">
-            {hasLeft && product.showcaseImages.spin360?.left && (
-              <div className="relative w-1/2 aspect-[93/200]">
-                <Image
-                  src={product.showcaseImages.spin360.left[currentIndex]}
-                  alt={`${product.name} - left view ${currentIndex + 1}`}
-                  fill
-                  sizes="50vw"
-                  className="object-cover"
-                  priority
-                />
-              </div>
-            )}
-            {hasRight && product.showcaseImages.spin360?.right && (
-              <div className="relative w-1/2 aspect-[93/200]">
-                <Image
-                  src={product.showcaseImages.spin360.right[currentIndex]}
-                  alt={`${product.name} - right view ${currentIndex + 1}`}
-                  fill
-                  sizes="50vw"
-                  className="object-cover"
-                  priority
-                />
-              </div>
-            )}
-          </div>
+          <Spin360Pair
+            left={product.showcaseImages.spin360?.left}
+            right={product.showcaseImages.spin360?.right}
+            name={product.name}
+            sizes="50vw"
+            className="flex gap-4 mb-6 justify-center"
+          />
         ) : (
           <div className="relative w-full aspect-square mb-6">
             <Image
